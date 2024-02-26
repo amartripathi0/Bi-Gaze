@@ -1,4 +1,4 @@
-# Proctor Vigilant" 
+# Proctor Vigilant
 
 ## Examination Cheating Prevention Project
 
