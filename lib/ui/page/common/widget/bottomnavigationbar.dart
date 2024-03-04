@@ -29,8 +29,8 @@ class CoolBottomNavigationBar extends StatelessWidget {
                 .withAlpha(80), // Make background transparent
             elevation: 3,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: const Color.fromARGB(
-                255, 151, 123, 172), // Customize the selected item color
+            selectedItemColor:
+                SoothingColors.purpleGray, // Customize the selected item color
             unselectedItemColor:
                 Colors.grey, // Customize the unselected item color
             currentIndex: currentIndex,
