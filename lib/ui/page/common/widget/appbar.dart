@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:bigaze/ui/page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 
@@ -57,8 +58,16 @@ class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class CommonAppBar extends StatelessWidget {
-  const CommonAppBar({super.key});
+class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+
+  const CommonAppBar({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +76,9 @@ class CommonAppBar extends StatelessWidget {
       shadowColor: SoothingColors.purpleGray,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(30, 20),
-            bottomRight: Radius.elliptical(30, 20)),
+          bottomLeft: Radius.elliptical(30, 20),
+          bottomRight: Radius.elliptical(30, 20),
+        ),
       ),
       elevation: 3,
       flexibleSpace: ClipRect(
@@ -77,6 +87,16 @@ class CommonAppBar extends StatelessWidget {
         ),
       ),
       centerTitle: true,
+      title: GestureDetector(
+        onTap: () {
+          // Navigate to the home page when app bar is tapped
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const MyHomePage()));
+        },
+        child: Text(
+          title,
+        ),
+      ),
     );
   }
 }
