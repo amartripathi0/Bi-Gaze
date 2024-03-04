@@ -56,3 +56,27 @@ class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
+
+class CommonAppBar extends StatelessWidget {
+  const CommonAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(200),
+      shadowColor: SoothingColors.purpleGray,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.elliptical(30, 20),
+            bottomRight: Radius.elliptical(30, 20)),
+      ),
+      elevation: 3,
+      flexibleSpace: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        ),
+      ),
+      centerTitle: true,
+    );
+  }
+}
