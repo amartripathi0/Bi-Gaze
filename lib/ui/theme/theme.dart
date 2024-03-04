@@ -26,6 +26,11 @@ class AppTheme {
           shadowColor: SoothingColors.purpleGray.withAlpha(200),
           elevation: 10,
         ),
+    bottomNavigationBarTheme:
+        ThemeData.light().bottomNavigationBarTheme.copyWith(
+              backgroundColor: Colors.black,
+              elevation: 10,
+            ),
 
     // colorScheme: const ColorScheme(
     //   background: Colors.white,

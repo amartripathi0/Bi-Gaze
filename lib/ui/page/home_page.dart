@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0; // 🔴 implement later
+    int currentIndex = 1; // 🔴 implement later
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CoolAppBar(),
@@ -53,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 116, vertical: 18),
       child: Card(
-        color: Colors.white, // You can customize card color here
+        color: const Color.fromARGB(
+            255, 132, 130, 130), // You can customize card color here
         elevation: 4, // Adjust elevation as needed
         child: Padding(
           padding: const EdgeInsets.all(16),
