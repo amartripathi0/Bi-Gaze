@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
+import 'package:bigaze/widgets/coolcard.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -27,24 +28,45 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _currentIndex, // Pass current index
         onTap: (index) => _onItemTapped(context, index), // Handle tap event
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 150), // Add spacing at the top
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
-            _buildCard('Card 1 sample to test the interface'),
+      body: const SingleChildScrollView(
+        physics: BouncingScrollPhysics(
+            decelerationRate: ScrollDecelerationRate.fast),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox.square(
+                dimension: 100,
+              ),
+              GlassCard(),
+              SizedBox.square(
+                dimension: 20,
+              ),
+              GlassCard(),
+              SizedBox.square(
+                dimension: 20,
+              ),
+              GlassCard(),
+              SizedBox.square(
+                dimension: 20,
+              ),
 
-            // Add more cards as needed
-          ],
+              GlassCard(),
+              SizedBox.square(
+                dimension: 20,
+              ),
+              GlassCard(),
+              SizedBox.square(
+                dimension: 20,
+              ),
+              GlassCard(),
+              SizedBox.square(
+                dimension: 20,
+              )
+              // Add more cards as needed
+            ],
+          ),
         ),
       ),
     );
@@ -85,23 +107,5 @@ class _MyHomePageState extends State<MyHomePage> {
         );
         break;
     }
-  }
-
-  Widget _buildCard(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 116, vertical: 18),
-      child: Card(
-        color: const Color.fromARGB(
-            255, 132, 130, 130), // You can customize card color here
-        elevation: 4, // Adjust elevation as needed
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-    );
   }
 }
