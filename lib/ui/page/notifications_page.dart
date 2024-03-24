@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:bigaze/ui/page/common/widget/appbar.dart';
-import 'package:bigaze/ui/page/home_page.dart';
+import 'common/widget/appbar.dart';
+import '../page/home_page.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<NotificationPage> createState() => _NotificationPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -23,12 +23,12 @@ class _ProfilePageState extends State<ProfilePage> {
       },
       child: const Scaffold(
         appBar: CommonAppBar(
-          title: "Profile",
+          title: "Notification",
         ),
         body: Center(
           child: Text(
-            'Results Page',
-            style: TextStyle(fontSize: 24),
+            'Notification to be implemented',
+            style: TextStyle(fontSize: 24, color: Colors.white24),
           ),
         ),
       ),

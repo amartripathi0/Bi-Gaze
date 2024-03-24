@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:bigaze/ui/page/home_page.dart';
+import 'package:bigaze/ui/page/notifications_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 
@@ -45,7 +45,13 @@ class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationPage()),
+                    );
+                  },
                   icon: const Icon(
                     Icons.notifications_outlined,
                     color: Colors.white,
@@ -90,8 +96,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: GestureDetector(
         onTap: () {
           // Navigate to the home page when app bar is tapped
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const MyHomePage()));
+          Navigator.pop(context);
         },
         child: Text(
           title,
