@@ -6,6 +6,7 @@ import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:bigaze/widgets/coolcard.dart';
+import 'package:bigaze/ui/page/audio_classifier_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -39,31 +40,48 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox.square(
                 dimension: 100,
               ),
-              GlassCard(),
+              GlassCard(
+                destinationPage: AudioClassifier(),
+                cardName: "Audio Classifier",
+              ),
               SizedBox.square(
                 dimension: 20,
               ),
-              GlassCard(),
+              GlassCard(
+                destinationPage: AudioClassifier(),
+                cardName: "Audio Classifier",
+              ),
               SizedBox.square(
                 dimension: 20,
               ),
-              GlassCard(),
+              GlassCard(
+                destinationPage: AudioClassifier(),
+                cardName: "Audio Classifier",
+              ),
               SizedBox.square(
                 dimension: 20,
               ),
-
-              GlassCard(),
+              GlassCard(
+                destinationPage: AudioClassifier(),
+                cardName: "Audio Classifier",
+              ),
               SizedBox.square(
                 dimension: 20,
               ),
-              GlassCard(),
+              GlassCard(
+                destinationPage: AudioClassifier(),
+                cardName: "Audio Classifier",
+              ),
               SizedBox.square(
                 dimension: 20,
               ),
-              GlassCard(),
+              GlassCard(
+                destinationPage: AudioClassifier(),
+                cardName: "Audio Classifier",
+              ),
               SizedBox.square(
                 dimension: 20,
-              )
+              ),
               // Add more cards as needed
             ],
           ),
