@@ -41,6 +41,15 @@ flutter:
     - assets/images/AppIcons/android/mipmap-xxhdpi/bigaze.png
     - assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png
     - assets/models/
+    - assets/models/mobilenet_v1_1.0_224.tflite
+    - assets/models/mobilenet_v1_1.0_224.txt
+    - assets/models/posenet_mv1_075_float_from_checkpoints.tflite
+    - assets/models/yolov2_tiny.txt
+    - assets/models/yolov2_tiny.tflite
+    - assets/models/yamnet.tflite
+    - assets/models/yamnet_label_list.txt
+    - assets/models/ssd_mobilenet.txt
+    - assets/models/ssd_mobilenet.tflite
   #   - images/a_dot_ham.jpeg
 
 

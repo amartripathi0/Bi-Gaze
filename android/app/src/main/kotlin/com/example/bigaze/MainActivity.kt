@@ -1,4 +1,3 @@
-package org.tensorflow.audio_classification.audio_classification
 package org.bigaze.bigaze
 
 import android.Manifest
