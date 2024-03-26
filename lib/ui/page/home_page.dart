@@ -1,3 +1,4 @@
+import 'package:bigaze/object_detection/object_detection_home.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
@@ -48,8 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 dimension: 20,
               ),
               GlassCard(
-                destinationPage: AudioClassifier(),
-                cardName: "Audio Classifier",
+                destinationPage: ODHome(),
+                cardName: "Image Classifier",
               ),
               SizedBox.square(
                 dimension: 20,

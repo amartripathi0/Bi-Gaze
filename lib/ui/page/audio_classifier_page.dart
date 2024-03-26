@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:typed_data';
-
 import '../../helper/audio_classification_helper.dart';
 
 class AudioClassifier extends StatefulWidget {
@@ -55,6 +54,20 @@ class _AudioClassifierState extends State<AudioClassifier> {
   ];
   var _showError = false;
 
+  void _attachBackButtonListener() {
+    // Add a listener for the back button
+    RawKeyboard.instance.addListener(_handleKeyEvent);
+  }
+
+  void _handleKeyEvent(RawKeyEvent event) {
+    if (event.runtimeType == RawKeyDownEvent) {
+      // Check if the escape key is pressed
+      if (event.logicalKey == LogicalKeyboardKey.escape) {
+        _closeRecorder(); // Stop the audio classifier when escape button is pressed
+      }
+    }
+  }
+
   void _startRecorder() {
     try {
       platform.invokeMethod('startRecord');
@@ -100,6 +113,11 @@ class _AudioClassifierState extends State<AudioClassifier> {
   initState() {
     _initRecorder();
     super.initState();
+    // test line
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Attach back button listener
+      _attachBackButtonListener();
+    });
   }
 
   Future<void> _initRecorder() async {
@@ -120,26 +138,6 @@ class _AudioClassifierState extends State<AudioClassifier> {
       });
     }
   }
-
-  // Future<void> _runInference() async {
-  //   Float32List inputArray = await _getAudioFloatArray();
-  //   final result =
-  //       await _helper.inference(inputArray.sublist(0, _requiredInputBuffer));
-  //   setState(() {
-  //     // take top 20 classification
-
-  //     _classification = (result.entries.toList()
-  //           ..sort(
-  //             (a, b) => a.value.compareTo(b.value),
-  //           ))
-  //         .reversed
-  //         .take(20)
-  //         .toList();
-  //   });
-
-  //   // log(_classification.first.key);
-  //   // log(DateTime.now().toString());
-  // }
 
   Future<void> _runInference() async {
     Float32List inputArray = await _getAudioFloatArray();
@@ -163,16 +161,9 @@ class _AudioClassifierState extends State<AudioClassifier> {
   @override
   void dispose() {
     _closeRecorder();
+    // Remove the back button listener
+    RawKeyboard.instance.removeListener(_handleKeyEvent);
     super.dispose();
-  }
-
-  Future<void> _closeRecorder() async {
-    try {
-      await platform.invokeMethod('closeRecorder');
-      _helper.closeInterpreter();
-    } on PlatformException {
-      log("Failed to close recorder.");
-    }
   }
 
   @override
