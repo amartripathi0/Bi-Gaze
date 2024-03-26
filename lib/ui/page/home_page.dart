@@ -1,4 +1,7 @@
-import 'package:bigaze/object_detection/object_detection_home.dart';
+import 'package:bigaze/object_detection/object_detection_all.dart';
+import 'package:bigaze/object_detection/od_mobilenet_v1.dart';
+import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
+import 'package:bigaze/object_detection/od_yolov2_tiny.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
@@ -49,29 +52,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 dimension: 20,
               ),
               GlassCard(
-                destinationPage: ODHome(),
-                cardName: "Image Classifier",
+                destinationPage: ObjectDetectionAll(),
+                cardName: "Object Detection All",
               ),
               SizedBox.square(
                 dimension: 20,
               ),
               GlassCard(
-                destinationPage: AudioClassifier(),
-                cardName: "Audio Classifier",
+                destinationPage: OdSsdMobileNet(),
+                cardName: "Object Detection SSD MobileNet",
               ),
               SizedBox.square(
                 dimension: 20,
               ),
               GlassCard(
-                destinationPage: AudioClassifier(),
-                cardName: "Audio Classifier",
+                destinationPage: OdYolo(),
+                cardName: "Object Detection Yolov2",
               ),
               SizedBox.square(
                 dimension: 20,
               ),
               GlassCard(
-                destinationPage: AudioClassifier(),
-                cardName: "Audio Classifier",
+                destinationPage: OdMobileNetVone(),
+                cardName: "Object Detection Mobile net v1",
               ),
               SizedBox.square(
                 dimension: 20,

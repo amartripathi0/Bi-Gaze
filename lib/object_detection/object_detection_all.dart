@@ -7,14 +7,14 @@ import 'package:bigaze/object_detection/detect_screen.dart';
 
 import 'models.dart';
 
-class ODHome extends StatefulWidget {
-  const ODHome({super.key});
+class ObjectDetectionAll extends StatefulWidget {
+  const ObjectDetectionAll({super.key});
 
   @override
-  State<ODHome> createState() => _ODHomeState();
+  State<ObjectDetectionAll> createState() => _ObjectDetectionAllState();
 }
 
-class _ODHomeState extends State<ODHome> {
+class _ObjectDetectionAllState extends State<ObjectDetectionAll> {
   late final List<CameraDescription> cameras;
 
   @override
@@ -77,20 +77,32 @@ class _ODHomeState extends State<ODHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              child: const Text(ssd),
               onPressed: () => onSelect(ssd),
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                      Color.fromARGB(255, 153, 99, 167))),
+              child: const Text(ssd),
             ),
             ElevatedButton(
-              child: const Text(yolo),
               onPressed: () => onSelect(yolo),
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                      Color.fromARGB(255, 153, 99, 167))),
+              child: const Text(yolo),
             ),
             ElevatedButton(
-              child: const Text(mobilenet),
               onPressed: () => onSelect(mobilenet),
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                      Color.fromARGB(255, 153, 99, 167))),
+              child: const Text(mobilenet),
             ),
             ElevatedButton(
-              child: const Text(posenet),
               onPressed: () => onSelect(posenet),
+              style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                      Color.fromARGB(255, 153, 99, 167))),
+              child: const Text(posenet),
             ),
           ],
         ),
