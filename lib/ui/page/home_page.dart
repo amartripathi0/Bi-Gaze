@@ -4,6 +4,7 @@ import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
 import 'package:bigaze/object_detection/od_yolov2_tiny.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
+import 'package:bigaze/ui/page/proctor_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bigaze/ui/page/profile_page.dart';
@@ -45,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 dimension: 100,
               ),
               GlassCard(
-                destinationPage: AudioClassifier(),
-                cardName: "Audio Classifier",
+                destinationPage: ProctorPage(),
+                cardName: "P R O C T O R",
               ),
               SizedBox.square(
                 dimension: 20,

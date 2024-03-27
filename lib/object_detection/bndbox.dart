@@ -1,3 +1,4 @@
+import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'models.dart';
@@ -10,8 +11,9 @@ class BndBox extends StatelessWidget {
   final double screenW;
   final String model;
 
-  const BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model, {super.key});
+  const BndBox(this.results, this.previewH, this.previewW, this.screenH,
+      this.screenW, this.model,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +54,14 @@ class BndBox extends StatelessWidget {
             padding: const EdgeInsets.only(top: 5.0, left: 5.0),
             decoration: BoxDecoration(
               border: Border.all(
-                color: const Color.fromRGBO(247, 17, 17, 1),
+                color: SoothingColors.purpleGray,
                 width: 3.0,
               ),
             ),
             child: Text(
               "${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%",
               style: const TextStyle(
-                color: Color.fromRGBO(247, 17, 17, 1),
+                color: Color.fromARGB(255, 66, 43, 66),
                 fontSize: 14.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -136,7 +138,9 @@ class BndBox extends StatelessWidget {
     return Stack(
       children: model == mobilenet
           ? renderStrings()
-          : model == posenet ? renderKeypoints() : renderBoxes(),
+          : model == posenet
+              ? renderKeypoints()
+              : renderBoxes(),
     );
   }
 }
