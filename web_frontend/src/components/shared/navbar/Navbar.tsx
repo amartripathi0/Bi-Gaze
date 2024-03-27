@@ -3,13 +3,16 @@ import { bigazeLogo, navbarItems } from "../../../constants"
 import { Link } from "react-router-dom"
 import NavButton from "../NavButton"
 import { motion } from "framer-motion"
+import useTopScroll from "@/hooks/useTopScroll"
 
 
 
 function Navbar() {
+  const scrolled   = useTopScroll(10)
+  
   return (
     <motion.nav 
-    className="flex-btwn-center border-1 fixed top-0 left-0 z-50  backdrop-blur-lg border-black w-full h-24  py-4 px-20 "
+    className={`flex-btwn-center border-1 fixed top-0 left-0 z-50  backdrop-blur-lg  border-purple-300 w-full h-24  py-4 px-20 ${scrolled && "border-b border-purple-500"}  `}
     initial =  {{
       opacity : 0,
       y:-30
