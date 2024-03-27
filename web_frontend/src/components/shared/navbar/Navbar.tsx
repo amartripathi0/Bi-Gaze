@@ -29,7 +29,7 @@ function Navbar() {
 
             {/* Center: Naviagtion bar */}
             <div className="flex-btwn-center px-2 py-1 font-bold gap-10 rounded-full  shadow-md hover:shadow-cyan-200 transition-all duration-200
-              border-purple-700 border-2 w-1/2 h-full  ">
+              border-purple-700 border-2 w-2/5 h-full  ">
               {
                 navbarItems.map(navItem => (
                   <NavButton key={navItem.label} label={navItem.label} link={navItem.link}/>
