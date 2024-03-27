@@ -1,30 +1,60 @@
-import { QuestionProps } from "../../types"
+import { QuestionProps, userSelectedAnswerStateProps } from "../../types";
 import QuestionOptions from "./QuestionOptions";
-interface QuestionObjectProp {
-    question : QuestionProps ;
-}
-function QuestionsWithOptions({question} : QuestionObjectProp) {    
-  return (
-    <div 
-    className="h-full w-4/5 bg-red-50 p-10"
+import PurpleBorderContainer from "./containers/PurpleBorderContainer";
+// interface QuestionObjectProp {
+//     question : QuestionProps ;
+// }
+function QuestionsWithOptions({
+  question,
+  setUserSelectedAnswer,
+  userSelectedAnswer,
+}: {
+  question: QuestionProps;
+  setUserSelectedAnswer: React.Dispatch<
+    React.SetStateAction<userSelectedAnswerStateProps[]
     >
+  >;
+  userSelectedAnswer: userSelectedAnswerStateProps[];
 
-        <h1 className="text-3xl"><span>Que-{question.id}{" "}</span>{question.title}</h1>
-        
-            <div 
-            className="flex flex-col gap-6"
-            >
+}) {
+  function handleOptionClick(questionId: number, option: string) {
+    
+    if(userSelectedAnswer.length === 0){
+      setUserSelectedAnswer([...userSelectedAnswer , {id : questionId , selectedOption : option}])          
+    }
+    userSelectedAnswer.forEach((eachSelectedAnswerObj => {
+      // question answered for first time -> add ans to the array
+      
+       if(eachSelectedAnswerObj.id !== questionId) {
+        setUserSelectedAnswer([...userSelectedAnswer , {id : questionId , selectedOption : option}])          
+       }
 
-            {
-                
-                question.options.map(option => (
-                    <QuestionOptions key={`${option}`} handleOptionClick = {() => { }} optionValue={option}/>
-                    ))
-            }
-            </div>
-        
-    </div>
-  )
+      // question already answered with diff option -> replace the old ans with new one
+      // question already answered with same option -> replace the old ans with new one
+      else if(eachSelectedAnswerObj.id === questionId){
+          const removedExistingAttempedAns = userSelectedAnswer.filter((eachAns) => eachAns.id !== questionId)
+          setUserSelectedAnswer([...removedExistingAttempedAns , {id : questionId , selectedOption : option}])          
+      }   
+    }))
+  }
+  return (
+    <PurpleBorderContainer additionalStyles ="h-full w-4/5  p-10 flex flex-col gap-10 ">
+      <h1 className="text-3xl">
+        <span>Que:-{question.id} </span>
+        {question.title}
+      </h1>
+
+      <div className="flex flex-col gap-8 px-4">
+        {question.options.map((option) => (
+          <QuestionOptions
+            key={`${option}`}
+            handleOptionClick={() => handleOptionClick(question.id, option)}
+            optionValue={option}
+          />
+        ))}
+      </div>
+    </PurpleBorderContainer>
+  );
 }
 
-export default QuestionsWithOptions
+export default QuestionsWithOptions;

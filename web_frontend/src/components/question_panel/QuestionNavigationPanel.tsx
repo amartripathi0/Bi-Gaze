@@ -1,30 +1,44 @@
-import { questionsArray } from "../../constants"
-import Button from "../shared/Button"
-import QuestionNavigationButton from "./QuestionNavigationButton"
+import { questionsArray } from "../../constants";
+import { userSelectedAnswerStateProps } from "../../types";
+import Button from "../shared/Button";
+import QuestionNavigationButton from "./QuestionNavigationButton";
+import PurpleBorderContainer from "./containers/PurpleBorderContainer";
 
 type QuestionNavigationButtonProps = {
-    testName : string ;
-    handleQuestionChangeButtonClick : () => void
-}
-function QuestionNavigationPanel({testName , handleQuestionChangeButtonClick } : QuestionNavigationButtonProps) {
+  testName: string;
+  handleQuestionChangeButtonClick: (e : number) => void;
+  handleTestSubmit : (e ?: React.FormEvent<HTMLFormElement>) => void
+  userSelectedAnswer: userSelectedAnswerStateProps[];
+
+
+};
+function QuestionNavigationPanel({
+  testName,
+  handleQuestionChangeButtonClick,
+  handleTestSubmit,
+  userSelectedAnswer
+
+}: QuestionNavigationButtonProps ) {
+  
   return (
-    <div 
-    className="h-full w-1/5 rounded-md  p-6 bg-slate-200 flex items-center justify-between flex-col "
-    >
-        <h1 className="text-xl">{testName}</h1>
-        <h1>Questions Attempted:</h1>
+    <PurpleBorderContainer additionalStyles="h-full w-1/5 rounded-md  p-6 bg-slate-200 flex items-center justify-between flex-col ">
+      <h1 className="text-xl">{testName}</h1>
+      <h1>Questions Attempted:</h1>
 
-        <div className="flex-center bg-red-100 p-6   gap-4 flex-wrap">
-            {
-                questionsArray.map(eachQuestion => (
-                    <QuestionNavigationButton  handleButtonClick = {handleQuestionChangeButtonClick} key = {eachQuestion.id} buttonLabel={eachQuestion.id}/>
-                ))
-            }
-        </div>
+      <div className="flex-center bg-red-100 p-6   gap-4 flex-wrap">
+        {questionsArray.map((eachQuestion) => (
+          <QuestionNavigationButton
+            handleButtonClick={handleQuestionChangeButtonClick}
+            key={eachQuestion.id}
+            buttonLabel={eachQuestion.id}
+            questionAttempted = {userSelectedAnswer.some(ele => ele.id === eachQuestion.id)}
+          />
+        ))}
+      </div>
 
-        <Button handleButtonClick={() => {}} label="Submit Test" />
-    </div>
-  )
+      <Button handleButtonClick={handleTestSubmit} label="Submit Test" />
+    </PurpleBorderContainer>
+  );
 }
 
-export default QuestionNavigationPanel
+export default QuestionNavigationPanel;

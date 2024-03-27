@@ -1,5 +1,54 @@
 import { QuestionProps } from "../types";
+import brandLogo from "./assets/bi-gaze-logo.png"
 
+export const bigazeLogo = brandLogo;
+export const socialMedia = [
+      {
+        "name" : "Amar",
+         social : [
+            {
+              name :  "linkedin" ,
+              href :  ""
+            },
+            {
+              github :  "github" ,
+              href :  ""
+            }
+        ]
+      },
+      {
+        "name" : "Nayan",
+         social : [
+            {
+              name :  "linkedin" ,
+              href :  ""
+            },
+            {
+              github :  "github" ,
+              href :  ""
+            }
+        ]
+      }
+]
+
+export const navbarItems = [
+    {
+      "label" : "Home",
+      "link" : "#/"
+    },
+    {
+      "label" : "About-Bigaze",
+      "link" : "#about-bigaze"
+    },
+    {
+      "label" : "About-Us",
+      "link" : "#about-us"
+    },
+    {
+      "label" : "Contact-Us",
+      "link" : "#contact-us"
+    },
+]
 export const questionsArray: QuestionProps[] = [
   {
     id: 1,
@@ -9,7 +58,8 @@ export const questionsArray: QuestionProps[] = [
       "Mumbai",
       "Jaipur",
       "Kerala"
-    ]
+    ],
+    answer: "Delhi"
   },
   {
     id: 2,
@@ -19,7 +69,8 @@ export const questionsArray: QuestionProps[] = [
       "William Shakespeare",
       "Leo Tolstoy",
       "J.K. Rowling"
-    ]
+    ],
+    answer: "William Shakespeare"
   },
   {
     id: 3,
@@ -29,7 +80,8 @@ export const questionsArray: QuestionProps[] = [
       "Mars",
       "Jupiter",
       "Saturn"
-    ]
+    ],
+    answer: "Jupiter"
   },
   {
     id: 4,
@@ -39,7 +91,8 @@ export const questionsArray: QuestionProps[] = [
       "Ag",
       "Fe",
       "O"
-    ]
+    ],
+    answer: "Au"
   },
   {
     id: 5,
@@ -49,7 +102,8 @@ export const questionsArray: QuestionProps[] = [
       "Pablo Picasso",
       "Leonardo da Vinci",
       "Michelangelo"
-    ]
+    ],
+    answer: "Leonardo da Vinci"
   },
   {
     id: 6,
@@ -59,7 +113,8 @@ export const questionsArray: QuestionProps[] = [
       "Iron",
       "Diamond",
       "Quartz"
-    ]
+    ],
+    answer: "Diamond"
   },
   {
     id: 7,
@@ -69,7 +124,8 @@ export const questionsArray: QuestionProps[] = [
       "Marseille",
       "Paris",
       "Nice"
-    ]
+    ],
+    answer: "Paris"
   },
   {
     id: 8,
@@ -79,7 +135,8 @@ export const questionsArray: QuestionProps[] = [
       "6",
       "7",
       "8"
-    ]
+    ],
+    answer: "7"
   },
   {
     id: 9,
@@ -89,7 +146,8 @@ export const questionsArray: QuestionProps[] = [
       "Indian Ocean",
       "Arctic Ocean",
       "Pacific Ocean"
-    ]
+    ],
+    answer: "Pacific Ocean"
   },
   {
     id: 10,
@@ -99,8 +157,11 @@ export const questionsArray: QuestionProps[] = [
       "Alan Turing",
       "Bill Gates",
       "Steve Jobs"
-    ]
+    ],
+    answer: "Charles Babbage"
   }
 ];
+
+
 
 

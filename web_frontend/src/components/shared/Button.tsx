@@ -4,7 +4,7 @@ function Button({label , handleButtonClick , additionalStyles} : ButtonProps) {
     <button className={`${additionalStyles} 
     w-full  bg-purple-400 h-14 rounded-2xl text-white text-xl
     `}
-    onClick={() => handleButtonClick}
+    onClick={() => handleButtonClick()}
     >{label}</button>
   )
 }
