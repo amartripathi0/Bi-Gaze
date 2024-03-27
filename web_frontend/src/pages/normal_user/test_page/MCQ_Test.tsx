@@ -11,6 +11,8 @@ function MCQ_Test() {
 
     
    useEffect(() => {
+    console.log(totalNumberOfQuestions);
+    
     setTotalNumberOfQuestions(questionsArray.length)
    }, []);
 

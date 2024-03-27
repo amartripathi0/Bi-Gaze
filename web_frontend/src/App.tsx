@@ -1,5 +1,4 @@
 import Home from './pages/homepages/home/Home'
-import MCQ_Test from './pages/normal_user/test_page/MCQ_Test'
 
 function App() {
 

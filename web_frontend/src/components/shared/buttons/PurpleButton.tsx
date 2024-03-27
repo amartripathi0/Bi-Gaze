@@ -8,7 +8,10 @@ function PurpleButton({label , handleButtonClick , additionalStyles , icon : Ico
     `}
     onClick={() => handleButtonClick()}
         > 
-        <Icon size={16}/>
+        {
+          Icon && <Icon size={16}/>
+        }
+        
         {label}</button>
   )
 }

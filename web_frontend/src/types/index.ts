@@ -12,7 +12,7 @@ export type ButtonProps = {
     label : string;
     handleButtonClick : (() => void) | ((e?: React.FormEvent<HTMLFormElement>) => void)
     additionalStyles ?:string
-    icon : LucideIcon
+    icon ?: LucideIcon 
 }
 
 export type userSelectedAnswerStateProps = {
