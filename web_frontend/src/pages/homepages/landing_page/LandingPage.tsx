@@ -5,13 +5,25 @@ import BlueGreenGradientText from '@/components/shared/BlueGreenGradientText'
 import PurpleBlur from '@/components/shared/backgrounds/PurpleBlur'
 import PurpleButton from '@/components/shared/buttons/PurpleButton'
 import { User, UserSquareIcon } from 'lucide-react'
+import { motion } from 'framer-motion'
 
-function    LandingPage() {
+function LandingPage() {
   return (
     <div id='/' className='flex-btwn-center h-screen px-40 pt-16 '>
 
     {/* left side  */}
-      <div className=' w-3/5 flex flex-col justify-center h-full gap-8 pt-10'>
+      <motion.div className=' w-3/5 flex flex-col justify-center h-full gap-8 pt-10'
+      initial =  {{
+        opacity : 0,
+        x:-100
+  
+      }}
+      animate = {{
+        opacity : 1,
+        x:0
+      }}
+      transition={{ duration: 1 }}
+      >
 
         <span className='text-2xl leading-[0.1]'>Welcome to</span>
 
@@ -31,15 +43,37 @@ function    LandingPage() {
         <PurpleButton label="Student Login" icon = {User} handleButtonClick={() => {}}/>
         <PurpleButton label="Examiner Login" icon = {UserSquareIcon} handleButtonClick={() => {}}/>
         </div>
-      </div>
+      </motion.div>
 
        {/* right side */}
-      <div className='relative w-2/5 flex-center h-full'>
+      <motion.div className='relative w-2/5 flex-center h-full'
+            initial =  {{
+              opacity : 0,
+              x:100
+        
+            }}
+            animate = {{
+              opacity : 1,
+              x:0
+            }}
+            transition={{ duration: 1 }}
+      >
       
       <PurpleBlur/>
 
       {/* logo and text */}
-      <div className='flex-col-center text-3xl h-2/3 w-full  z-20'>
+      <motion.div className='flex-col-center text-3xl h-2/3 w-full  z-20'
+            initial =  {{
+              scale:1
+        
+            }}
+            animate = {{
+              scale : 0.9,
+            
+            }}
+            whileHover={{rotate : "1deg"}}
+            transition={{ duration : 1 , repeat : Infinity , repeatType : "reverse" , ease : "linear" }}
+      >
 
         <Logo height='full' width ="full" src={bigazeLogo}/>
       <div className=' bottom-0 flex-col-center'>
@@ -47,9 +81,9 @@ function    LandingPage() {
           <h1 >AI based <span className='opacity-90 hover:opacity-100 text-cyan-200 font-semibold'>Proctoring System</span> </h1>
           <h1 >Revolutionizing Online Assessment</h1>
           </div>
-      </div>
+      </motion.div>
 
-      </div>
+      </motion.div>
     </div>
 
   )

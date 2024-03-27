@@ -2,12 +2,26 @@ import Logo from "../Logo"
 import { bigazeLogo, navbarItems } from "../../../constants"
 import { Link } from "react-router-dom"
 import NavButton from "../NavButton"
+import { motion } from "framer-motion"
 
 
 
 function Navbar() {
   return (
-    <nav className="flex-btwn-center border-1 fixed top-0 left-0 z-50  backdrop-blur-lg border-black w-full h-24  py-4 px-20 ">
+    <motion.nav 
+    className="flex-btwn-center border-1 fixed top-0 left-0 z-50  backdrop-blur-lg border-black w-full h-24  py-4 px-20 "
+    initial =  {{
+      opacity : 0,
+      y:-30
+
+    }}
+    animate = {{
+      opacity : 1,
+      y:0
+    }}
+    transition={{ duration: 1 }}
+
+    >
             {/* Left: Bi-Gaze Logo */}
             <Link to={"/"} className="  aspect-square h-[98%]  " >
                 <Logo height="full" width="20" src={bigazeLogo}/>
@@ -28,7 +42,7 @@ function Navbar() {
             <div className="flex gap-4">
 
             </div>
-    </nav>
+    </motion.nav>
   )
 }
 
