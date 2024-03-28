@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:bigaze/ui/page/notifications_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
+import 'package:glowy_borders/glowy_borders.dart';
 
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -106,6 +107,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+// Proctor app bar
 class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
@@ -120,7 +122,7 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(200),
+      backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(100),
       shadowColor: SoothingColors.purpleGray,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -137,6 +139,7 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
+        style: const TextStyle(color: Color.fromARGB(255, 224, 174, 246)),
       ),
     );
   }

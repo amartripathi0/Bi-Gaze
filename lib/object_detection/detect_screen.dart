@@ -77,6 +77,7 @@ class _DetectScreenState extends State<DetectScreen> {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const ProctorAppBar(title: "P R O C T O R"),
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           Camera(
