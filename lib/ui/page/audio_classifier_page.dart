@@ -1,4 +1,3 @@
-import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -163,7 +162,7 @@ class _AudioClassifierState extends State<AudioClassifier> {
                 (a, b) => a.value.compareTo(b.value),
               ))
             .reversed
-            .take(20)
+            .take(10)
             .toList();
       });
     } else {
@@ -193,10 +192,10 @@ class _AudioClassifierState extends State<AudioClassifier> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: const CommonAppBar(
-          title: "Test Page",
-        ),
+        backgroundColor: Colors.black.withOpacity(0),
+        // appBar: const CommonAppBar(
+        //   title: "Test Page",
+        // ),
         body: _buildBody(),
       ),
     );

@@ -20,6 +20,10 @@ class _OdSsdMobileNetState extends State<OdSsdMobileNet> {
     super.initState();
     setupCameras();
     loadModel();
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   onSelect();
+    // });
   }
 
   loadModel() async {

@@ -1,5 +1,4 @@
 import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
-import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -13,6 +12,12 @@ class ProctorPage extends StatefulWidget {
 
 class _ProctorPageState extends State<ProctorPage> {
   @override
+  void initState() {
+    super.initState();
+    // Open the bottom modal sheet when the page is first opened
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
@@ -23,32 +28,15 @@ class _ProctorPageState extends State<ProctorPage> {
         );
         return false; // Prevent the default back button behavior
       },
-      child: Scaffold(
-        appBar: const CommonAppBar(
+      child: const Scaffold(
+        appBar: CommonAppBar(
           title: "P R O C T O R",
         ),
-        body: const Stack(
+        body: Stack(
           children: [
-            // Main page content
-            Center(
-              child: Text(
-                'Proctor Page',
-                style: TextStyle(fontSize: 24),
-              ),
-            ),
             // Overlay ObjectDetectionPage
             OdSsdMobileNet(),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Open AudioClassifierPage as a bottom modal sheet
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) => const AudioClassifier(),
-            );
-          },
-          child: const Icon(Icons.add),
         ),
       ),
     );
