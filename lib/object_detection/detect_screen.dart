@@ -29,8 +29,12 @@ class _DetectScreenState extends State<DetectScreen> {
   void _openBottomModalSheet() {
     showModalBottomSheet(
       context: context,
-      backgroundColor:
-          Colors.transparent, // Set background color to transparent
+      barrierColor: Colors.transparent,
+      elevation: 20,
+      enableDrag: true,
+
+      backgroundColor: const Color.fromARGB(
+          0, 0, 0, 0), // Set background color to transparent
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -39,16 +43,16 @@ class _DetectScreenState extends State<DetectScreen> {
           // Background widget covering the entire screen
           Positioned.fill(
             child: Container(
-              color: Colors.black.withOpacity(0), // Adjust opacity as needed
+              color: const Color.fromARGB(0, 0, 0, 0)
+                  .withOpacity(0), // Adjust opacity as needed
             ),
           ),
           // Bottom modal sheet
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 300), // Add additional space at the top
+          SizedBox(
+            height: 160,
             child: Container(
               decoration: const BoxDecoration(
-                color: Color.fromARGB(92, 0, 0,
+                color: Color.fromARGB(130, 0, 0,
                     0), // Change the color to the desired background color
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),

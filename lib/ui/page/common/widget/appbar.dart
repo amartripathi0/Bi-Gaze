@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:bigaze/ui/page/notifications_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
-import 'package:glowy_borders/glowy_borders.dart';
 
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
