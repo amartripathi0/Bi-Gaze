@@ -7,25 +7,24 @@ import 'dart:typed_data';
 import '../../helper/audio_classification_helper.dart';
 
 class AudioClassifier extends StatefulWidget {
-  const AudioClassifier({super.key});
+  const AudioClassifier({Key? key}) : super(key: key);
 
   @override
   State<AudioClassifier> createState() => _AudioClassifierState();
 }
 
 class _AudioClassifierState extends State<AudioClassifier> {
+  late AudioClassificationHelper _helper;
+  Timer? _timer;
+
   static const platform =
       MethodChannel('org.tensorflow.audio_classification/audio_record');
 
-  // The YAMNet/classifier model used in this code example accepts data that
-  // represent single-channel, or mono, audio clips recorded at 16kHz in 0.975
-  // second clips (15600 samples).
-  static const _sampleRate = 16000; // 16kHz
-  static const _expectAudioLength = 975; // milliseconds
+  static const _sampleRate = 16000;
+  static const _expectAudioLength = 975;
   final int _requiredInputBuffer =
       (16000 * (_expectAudioLength / 1000)).toInt();
-  late AudioClassificationHelper _helper;
-  List<MapEntry<String, double>> _classification = List.empty();
+  List<MapEntry<String, double>> _classification = [];
   final List<Color> _primaryProgressColorList = [
     const Color(0xFFF44336),
     const Color(0xFFE91E63),
@@ -53,6 +52,7 @@ class _AudioClassifierState extends State<AudioClassifier> {
     const Color(0x44FF9800)
   ];
   var _showError = false;
+  bool _isRecording = false;
 
   void _attachBackButtonListener() {
     // Add a listener for the back button
@@ -61,9 +61,14 @@ class _AudioClassifierState extends State<AudioClassifier> {
 
   void _handleKeyEvent(RawKeyEvent event) {
     if (event.runtimeType == RawKeyDownEvent) {
-      // Check if the escape key is pressed
-      if (event.logicalKey == LogicalKeyboardKey.escape) {
-        _closeRecorder(); // Stop the audio classifier when escape button is pressed
+      // Check if the back key is pressed
+      if (event.logicalKey == LogicalKeyboardKey.backspace ||
+          event.logicalKey == LogicalKeyboardKey.browserBack) {
+        if (_isRecording) {
+          _closeRecorder(); // Stop the audio classifier when back button is pressed
+        } else {
+          Navigator.of(context).pop(); // Navigate back if not recording
+        }
       }
     }
   }
@@ -71,6 +76,7 @@ class _AudioClassifierState extends State<AudioClassifier> {
   void _startRecorder() {
     try {
       platform.invokeMethod('startRecord');
+      _isRecording = true;
     } on PlatformException catch (e) {
       log("Failed to start record: '${e.message}'.");
     }
@@ -78,10 +84,13 @@ class _AudioClassifierState extends State<AudioClassifier> {
 
   Future<bool> _requestPermission() async {
     try {
-      return await platform.invokeMethod('requestPermissionAndCreateRecorder', {
-        "sampleRate": _sampleRate,
-        "requiredInputBuffer": _requiredInputBuffer
-      });
+      return await platform.invokeMethod(
+        'requestPermissionAndCreateRecorder',
+        {
+          "sampleRate": _sampleRate,
+          "requiredInputBuffer": _requiredInputBuffer
+        },
+      );
     } on Exception catch (e) {
       log("Failed to create recorder: '${e.toString()}'.");
       return false;
@@ -100,39 +109,40 @@ class _AudioClassifierState extends State<AudioClassifier> {
     return audioFloatArray;
   }
 
-  Future<void> _closeRecorder() async {
+  void _closeRecorder() async {
     try {
       await platform.invokeMethod('closeRecorder');
-      _helper.closeInterpreter();
+      if (_isRecording) {
+        _isRecording = false;
+        _helper.closeInterpreter();
+        log("Recorder closed");
+      }
     } on PlatformException {
       log("Failed to close recorder.");
     }
   }
 
   @override
-  initState() {
-    _initRecorder();
+  void initState() {
     super.initState();
-    // test line
+    _initRecorder();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Attach back button listener
       _attachBackButtonListener();
     });
   }
 
-  Future<void> _initRecorder() async {
+  void _initRecorder() async {
     _helper = AudioClassificationHelper();
     await _helper.initHelper();
     bool success = await _requestPermission();
     if (success) {
       _startRecorder();
 
-      Timer.periodic(const Duration(milliseconds: _expectAudioLength), (timer) {
-        // classify here
+      _timer = Timer.periodic(const Duration(milliseconds: _expectAudioLength),
+          (timer) {
         _runInference();
       });
     } else {
-      // show error here
       setState(() {
         _showError = true;
       });
@@ -141,6 +151,9 @@ class _AudioClassifierState extends State<AudioClassifier> {
 
   Future<void> _runInference() async {
     Float32List inputArray = await _getAudioFloatArray();
+    log(inputArray.length.toString());
+
+    // Check if the input array length is sufficient for inference
     if (inputArray.length >= _requiredInputBuffer) {
       final result =
           await _helper.inference(inputArray.sublist(0, _requiredInputBuffer));
@@ -155,25 +168,37 @@ class _AudioClassifierState extends State<AudioClassifier> {
       });
     } else {
       log("Input array length is less than required buffer length.");
+      log(inputArray.length.toString());
+
+      // Clear the classification list when input is insufficient
+      setState(() {
+        _classification.clear();
+      });
     }
   }
 
   @override
   void dispose() {
     _closeRecorder();
-    // Remove the back button listener
+    _timer?.cancel();
     RawKeyboard.instance.removeListener(_handleKeyEvent);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: const CommonAppBar(
-        title: "Test Page",
+    return WillPopScope(
+      onWillPop: () async {
+        _closeRecorder();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: const CommonAppBar(
+          title: "Test Page",
+        ),
+        body: _buildBody(),
       ),
-      body: _buildBody(),
     );
   }
 
@@ -203,14 +228,15 @@ class _AudioClassifierState extends State<AudioClassifier> {
                 ),
               ),
               Flexible(
-                  child: LinearProgressIndicator(
-                backgroundColor: _backgroundProgressColorList[
-                    index % _backgroundProgressColorList.length],
-                color: _primaryProgressColorList[
-                    index % _primaryProgressColorList.length],
-                value: item.value,
-                minHeight: 20,
-              ))
+                child: LinearProgressIndicator(
+                  backgroundColor: _backgroundProgressColorList[
+                      index % _backgroundProgressColorList.length],
+                  color: _primaryProgressColorList[
+                      index % _primaryProgressColorList.length],
+                  value: item.value,
+                  minHeight: 20,
+                ),
+              )
             ],
           );
         },

@@ -1,10 +1,11 @@
 import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
+import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 
 class ProctorPage extends StatefulWidget {
-  const ProctorPage({super.key});
+  const ProctorPage({Key? key}) : super(key: key);
 
   @override
   State<ProctorPage> createState() => _ProctorPageState();
@@ -22,11 +23,33 @@ class _ProctorPageState extends State<ProctorPage> {
         );
         return false; // Prevent the default back button behavior
       },
-      child: const Scaffold(
-        appBar: CommonAppBar(
+      child: Scaffold(
+        appBar: const CommonAppBar(
           title: "P R O C T O R",
         ),
-        body: OdSsdMobileNet(),
+        body: const Stack(
+          children: [
+            // Main page content
+            Center(
+              child: Text(
+                'Proctor Page',
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+            // Overlay ObjectDetectionPage
+            OdSsdMobileNet(),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Open AudioClassifierPage as a bottom modal sheet
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) => const AudioClassifier(),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
