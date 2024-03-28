@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:bigaze/ui/page/notifications_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
+import 'dart:math';
 
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -136,9 +137,29 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       centerTitle: true,
-      title: Text(
-        title,
-        style: const TextStyle(color: Color.fromARGB(255, 224, 174, 246)),
+      title: Transform.rotate(
+        angle: pi,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: title.split('').map((letter) {
+            return Transform.rotate(
+              angle: -pi / 2, // Rotate each letter by 90 degrees clockwise
+              child: Text(letter,
+                  style: TextStyle(
+                    color: SoothingColors.purpleGray,
+                    shadows: [
+                      Shadow(
+                        offset: const Offset(1, 1), // Set the shadow offset
+                        color: const Color.fromARGB(255, 0, 0, 0)
+                            .withOpacity(1), // Set the shadow color and opacity
+                        blurRadius: 8, // Set the blur radius
+                      ),
+                    ],
+                    decorationStyle: TextDecorationStyle.double,
+                  )),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
