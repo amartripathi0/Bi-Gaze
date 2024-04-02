@@ -360,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  glass_kit:
+    dependency: "direct main"
+    description:
+      name: glass_kit
+      sha256: "5cbf3c979089ebac808856a0f8e6161f0d302b71dfc18766fa40c25b87dfc304"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   glassmorphism:
     dependency: "direct main"
     description:
@@ -808,6 +816,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  simple_animated_button:
+    dependency: "direct main"
+    description:
+      name: simple_animated_button
+      sha256: "128cf48cd3002c323eaf23738386674d5830eef09443291387627b2bff864a9b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   sky_engine:
     dependency: transitive
     description: flutter

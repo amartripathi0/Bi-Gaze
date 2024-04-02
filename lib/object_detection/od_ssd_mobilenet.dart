@@ -1,9 +1,11 @@
 import 'dart:developer';
 
+import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:bigaze/object_detection/detect_screen.dart';
+import 'package:simple_animated_button/simple_animated_button.dart';
 
 class OdSsdMobileNet extends StatefulWidget {
   const OdSsdMobileNet({Key? key}) : super(key: key);
@@ -54,12 +56,24 @@ class _OdSsdMobileNetState extends State<OdSsdMobileNet> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: onSelect,
-          style: const ButtonStyle(
-              backgroundColor:
-                  MaterialStatePropertyAll(Color.fromARGB(255, 153, 99, 167))),
-          child: const Text('Launch 🚀'),
+        child: ElevatedLayerButton(
+          onClick: onSelect,
+          buttonHeight: 60,
+          buttonWidth: 270,
+          animationDuration: const Duration(milliseconds: 200),
+          animationCurve: Curves.ease,
+          topDecoration: BoxDecoration(
+            color: SoothingColors.purpleGray.withAlpha(200),
+            border: Border.all(),
+          ),
+          topLayerChild: const Text(
+            "Start Session 🚀",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          baseDecoration: BoxDecoration(
+            color: const Color.fromARGB(255, 147, 228, 161).withAlpha(200),
+            border: Border.all(),
+          ),
         ),
       ),
     );

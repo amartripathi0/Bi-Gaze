@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'dart:math';
 
-import 'package:flutter/widgets.dart';
 
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
