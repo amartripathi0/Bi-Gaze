@@ -36,6 +36,7 @@ class _OdSsdMobileNetState extends State<OdSsdMobileNet> {
 
   onSelect() {
     final route = MaterialPageRoute(builder: (context) {
+      log("Session started");
       return DetectScreen(cameras: cameras, model: "SSD MobileNet");
     });
     Navigator.of(context).push(route);

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';

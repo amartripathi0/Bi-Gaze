@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'dart:math';
 
+import 'package:flutter/widgets.dart';
+
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -39,6 +41,7 @@ class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               const Text(
                 "BiGaze",
+                style: TextStyle(color: Colors.white),
               )
             ],
           ),
@@ -101,6 +104,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         child: Text(
           title,
+          style: const TextStyle(color: Colors.white60),
         ),
       ),
     );
