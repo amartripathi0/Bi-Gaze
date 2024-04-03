@@ -60,7 +60,7 @@ class _OdSsdMobileNetState extends State<OdSsdMobileNet> {
           onClick: onSelect,
           buttonHeight: 60,
           buttonWidth: 270,
-          animationDuration: const Duration(milliseconds: 200),
+          animationDuration: const Duration(milliseconds: 500),
           animationCurve: Curves.ease,
           topDecoration: BoxDecoration(
             color: SoothingColors.purpleGray.withAlpha(200),

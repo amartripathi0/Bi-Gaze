@@ -17,21 +17,24 @@ class ProctorModelAdapter extends TypeAdapter<ProctorModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProctorModel(
-      fields[2] as String,
-      fields[1] as String,
       fields[0] as String,
+      (fields[3] as Map).cast<String, dynamic>(),
+      (fields[2] as Map).cast<String, dynamic>(),
+      fields[1] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProctorModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.time)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.audio)
+      ..write(obj.time)
       ..writeByte(2)
+      ..write(obj.audio)
+      ..writeByte(3)
       ..write(obj.object);
   }
 

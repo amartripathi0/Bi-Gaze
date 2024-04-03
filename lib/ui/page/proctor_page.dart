@@ -1,12 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
-
+import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:glass_kit/glass_kit.dart';
 import 'package:simple_animated_button/horizontal_fill_button.dart';
+import 'package:uuid/uuid.dart';
+import 'package:hive/hive.dart';
+
+import '../../model/proctor_model.dart';
 
 class ProctorPage extends StatefulWidget {
   const ProctorPage({Key? key}) : super(key: key);
@@ -170,11 +174,28 @@ class _ProctorPageState extends State<ProctorPage> {
                 right: 0,
                 child: HorizontalFillButton(
                   onClick: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const OdSsdMobileNet()),
+                    const uuid = Uuid();
+                    final id = uuid.v4(); // Generate unique ID
+                    final currentTime = DateTime.now().toString();
+                    final newRecord = ProctorModel(
+                      id,
+                      {'audioKey': 'audioValue'}, // Your audio dictionary
+                      {'objectKey': 'objectValue'}, // Your object dictionary
+                      currentTime,
                     );
+                    try {
+                      boxProctor.add(newRecord);
+                      print('Record added with ID: $id');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OdSsdMobileNet(),
+                        ),
+                      );
+                    } catch (e) {
+                      print('Error adding record: $e');
+                      // Handle error here, such as showing an error message to the user
+                    }
                   },
                   fillingDuration: const Duration(milliseconds: 700),
                   curve: Curves.ease,

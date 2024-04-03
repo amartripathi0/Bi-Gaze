@@ -67,7 +67,6 @@ class _DetectScreenState extends State<DetectScreen> {
   List<dynamic>? _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
-
   setRecognitions(recognitions, imageHeight, imageWidth) {
     setState(() {
       _recognitions = recognitions;

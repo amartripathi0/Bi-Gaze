@@ -4,13 +4,16 @@ part 'proctor_model.g.dart';
 @HiveType(typeId: 0)
 class ProctorModel {
   @HiveField(0)
-  final String time;
+  final String id;
 
   @HiveField(1)
-  final String audio;
+  final String time;
 
   @HiveField(2)
-  final String object;
+  final Map<String, dynamic> audio;
 
-  const ProctorModel(this.object, this.audio, this.time);
+  @HiveField(3)
+  final Map<String, dynamic> object;
+
+  const ProctorModel(this.id, this.object, this.audio, this.time);
 }

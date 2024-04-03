@@ -1,3 +1,4 @@
+import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -8,6 +9,7 @@ import 'package:bigaze/ui/theme/theme.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProctorModelAdapter());
+  boxProctor = await Hive.openBox('proctorBox');
   runApp(const MyApp());
 }
 

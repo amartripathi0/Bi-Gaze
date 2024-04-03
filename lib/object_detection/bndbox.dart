@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -44,6 +46,9 @@ class BndBox extends StatelessWidget {
           h = h0 * scaleH;
           if (y0 < difH / 2) h -= (difH / 2 - y0) * scaleH;
         }
+
+        // detections to be stored @object detction model
+        log("${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%");
 
         return Positioned(
           left: math.max(0, x),

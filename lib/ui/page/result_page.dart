@@ -1,11 +1,12 @@
-// ignore_for_file: deprecated_member_use
-
-import 'package:bigaze/ui/page/common/widget/appbar.dart';
+import 'package:bigaze/helper/boxes.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
+import 'package:bigaze/model/proctor_model.dart'; // Import your ProctorModel class
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({Key? key}) : super(key: key); // Fix key parameter
+  const ResultsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +19,36 @@ class ResultsPage extends StatelessWidget {
         );
         return false; // Prevent the default back button behavior
       },
-      child: const Scaffold(
-        appBar: CommonAppBar(
+      child: Scaffold(
+        appBar: const CommonAppBar(
           title: "Result",
         ),
-        body: Center(
-          child: Text(
-            'Results Page',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
+        body: _buildResultsList(),
       ),
     );
+  }
+
+  Widget _buildResultsList() {
+    if (boxProctor.isEmpty) {
+      return const Center(child: Text('No records found'));
+    } else {
+      return ListView.builder(
+        itemCount: boxProctor.length,
+        itemBuilder: (context, index) {
+          final record = boxProctor.getAt(index)! as ProctorModel;
+          return ListTile(
+            title: Text('Record ID: ${record.id}'),
+            subtitle: Column(
+              children: [
+                Text('Time: ${record.time}'),
+                Text('Audio: ${record.audio}'),
+                Text('Object: ${record.object}'),
+              ],
+            ),
+            // Display other record details as needed
+          );
+        },
+      );
+    }
   }
 }
