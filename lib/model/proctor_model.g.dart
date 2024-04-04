@@ -18,11 +18,12 @@ class ProctorModelAdapter extends TypeAdapter<ProctorModel> {
     };
     return ProctorModel(
       fields[0] as String,
-      (fields[1] as List).cast<String>(),
-      (fields[2] as List)
+      fields[1] as String,
+      (fields[2] as List).cast<String>(),
+      (fields[3] as List)
           .map((dynamic e) => (e as Map).cast<String, dynamic>())
           .toList(),
-      (fields[3] as List)
+      (fields[4] as List)
           .map((dynamic e) => (e as Map).cast<String, dynamic>())
           .toList(),
     );
@@ -31,14 +32,16 @@ class ProctorModelAdapter extends TypeAdapter<ProctorModel> {
   @override
   void write(BinaryWriter writer, ProctorModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.time)
+      ..write(obj.date)
       ..writeByte(2)
-      ..write(obj.audio)
+      ..write(obj.time)
       ..writeByte(3)
+      ..write(obj.audio)
+      ..writeByte(4)
       ..write(obj.object);
   }
 

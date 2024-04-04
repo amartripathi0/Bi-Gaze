@@ -180,6 +180,8 @@ class _ProctorPageState extends State<ProctorPage> {
                     const uuid = Uuid();
                     final id = uuid.v4(); // Generate unique ID
 
+                    final date = DateTime.now().toString().split(' ')[0];
+
                     final List<String> time = [];
                     final List<Map<String, dynamic>> audioData =
                         outputProvider.audioOutput;
@@ -194,7 +196,7 @@ class _ProctorPageState extends State<ProctorPage> {
                     }
 
                     final newRecord =
-                        ProctorModel(id, time, audioData, objectData);
+                        ProctorModel(id, date, time, audioData, objectData);
                     try {
                       await boxProctor.add(newRecord);
                       print('Record added with ID: $id');

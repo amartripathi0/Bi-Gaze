@@ -43,6 +43,7 @@ class ResultsPage extends StatelessWidget {
             title: Text('Record ID: ${record.id}'),
             subtitle: Column(
               children: [
+                Text('Date: ${record.date}'),
                 Text('Time: ${record.time}'),
                 Text('Audio: ${record.audio}'),
                 Text('Object: ${record.object}'),

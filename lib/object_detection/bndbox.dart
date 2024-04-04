@@ -50,6 +50,8 @@ class BndBox extends StatelessWidget {
         // detections to be stored @object detction model
         log("${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%");
 
+        // Detected object to be stored as |Time(common)|Object_name|confience_percentage
+
         return Positioned(
           left: math.max(0, x),
           top: math.max(0, y),
