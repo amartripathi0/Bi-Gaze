@@ -18,9 +18,13 @@ class ProctorModelAdapter extends TypeAdapter<ProctorModel> {
     };
     return ProctorModel(
       fields[0] as String,
-      (fields[3] as Map).cast<String, dynamic>(),
-      (fields[2] as Map).cast<String, dynamic>(),
-      fields[1] as String,
+      (fields[1] as List).cast<String>(),
+      (fields[2] as List)
+          .map((dynamic e) => (e as Map).cast<String, dynamic>())
+          .toList(),
+      (fields[3] as List)
+          .map((dynamic e) => (e as Map).cast<String, dynamic>())
+          .toList(),
     );
   }
 

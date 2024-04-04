@@ -7,13 +7,13 @@ class ProctorModel {
   final String id;
 
   @HiveField(1)
-  final String time;
+  final List<String> time;
 
   @HiveField(2)
-  final Map<String, dynamic> audio;
+  final List<Map<String, dynamic>> audio;
 
   @HiveField(3)
-  final Map<String, dynamic> object;
+  final List<Map<String, dynamic>> object;
 
-  const ProctorModel(this.id, this.audio, this.object, this.time);
+  const ProctorModel(this.id, this.time, this.audio, this.object);
 }
