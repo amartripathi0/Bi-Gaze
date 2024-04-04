@@ -1,10 +1,18 @@
+// ignore_for_file: avoid_print
+
 import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/object_detection/bndbox.dart';
 import 'package:bigaze/object_detection/camera.dart';
+import 'package:bigaze/helper/boxes.dart';
+import 'package:uuid/uuid.dart';
+import 'dart:async';
+import '../../model/proctor_model.dart';
 import 'dart:math' as math;
+import 'package:provider/provider.dart';
+import '../../provider/detections_provider.dart'; // Import the provider class
 
 class DetectScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -17,13 +25,59 @@ class DetectScreen extends StatefulWidget {
 }
 
 class _DetectScreenState extends State<DetectScreen> {
+  late final OutputProvider outputProvider;
+  late final ProctorModel newRecord;
+  late Timer _timer;
+
+  void _updateRecord() {
+    // Get the current time
+    final currentTime = DateTime.now().toString().split(' ')[1];
+
+    // Append the current time to the time list of the record
+    newRecord.time.add(currentTime);
+
+    // Append the audio and object data from the output provider
+    newRecord.audio.addAll(outputProvider.audioOutput);
+    newRecord.object.addAll(outputProvider.objectOutput);
+
+    // Optionally, you can update the output provider here if needed
+
+    // Add the updated record to the Hive box
+    try {
+      boxProctor.add(newRecord);
+      print('Record updated with ID: ${newRecord.id}');
+    } catch (e) {
+      print('Error updating record: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    // provider
+    outputProvider = Provider.of<OutputProvider>(context, listen: false);
+
+    // Initialize the ProctorModel object with an initial ID, date, and empty lists
+    const uuid = Uuid();
+    final id = uuid.v4();
+    final date = DateTime.now().toString().split(' ')[0];
+    newRecord = ProctorModel(id, date, [], [], []);
+
+    // Start a timer to trigger _addRecord every second
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _updateRecord();
+    });
+
     // Open the bottom modal sheet when the page is first opened
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _openBottomModalSheet();
     });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   void _openBottomModalSheet() {

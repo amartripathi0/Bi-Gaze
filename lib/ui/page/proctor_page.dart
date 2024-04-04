@@ -1,18 +1,11 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
-import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:glass_kit/glass_kit.dart';
 import 'package:simple_animated_button/horizontal_fill_button.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
-
-import '../../provider/detections_provider.dart'; // Import the provider class
-
-import '../../model/proctor_model.dart';
 
 class ProctorPage extends StatefulWidget {
   const ProctorPage({Key? key}) : super(key: key);
@@ -22,15 +15,14 @@ class ProctorPage extends StatefulWidget {
 }
 
 class _ProctorPageState extends State<ProctorPage> {
+  // late Timer _timer; // Define a Timer variable
   @override
   void initState() {
     super.initState();
-    // Open the bottom modal sheet when the page is first opened
   }
 
   @override
   Widget build(BuildContext context) {
-    final outputProvider = Provider.of<OutputProvider>(context);
     return WillPopScope(
         onWillPop: () async {
           // Navigate to the home page when the back button is pressed
@@ -177,38 +169,13 @@ class _ProctorPageState extends State<ProctorPage> {
                 right: 0,
                 child: HorizontalFillButton(
                   onClick: () async {
-                    const uuid = Uuid();
-                    final id = uuid.v4(); // Generate unique ID
-
-                    final date = DateTime.now().toString().split(' ')[0];
-
-                    final List<String> time = [];
-                    final List<Map<String, dynamic>> audioData =
-                        outputProvider.audioOutput;
-                    final List<Map<String, dynamic>> objectData =
-                        outputProvider.objectOutput;
-
-                    // Generate data for each second
-                    final currentTime = DateTime.now().toString();
-                    time.add(currentTime);
-
-                    final newRecord =
-                        ProctorModel(id, date, time, audioData, objectData);
-                    try {
-                      await boxProctor.add(newRecord);
-                      print('Record added with ID: $id');
-
-                      Navigator.push(
-                        // ignore: use_build_context_synchronously
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const OdSsdMobileNet(),
-                        ),
-                      );
-                    } catch (e) {
-                      print('Error adding record: $e');
-                      // Handle error here, such as showing an error message to the user
-                    }
+                    Navigator.push(
+                      // ignore: use_build_context_synchronously
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OdSsdMobileNet(),
+                      ),
+                    );
                   },
                   fillingDuration: const Duration(milliseconds: 700),
                   curve: Curves.ease,
