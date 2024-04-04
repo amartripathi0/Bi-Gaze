@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/detections_provider.dart';
 import 'dart:math' as math;
 import 'models.dart';
 
@@ -19,6 +21,8 @@ class BndBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final outputProvider = Provider.of<OutputProvider>(context, listen: false);
+
     List<Widget> renderBoxes() {
       return results.map((re) {
         var x0 = re["rect"]["x"];
@@ -48,7 +52,20 @@ class BndBox extends StatelessWidget {
         }
 
         // detections to be stored @object detction model
-        log("${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%");
+        // log("${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%");
+        final output =
+            "${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%";
+        final data = [
+          {
+            "${re["detectedClass"]}":
+                "${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%"
+          }
+        ];
+        log(data.toString());
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Provider.of<OutputProvider>(context, listen: false)
+              .updateObjectOutput(output, object: data);
+        });
 
         // Detected object to be stored as |Time(common)|Object_name|confience_percentage
 

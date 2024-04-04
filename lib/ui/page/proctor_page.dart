@@ -189,11 +189,8 @@ class _ProctorPageState extends State<ProctorPage> {
                         outputProvider.objectOutput;
 
                     // Generate data for each second
-                    for (int i = 0; i < 10; i++) {
-                      final currentTime =
-                          DateTime.now().add(Duration(seconds: i)).toString();
-                      time.add(currentTime);
-                    }
+                    final currentTime = DateTime.now().toString();
+                    time.add(currentTime);
 
                     final newRecord =
                         ProctorModel(id, date, time, audioData, objectData);
