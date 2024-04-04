@@ -1,6 +1,7 @@
+// ignore_for_file: deprecated_member_use, avoid_print
+
 import 'package:bigaze/helper/boxes.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/model/proctor_model.dart'; // Import your ProctorModel class
@@ -20,6 +21,7 @@ class ResultsPage extends StatelessWidget {
         return false; // Prevent the default back button behavior
       },
       child: Scaffold(
+        floatingActionButton: const ClearRecordsButton(),
         appBar: const CommonAppBar(
           title: "Result",
         ),
@@ -36,6 +38,7 @@ class ResultsPage extends StatelessWidget {
         itemCount: boxProctor.length,
         itemBuilder: (context, index) {
           final record = boxProctor.getAt(index)! as ProctorModel;
+          // log(record.id.toString());
           return ListTile(
             title: Text('Record ID: ${record.id}'),
             subtitle: Column(
@@ -50,5 +53,26 @@ class ResultsPage extends StatelessWidget {
         },
       );
     }
+  }
+}
+
+class ClearRecordsButton extends StatelessWidget {
+  const ClearRecordsButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () async {
+        try {
+          boxProctor.clear();
+          print('All records cleared');
+        } catch (e) {
+          print('Error clearing records: $e');
+          // Handle error here, such as showing an error message to the user
+        }
+      },
+      tooltip: 'Clear Records',
+      child: const Icon(Icons.clear),
+    );
   }
 }

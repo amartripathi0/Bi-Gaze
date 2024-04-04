@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, avoid_print
 
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/object_detection/od_ssd_mobilenet.dart';
@@ -8,7 +8,6 @@ import 'package:bigaze/ui/page/home_page.dart';
 import 'package:glass_kit/glass_kit.dart';
 import 'package:simple_animated_button/horizontal_fill_button.dart';
 import 'package:uuid/uuid.dart';
-import 'package:hive/hive.dart';
 
 import '../../model/proctor_model.dart';
 

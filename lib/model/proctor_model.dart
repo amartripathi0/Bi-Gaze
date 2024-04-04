@@ -15,5 +15,5 @@ class ProctorModel {
   @HiveField(3)
   final Map<String, dynamic> object;
 
-  const ProctorModel(this.id, this.object, this.audio, this.time);
+  const ProctorModel(this.id, this.audio, this.object, this.time);
 }
