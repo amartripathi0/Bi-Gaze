@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +59,7 @@ class BndBox extends StatelessWidget {
                 "${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%"
           }
         ];
-        log(data.toString());
+        // log(data.toString());
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Provider.of<OutputProvider>(context, listen: false)
               .updateObjectOutput(output, object: data);

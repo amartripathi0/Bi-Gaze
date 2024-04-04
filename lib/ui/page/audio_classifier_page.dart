@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'dart:typed_data';
 import '../../helper/audio_classification_helper.dart';
+import '../../provider/detections_provider.dart';
 
 class AudioClassifier extends StatefulWidget {
   const AudioClassifier({Key? key}) : super(key: key);
@@ -152,7 +154,7 @@ class _AudioClassifierState extends State<AudioClassifier> {
 
   Future<void> _runInference() async {
     Float32List inputArray = await _getAudioFloatArray();
-    log(inputArray.length.toString());
+    // log(inputArray.length.toString());
 
     // Check if the input array length is sufficient for inference
     if (inputArray.length >= _requiredInputBuffer) {
@@ -169,7 +171,7 @@ class _AudioClassifierState extends State<AudioClassifier> {
       });
     } else {
       log("Input array length is less than required buffer length.");
-      log(inputArray.length.toString());
+      // log(inputArray.length.toString());
 
       // Clear the classification list when input is insufficient
       setState(() {
@@ -219,6 +221,18 @@ class _AudioClassifierState extends State<AudioClassifier> {
         itemCount: _classification.length,
         itemBuilder: (context, index) {
           final item = _classification[index];
+          // log(_classification.first.toString());
+          // -------|---------------------|----------------------------------|-----------------
+          // log(data.toString());
+          // log(_classification.toString());
+          final output = _classification;
+          final data = [_classification.first];
+          log(data.toString());
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Provider.of<OutputProvider>(context, listen: false)
+                .updateAudioOutput(output, audio: data);
+          });
+
           return Row(
             children: [
               SizedBox(

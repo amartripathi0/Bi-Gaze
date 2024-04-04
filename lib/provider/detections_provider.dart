@@ -15,11 +15,13 @@ class OutputProvider extends ChangeNotifier {
 
   // Method to update the output data
   void updateAudioOutput(
-    String output, {
-    required List<Map<String, dynamic>> audio,
+    List<MapEntry<String, double>> output, {
+    required List<MapEntry<String, double>> audio,
   }) {
-    audioOutput = audio;
+    // Convert List<MapEntry<String, double>> to List<Map<String, dynamic>>
+    audioOutput = audio.map((entry) => {entry.key: entry.value}).toList();
 
+    // Notify listeners that the audio output has been updated
     notifyListeners();
   }
 }
