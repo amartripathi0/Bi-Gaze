@@ -4,7 +4,8 @@ import 'package:bigaze/helper/boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
-import 'package:bigaze/model/proctor_model.dart'; // Import your ProctorModel class
+import 'package:bigaze/model/proctor_model.dart';
+import 'package:bigaze/ui/page/records_detailed.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({Key? key}) : super(key: key);
@@ -21,16 +22,20 @@ class ResultsPage extends StatelessWidget {
         return false; // Prevent the default back button behavior
       },
       child: Scaffold(
-        floatingActionButton: const ClearRecordsButton(),
+        floatingActionButton: const SizedBox(
+          width: 130, // Adjust the width as needed
+          child: ClearRecordsButton(),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: const CommonAppBar(
           title: "Result",
         ),
-        body: _buildResultsList(),
+        body: _buildResultsList(context),
       ),
     );
   }
 
-  Widget _buildResultsList() {
+  Widget _buildResultsList(BuildContext context) {
     if (boxProctor.isEmpty) {
       return const Center(child: Text('No records found'));
     } else {
@@ -38,18 +43,17 @@ class ResultsPage extends StatelessWidget {
         itemCount: boxProctor.length,
         itemBuilder: (context, index) {
           final record = boxProctor.getAt(index)! as ProctorModel;
-          // log(record.id.toString());
           return ListTile(
             title: Text('Record ID: ${record.id}'),
-            subtitle: Column(
-              children: [
-                Text('Date: ${record.date}'),
-                Text('Time: ${record.time}'),
-                Text('Audio: ${record.audio}'),
-                Text('Object: ${record.object}'),
-              ],
-            ),
-            // Display other record details as needed
+            onTap: () {
+              // Navigate to a new page displaying the complete information of the selected record
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RecordDetailsPage(record: record),
+                ),
+              );
+            },
           );
         },
       );
@@ -73,7 +77,26 @@ class ClearRecordsButton extends StatelessWidget {
         }
       },
       tooltip: 'Clear Records',
-      child: const Icon(Icons.clear),
+      isExtended: true,
+      backgroundColor: const Color.fromARGB(186, 175, 59, 59),
+      child: const Padding(
+        padding: EdgeInsets.all(3.0),
+        child: Center(
+          child: Row(
+            children: [
+              Icon(
+                Icons.clear,
+                color: Colors.black,
+              ),
+              Text(
+                "Clear records",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
