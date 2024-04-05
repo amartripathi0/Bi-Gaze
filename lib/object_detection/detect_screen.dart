@@ -29,25 +29,69 @@ class _DetectScreenState extends State<DetectScreen> {
   late final ProctorModel newRecord;
   late Timer _timer;
 
+  // void _updateRecord() {
+  //   // Get the current time
+  //   final currentTime = DateTime.now().toString().split(' ')[1];
+
+  //   // Append the current time to the time list of the record
+  //   newRecord.time.add(currentTime);
+
+  //   // Append the audio and object data from the output provider
+  //   newRecord.audio.addAll(outputProvider.audioOutput);
+  //   newRecord.object.addAll(outputProvider.objectOutput);
+
+  //   // Optionally, you can update the output provider here if needed
+
+  //   // Add the updated record to the Hive box
+  //   try {
+  //     boxProctor.add(newRecord);
+  //     print('Record updated with ID: ${newRecord.id}');
+  //   } catch (e) {
+  //     print('Error updating record: $e');
+  //   }
+  // }
+
   void _updateRecord() {
     // Get the current time
     final currentTime = DateTime.now().toString().split(' ')[1];
 
-    // Append the current time to the time list of the record
-    newRecord.time.add(currentTime);
+    // Check if the record with the same ID already exists in the box
+    final existingRecordIndex = boxProctor.values
+        .toList()
+        .indexWhere((record) => record.id == newRecord.id);
 
-    // Append the audio and object data from the output provider
-    newRecord.audio.addAll(outputProvider.audioOutput);
-    newRecord.object.addAll(outputProvider.objectOutput);
+    if (existingRecordIndex != -1) {
+      // If the record already exists, update its time, audio, and object data
+      final existingRecord =
+          boxProctor.getAt(existingRecordIndex) as ProctorModel;
+      existingRecord.time.add(currentTime);
+      existingRecord.audio.addAll(outputProvider.audioOutput);
+      existingRecord.object.addAll(outputProvider.objectOutput);
 
-    // Optionally, you can update the output provider here if needed
+      try {
+        // Save the updated record back to the Hive box
+        boxProctor.putAt(existingRecordIndex, existingRecord);
+        print('Record updated with ID: ${existingRecord.id}');
+      } catch (e) {
+        print('Error updating record: $e');
+      }
+    } else {
+      // If the record doesn't exist, create a new one
+      final record = ProctorModel(
+        newRecord.id,
+        newRecord.date,
+        [currentTime], // Start a new list of time with the current time
+        outputProvider.audioOutput,
+        outputProvider.objectOutput,
+      );
 
-    // Add the updated record to the Hive box
-    try {
-      boxProctor.add(newRecord);
-      print('Record updated with ID: ${newRecord.id}');
-    } catch (e) {
-      print('Error updating record: $e');
+      try {
+        // Add the new record to the Hive box
+        boxProctor.add(record);
+        print('New record created with ID: ${record.id}');
+      } catch (e) {
+        print('Error adding new record: $e');
+      }
     }
   }
 
