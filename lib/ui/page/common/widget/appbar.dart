@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'dart:math';
 
-
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -13,6 +12,7 @@ class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(200),
       shadowColor: SoothingColors.purpleGray,
       shape: const RoundedRectangleBorder(
@@ -81,6 +81,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(200),
       shadowColor: SoothingColors.purpleGray,
       shape: const RoundedRectangleBorder(

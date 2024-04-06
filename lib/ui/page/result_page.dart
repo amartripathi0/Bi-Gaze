@@ -1,6 +1,9 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
 import 'package:bigaze/helper/boxes.dart';
+import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
+import 'package:bigaze/ui/page/profile_page.dart';
+import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -8,8 +11,41 @@ import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/ui/page/records_detailed.dart';
 
-class ResultsPage extends StatelessWidget {
+class ResultsPage extends StatefulWidget {
   const ResultsPage({Key? key}) : super(key: key);
+
+  @override
+  State<ResultsPage> createState() => _ResultsPageState();
+}
+
+class _ResultsPageState extends State<ResultsPage> {
+  int _currentIndex = 1;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    // Handle navigation based on index
+    switch (index) {
+      case 0:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const MyHomePage()));
+        break;
+      case 1:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ResultsPage()));
+        break;
+      case 2:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ScannerPage()));
+        break;
+      case 3:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ProfilePage()));
+        break;
+      // Add cases for other indexes as needed
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +59,10 @@ class ResultsPage extends StatelessWidget {
         return false; // Prevent the default back button behavior
       },
       child: Scaffold(
+        bottomNavigationBar: CoolBottomNavigationBar(
+          currentIndex: _currentIndex, // Pass current index
+          onTap: _onItemTapped, // Handle tap event
+        ),
         floatingActionButton: const SizedBox(
           width: 130, // Adjust the width as needed
           child: ClearRecordsButton(),
