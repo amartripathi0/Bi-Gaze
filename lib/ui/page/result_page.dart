@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
 import 'package:bigaze/helper/boxes.dart';
+import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -43,17 +44,19 @@ class ResultsPage extends StatelessWidget {
         itemCount: boxProctor.length,
         itemBuilder: (context, index) {
           final record = boxProctor.getAt(index)! as ProctorModel;
-          return ListTile(
-            title: Text('Record ID: ${record.id}'),
-            onTap: () {
-              // Navigate to a new page displaying the complete information of the selected record
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RecordDetailsPage(record: record),
+          return Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              );
-            },
+                GlassListTile(
+                  recordId: 'Record ID: ${record.id}',
+                  dateOfProctor: 'Date : ${record.date}',
+                  destinationPage: RecordDetailsPage(record: record),
+                ),
+              ],
+            ),
           );
         },
       );
