@@ -2,7 +2,6 @@ import 'package:bigaze/ui/page/analysis_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
-import 'package:flutter/widgets.dart';
 import 'package:simple_animated_button/vertical_fill_button.dart';
 
 class RecordDetailsPage extends StatelessWidget {

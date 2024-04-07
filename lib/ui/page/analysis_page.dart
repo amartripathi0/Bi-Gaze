@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bigaze/widgets/purpleglass.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -19,50 +20,19 @@ class AnalysisReportPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            PurpleGlassCard(
+              child: PieChartSample2(
+                record: record,
+              ),
+            ),
             // Pi Chart
-            PieChartSample2(
-              record: record,
+            const PurpleGlassCard(
+              child: Text("Line Chart"),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Record ID: ${record.id}',
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 250, 156, 122)),
-              ),
+            const PurpleGlassCard(
+              child: Text("Time Serires Chart"),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Date: ${record.date}',
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 137, 193, 192)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Time: ${record.time}',
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 186, 186, 182)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Audio: ${record.audio}',
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 178, 175, 175)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Object: ${record.object}',
-                style:
-                    const TextStyle(color: Color.fromARGB(255, 178, 175, 175)),
-              ),
-            ),
+
             const SizedBox(height: 20),
             // LineChartSample(record: record),
           ],
