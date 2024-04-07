@@ -25,58 +25,69 @@ class PieChart2State extends State<PieChartSample2> {
 
   @override
   Widget build(BuildContext context) {
+    List<Color> colors = generateRandomColors(record.audio);
+
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 0.7,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          const SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: PieChart(
-                PieChartData(
-                  pieTouchData: PieTouchData(
-                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                      setState(() {
-                        if (!event.isInterestedForInteractions ||
-                            pieTouchResponse == null ||
-                            pieTouchResponse.touchedSection == null) {
-                          touchedIndex = -1;
-                          return;
-                        }
-                        touchedIndex = pieTouchResponse
-                            .touchedSection!.touchedSectionIndex;
-                      });
-                    },
-                  ),
-                  borderData: FlBorderData(
-                    show: false,
-                  ),
-                  sectionsSpace: 0,
-                  centerSpaceRadius: 40,
-                  sections: showingSections(record.audio),
-                ),
+          Container(
+            padding: const EdgeInsets.only(top: 20),
+            height: 42,
+            color: Colors.transparent,
+            child: const Center(
+              child: Text(
+                "Sounds classified",
+                style: TextStyle(
+                    color: Colors.white, fontSize: 20, letterSpacing: 5),
               ),
             ),
           ),
-          const SizedBox(
-            width: 28,
+          AspectRatio(
+            aspectRatio: 1.5,
+            child: PieChart(
+              PieChartData(
+                pieTouchData: PieTouchData(
+                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                    setState(() {
+                      if (!event.isInterestedForInteractions ||
+                          pieTouchResponse == null ||
+                          pieTouchResponse.touchedSection == null) {
+                        touchedIndex = -1;
+                        return;
+                      }
+                      touchedIndex =
+                          pieTouchResponse.touchedSection!.touchedSectionIndex;
+                    });
+                  },
+                ),
+                borderData: FlBorderData(
+                  show: false,
+                ),
+                sectionsSpace: 1.0,
+                centerSpaceRadius: 40,
+                sections: showingSections(record.audio, colors),
+              ),
+            ),
           ),
-          // Column(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: showingIndicators(record.audio),
-          // ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 80),
+              child: ListView(
+                children: showingIndicators(record.audio, colors),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  List<PieChartSectionData> showingSections(List<dynamic> audioData) {
+  List<PieChartSectionData> showingSections(
+      List<dynamic> audioData, List<Color> colors) {
     Map<String, double> categoryMap = {};
-    List<Color> colors = [];
 
     // Calculate the total value for each category
     for (var item in audioData) {
@@ -96,43 +107,58 @@ class PieChart2State extends State<PieChartSample2> {
     });
 
     // Generate PieChart sections based on percentages
-    percentages.forEach((category, value) {
-      colors.add(getRandomColor());
-    });
-
     return percentages.entries.map((entry) {
       final isTouched = entry.key == touchedIndex.toString();
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
+      const shadows = [
+        Shadow(color: Color.fromARGB(255, 27, 26, 26), blurRadius: 2)
+      ];
 
       return PieChartSectionData(
-        color: getRandomColor(),
+        color: colors[percentages.keys.toList().indexOf(entry.key)],
         value: entry.value,
         title: '${entry.value.toStringAsFixed(2)}%',
         radius: radius,
         titleStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
-          color: AppColors.mainTextColor1,
+          color: const Color.fromARGB(255, 234, 234, 234),
           shadows: shadows,
         ),
       );
     }).toList();
   }
 
-  List<Widget> showingIndicators(List<dynamic> audioData) {
-    Set<String> uniqueCategories = <String>{};
+  List<Widget> showingIndicators(List<dynamic> audioData, List<Color> colors) {
+    Map<String, List<double>> categoryValues =
+        {}; // Map to store category and its values
     List<Widget> indicators = [];
 
-    // Collect unique categories
+    // Collect category values
     for (var item in audioData) {
       String category = item.keys.first;
-      uniqueCategories.add(category);
+      double value = item.values.first;
+
+      if (!categoryValues.containsKey(category)) {
+        categoryValues[category] = []; // Initialize empty list for the category
+      }
+      categoryValues[category]!.add(value); // Add value to the category's list
     }
 
-    // Generate corresponding Indicator widgets for sorted unique categories
-    List<String> sortedCategories = uniqueCategories.toList()..sort();
+    // Calculate average values for each category
+    Map<String, double> averageValues = {};
+    categoryValues.forEach((category, values) {
+      double sum = values.reduce((value, element) => value + element);
+      averageValues[category] = sum / values.length;
+    });
+
+    // Generate corresponding Indicator widgets for categories sorted by average values
+    List<String> sortedCategories = averageValues.keys.toList()
+      ..sort((a, b) {
+        return averageValues[a]!.compareTo(averageValues[b]!);
+      });
+
     for (String category in sortedCategories) {
       indicators.add(
         Column(
@@ -140,7 +166,7 @@ class PieChart2State extends State<PieChartSample2> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Indicator(
-              color: getRandomColor(),
+              color: colors[sortedCategories.indexOf(category)],
               text: category,
               isSquare: true,
             ),
@@ -165,70 +191,15 @@ class PieChart2State extends State<PieChartSample2> {
     );
   }
 
-  // List<PieChartSectionData> showingSections() {
-  //   return List.generate(4, (i) {
-  //     final isTouched = i == touchedIndex;
-  //     final fontSize = isTouched ? 25.0 : 16.0;
-  //     final radius = isTouched ? 60.0 : 50.0;
-  //     const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
-  //     switch (i) {
-  //       case 0:
-  //         return PieChartSectionData(
-  //           color: AppColors.contentColorBlue,
-  //           value: 40,
-  //           title: '40%',
-  //           radius: radius,
-  //           titleStyle: TextStyle(
-  //             fontSize: fontSize,
-  //             fontWeight: FontWeight.bold,
-  //             color: AppColors.mainTextColor1,
-  //             shadows: shadows,
-  //           ),
-  //         );
-  //       case 1:
-  //         return PieChartSectionData(
-  //           color: AppColors.contentColorYellow,
-  //           value: 30,
-  //           title: '30%',
-  //           radius: radius,
-  //           titleStyle: TextStyle(
-  //             fontSize: fontSize,
-  //             fontWeight: FontWeight.bold,
-  //             color: AppColors.mainTextColor1,
-  //             shadows: shadows,
-  //           ),
-  //         );
-  //       case 2:
-  //         return PieChartSectionData(
-  //           color: AppColors.contentColorPurple,
-  //           value: 15,
-  //           title: '15%',
-  //           radius: radius,
-  //           titleStyle: TextStyle(
-  //             fontSize: fontSize,
-  //             fontWeight: FontWeight.bold,
-  //             color: AppColors.mainTextColor1,
-  //             shadows: shadows,
-  //           ),
-  //         );
-  //       case 3:
-  //         return PieChartSectionData(
-  //           color: AppColors.contentColorGreen,
-  //           value: 15,
-  //           title: '15%',
-  //           radius: radius,
-  //           titleStyle: TextStyle(
-  //             fontSize: fontSize,
-  //             fontWeight: FontWeight.bold,
-  //             color: AppColors.mainTextColor1,
-  //             shadows: shadows,
-  //           ),
-  //         );
-  //       default:
-  //         throw Error();
-  //     }
-  //   });
-  // }
+  List<Color> generateRandomColors(List<dynamic> audioData) {
+    List<Color> colors = [];
+
+    for (var item in audioData) {
+      colors.add(getRandomColor());
+    }
+
+    return colors;
+  }
 }
 
 // --------------------------------------------------------------------------------
@@ -266,37 +237,13 @@ class Indicator extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: textColor,
+            fontWeight: FontWeight.normal,
+            color: Colors.white,
           ),
         )
       ],
     );
   }
-}
-
-class AppColors {
-  static const Color primary = contentColorCyan;
-  static const Color menuBackground = Color(0xFF090912);
-  static const Color itemsBackground = Color(0xFF1B2339);
-  static const Color pageBackground = Color(0xFF282E45);
-  static const Color mainTextColor1 = Colors.white;
-  static const Color mainTextColor2 = Colors.white70;
-  static const Color mainTextColor3 = Colors.white38;
-  static const Color mainGridLineColor = Colors.white10;
-  static const Color borderColor = Colors.white54;
-  static const Color gridLinesColor = Color(0x11FFFFFF);
-
-  static const Color contentColorBlack = Colors.black;
-  static const Color contentColorWhite = Colors.white;
-  static const Color contentColorBlue = Color(0xFF2196F3);
-  static const Color contentColorYellow = Color(0xFFFFC300);
-  static const Color contentColorOrange = Color(0xFFFF683B);
-  static const Color contentColorGreen = Color(0xFF3BFF49);
-  static const Color contentColorPurple = Color(0xFF6E1BFF);
-  static const Color contentColorPink = Color(0xFFFF3AF2);
-  static const Color contentColorRed = Color(0xFFE80054);
-  static const Color contentColorCyan = Color(0xFF50E4FF);
 }
