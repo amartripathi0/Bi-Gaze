@@ -21,7 +21,7 @@ class AnalysisReportPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PurpleGlassCard(
-              child: PieChartSample2(
+              child: PieChartAudio(
                 record: record,
               ),
             ),

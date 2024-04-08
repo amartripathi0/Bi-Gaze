@@ -4,15 +4,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:flutter/material.dart';
 
-class PieChartSample2 extends StatefulWidget {
+class PieChartAudio extends StatefulWidget {
   final ProctorModel record;
-  const PieChartSample2({Key? key, required this.record}) : super(key: key);
+  const PieChartAudio({Key? key, required this.record}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }
 
-class PieChart2State extends State<PieChartSample2> {
+class PieChart2State extends State<PieChartAudio> {
   int touchedIndex = -1;
   late ProctorModel record;
 
@@ -130,43 +130,41 @@ class PieChart2State extends State<PieChartSample2> {
   }
 
   List<Widget> showingIndicators(List<dynamic> audioData, List<Color> colors) {
-    Map<String, List<double>> categoryValues =
-        {}; // Map to store category and its values
+    Map<String, double> categoryMap = {};
     List<Widget> indicators = [];
 
-    // Collect category values
+    // Calculate the total value for each category
     for (var item in audioData) {
       String category = item.keys.first;
       double value = item.values.first;
-
-      if (!categoryValues.containsKey(category)) {
-        categoryValues[category] = []; // Initialize empty list for the category
-      }
-      categoryValues[category]!.add(value); // Add value to the category's list
+      categoryMap[category] = (categoryMap[category] ?? 0) + value;
     }
 
-    // Calculate average values for each category
-    Map<String, double> averageValues = {};
-    categoryValues.forEach((category, values) {
-      double sum = values.reduce((value, element) => value + element);
-      averageValues[category] = sum / values.length;
+    // Calculate the total sum of all categories
+    double total =
+        categoryMap.values.reduce((value, element) => value + element);
+
+    // Convert category values to percentages
+    Map<String, double> percentages = {};
+    categoryMap.forEach((category, value) {
+      percentages[category] = value / total * 100;
     });
 
     // Generate corresponding Indicator widgets for categories sorted by average values
-    List<String> sortedCategories = averageValues.keys.toList()
+    List<MapEntry<String, double>> sortedEntries = percentages.entries.toList()
       ..sort((a, b) {
-        return averageValues[a]!.compareTo(averageValues[b]!);
+        return b.value.compareTo(a.value); // Sort in descending order
       });
 
-    for (String category in sortedCategories) {
+    for (var entry in sortedEntries) {
       indicators.add(
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Indicator(
-              color: colors[sortedCategories.indexOf(category)],
-              text: category,
+              color: colors[sortedEntries.indexOf(entry)],
+              text: entry.key,
               isSquare: true,
             ),
             const SizedBox(
