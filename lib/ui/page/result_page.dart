@@ -12,7 +12,7 @@ import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/ui/page/records_detailed.dart';
 
 class ResultsPage extends StatefulWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+  const ResultsPage({super.key});
 
   @override
   State<ResultsPage> createState() => _ResultsPageState();
@@ -105,7 +105,7 @@ class _ResultsPageState extends State<ResultsPage> {
 }
 
 class ClearRecordsButton extends StatelessWidget {
-  const ClearRecordsButton({Key? key}) : super(key: key);
+  const ClearRecordsButton({super.key});
 
   @override
   Widget build(BuildContext context) {

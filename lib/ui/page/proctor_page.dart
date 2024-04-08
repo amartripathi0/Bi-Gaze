@@ -8,7 +8,7 @@ import 'package:glass_kit/glass_kit.dart';
 import 'package:simple_animated_button/horizontal_fill_button.dart';
 
 class ProctorPage extends StatefulWidget {
-  const ProctorPage({Key? key}) : super(key: key);
+  const ProctorPage({super.key});
 
   @override
   State<ProctorPage> createState() => _ProctorPageState();

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class PieChartObject extends StatefulWidget {
   final ProctorModel record;
-  const PieChartObject({Key? key, required this.record}) : super(key: key);
+  const PieChartObject({super.key, required this.record});
 
   @override
   State<StatefulWidget> createState() => PieChart2State();

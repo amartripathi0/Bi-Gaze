@@ -10,7 +10,7 @@ import '../../helper/audio_classification_helper.dart';
 import '../../provider/detections_provider.dart';
 
 class AudioClassifier extends StatefulWidget {
-  const AudioClassifier({Key? key}) : super(key: key);
+  const AudioClassifier({super.key});
 
   @override
   State<AudioClassifier> createState() => _AudioClassifierState();

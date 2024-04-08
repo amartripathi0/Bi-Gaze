@@ -7,7 +7,7 @@ import 'package:simple_animated_button/vertical_fill_button.dart';
 class RecordDetailsPage extends StatelessWidget {
   final ProctorModel record;
 
-  const RecordDetailsPage({Key? key, required this.record}) : super(key: key);
+  const RecordDetailsPage({super.key, required this.record});
 
   @override
   Widget build(BuildContext context) {

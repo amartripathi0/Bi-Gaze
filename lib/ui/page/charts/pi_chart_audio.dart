@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class PieChartAudio extends StatefulWidget {
   final ProctorModel record;
-  const PieChartAudio({Key? key, required this.record}) : super(key: key);
+  const PieChartAudio({super.key, required this.record});
 
   @override
   State<StatefulWidget> createState() => PieChart2State();

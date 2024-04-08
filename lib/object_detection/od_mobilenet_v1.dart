@@ -6,7 +6,7 @@ import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:bigaze/object_detection/detect_screen.dart';
 
 class OdMobileNetVone extends StatefulWidget {
-  const OdMobileNetVone({Key? key}) : super(key: key);
+  const OdMobileNetVone({super.key});
 
   @override
   State<OdMobileNetVone> createState() => _OdMobileNetVoneState();

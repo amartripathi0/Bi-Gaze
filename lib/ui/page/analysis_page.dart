@@ -10,7 +10,7 @@ import 'package:bigaze/ui/page/charts/pi_chart_audio.dart';
 class AnalysisReportPage extends StatelessWidget {
   final ProctorModel record;
 
-  const AnalysisReportPage({Key? key, required this.record}) : super(key: key);
+  const AnalysisReportPage({super.key, required this.record});
 
   @override
   Widget build(BuildContext context) {

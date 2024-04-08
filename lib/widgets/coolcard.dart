@@ -6,8 +6,7 @@ class GlassCard extends StatelessWidget {
   final String cardName;
 
   const GlassCard(
-      {Key? key, required this.destinationPage, required this.cardName})
-      : super(key: key);
+      {super.key, required this.destinationPage, required this.cardName});
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +58,10 @@ class GlassListTile extends StatelessWidget {
   final String dateOfProctor;
 
   const GlassListTile(
-      {Key? key,
+      {super.key,
       required this.destinationPage,
       required this.recordId,
-      required this.dateOfProctor})
-      : super(key: key);
+      required this.dateOfProctor});
 
   @override
   Widget build(BuildContext context) {

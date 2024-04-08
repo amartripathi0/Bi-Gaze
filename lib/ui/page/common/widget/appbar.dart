@@ -71,9 +71,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   const CommonAppBar({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -116,9 +116,9 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   const ProctorAppBar({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

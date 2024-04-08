@@ -6,10 +6,10 @@ class CoolBottomNavigationBar extends StatelessWidget {
   final Function(int) onTap;
 
   const CoolBottomNavigationBar({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

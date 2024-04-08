@@ -18,7 +18,7 @@ class PurpleGlassCard extends StatelessWidget {
   final ShapeBorder shape;
 
   const PurpleGlassCard({
-    Key? key,
+    super.key,
     required this.child,
     this.height = 500,
     this.width = 450,
@@ -34,7 +34,7 @@ class PurpleGlassCard extends StatelessWidget {
     this.shape = const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(20)),
     ),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:bigaze/object_detection/detect_screen.dart';
 import 'package:simple_animated_button/simple_animated_button.dart';
 
 class OdSsdMobileNet extends StatefulWidget {
-  const OdSsdMobileNet({Key? key}) : super(key: key);
+  const OdSsdMobileNet({super.key});
 
   @override
   State<OdSsdMobileNet> createState() => _OdSsdMobileNetState();
