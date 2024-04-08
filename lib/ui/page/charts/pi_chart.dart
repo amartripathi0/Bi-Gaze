@@ -193,6 +193,7 @@ class PieChart2State extends State<PieChartSample2> {
   List<Color> generateRandomColors(List<dynamic> audioData) {
     List<Color> colors = [];
 
+    // ignore: unused_local_variable
     for (var item in audioData) {
       colors.add(getRandomColor());
     }

@@ -121,7 +121,7 @@ class ClearRecordsButton extends StatelessWidget {
       },
       tooltip: 'Clear Records',
       isExtended: true,
-      backgroundColor: const Color.fromARGB(186, 175, 59, 59),
+      backgroundColor: const Color.fromARGB(255, 255, 67, 67).withOpacity(0.5),
       child: const Padding(
         padding: EdgeInsets.all(3.0),
         child: Center(
