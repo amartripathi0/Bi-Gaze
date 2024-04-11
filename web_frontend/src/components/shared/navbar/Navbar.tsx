@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <motion.nav
-      className={`flex-between fixed z-50 backdrop-blur-lg  w-full h-20  py-4 px-20 ${
+      className={`flex-between fixed top-0 left-0 z-50 backdrop-blur-lg  w-screen h-20  py-4 px-20 ${
         scrolled && "border-b border-purple-500 "
       }  `}
       initial={{

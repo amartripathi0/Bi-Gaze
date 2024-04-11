@@ -9,10 +9,10 @@ import { motion } from 'framer-motion'
 
 function LandingPage() {
   return (
-    <div id='/' className='flex-between h-screen px-40 pt-16 '>
+    <div id='/' className='flex-between h-full mx-20 border'>
 
     {/* left side  */}
-      <motion.div className=' w-3/5 flex flex-col justify-center h-full gap-8 pt-10'
+      <motion.div className=' w-3/5 flex flex-col justify-center h-full gap-6 pt-10'
       initial =  {{
         opacity : 0,
         x:-100
@@ -25,7 +25,7 @@ function LandingPage() {
       transition={{ duration: 1 }}
       >
 
-        <span className='text-2xl leading-[0.1]'>Welcome to</span>
+        <span className='text-xl leading-[0.1]'>Welcome to</span>
 
         <BlueGreenGradientText 
         text='Bi-GAZE'
@@ -39,7 +39,7 @@ function LandingPage() {
         </PurpleGradientCard>
 
         {/* Login buttons */}
-        <div className='flex gap-10 mt-6'>
+        <div className='flex gap-10 mt-4'>
         <PurpleButton label="Student Login" icon = {User} handleButtonClick={() => {}}/>
         <PurpleButton label="Examiner Login" icon = {UserSquareIcon} handleButtonClick={() => {}}/>
         </div>
@@ -62,7 +62,7 @@ function LandingPage() {
       <PurpleBlur/>
 
       {/* logo and text */}
-      <motion.div className='flex-col-center text-3xl h-2/3 w-full  z-20'
+      <motion.div className='flex-col-center text-xl h-2/3 w-full  z-20'
             initial =  {{
               scale:1
         

@@ -15,11 +15,11 @@ function Home() {
   return (
     <section className=" w-full relative">
       <Navbar  />
-      <div className="px-20 h-[calc(100vh - 5rem)] ">
+      <div className=" h-[calc(100vh-5rem)] mt-20 border px-20">
         <LandingPage/>
-        <AboutBigaze/>
+        {/* <AboutBigaze/>
         <AboutUs/>
-        <ContactUs/>
+        <ContactUs/> */}
       </div>
     </section>
   );
