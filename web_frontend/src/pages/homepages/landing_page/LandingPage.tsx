@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 
 function LandingPage() {
   return (
-    <div id='/' className='flex-btwn-center h-screen px-40 pt-16 '>
+    <div id='/' className='flex-between h-screen px-40 pt-16 '>
 
     {/* left side  */}
       <motion.div className=' w-3/5 flex flex-col justify-center h-full gap-8 pt-10'

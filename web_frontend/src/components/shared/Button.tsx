@@ -2,7 +2,7 @@ import { ButtonProps } from "../../types"
 function Button({label , handleButtonClick , additionalStyles} : ButtonProps) {
   return (
     <button className={`${additionalStyles} 
-     bg-purple-600 h-10 rounded-xl text-white text-lg w-4/5
+     bg-purple-900 h-10 rounded text-white text-lg 
     `}
     onClick={() => handleButtonClick()}
     >{label}</button>

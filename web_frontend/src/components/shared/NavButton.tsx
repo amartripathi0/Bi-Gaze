@@ -15,11 +15,10 @@ function NavButton({ link, label }: NavButtonProps) {
     <NavHashLink
       to={link}
       smooth={true}
-  
-      className={`${hash === link ? "bg-gradient-to-r from-purple-900 to-indigo-700" : "bg-gray-800"} 
-      w-1/3 h-4/5 hover:bg-purple-900 flex-center rounded-full transition-all duration-150`}
+      className={`${hash === link ? "bg-gradient-to-r from-purple-500 to-indigo-300 text-transparent bg-clip-text opacity-100" : "opacity-90"} 
+      h-4/5 flex-center text-xs uppercase font-bold transition-all duration-150`}
     >
-      <Button className="text-xl">{label}</Button>
+      {label}
     </NavHashLink>
   );
 }

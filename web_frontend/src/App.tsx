@@ -6,7 +6,7 @@ function App() {
   return (
    <div className='min-h-screen w-screen relative'>
     <Home />
-    <MCQ_Test/>
+    {/* <MCQ_Test/> */}
    </div>
   )
 }

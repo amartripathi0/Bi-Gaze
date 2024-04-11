@@ -23,7 +23,7 @@ html , body{
         @apply flex flex-col justify-center items-center
     }
 
-    .flex-btwn-center{
+    .flex-between{
         @apply flex justify-between items-center
     }
 

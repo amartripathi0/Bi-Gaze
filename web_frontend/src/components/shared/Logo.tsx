@@ -7,11 +7,11 @@ type LogoProps = {
 function Logo({height = "10", width = "10" , src , alt = "logo"} : LogoProps) {
   
   return (
+
         <img
-        className={` aspect-square h-${height} w-${width}`}
+        className={` aspect-square h-${height} w-${width} `}
         src={src}
         alt={alt} />
-  
   )
 }
 

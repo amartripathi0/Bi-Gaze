@@ -1,9 +1,9 @@
 // import Logo from '@/components/shared/Logo'
-import Navbar from '../../../components/shared/navbar/Navbar'
-import AboutBigaze from '../about_bigaze/AboutBigaze'
-import AboutUs from '../about_us/AboutUs'
-import ContactUs from '../contact_us/ContactUs'
-import LandingPage from '../landing_page/LandingPage'
+import Navbar from "../../../components/shared/navbar/Navbar";
+import AboutBigaze from "../about_bigaze/AboutBigaze";
+import AboutUs from "../about_us/AboutUs";
+import ContactUs from "../contact_us/ContactUs";
+import LandingPage from "../landing_page/LandingPage";
 // import { bigazeLogo } from '@/constants'
 // import PurpleGradientCard from '@/components/shared/cards/PurpleGradientCard'
 // import BlueGreenGradientText from '@/components/shared/BlueGreenGradientText'
@@ -13,22 +13,16 @@ import LandingPage from '../landing_page/LandingPage'
 
 function Home() {
   return (
-    <section className='h-full  w-full px-20  relative'>
-        <Navbar />
-
-        {/* Landing Page */}
+    <section className=" w-full relative">
+      <Navbar  />
+      <div className="px-20 h-[calc(100vh - 5rem)] ">
         <LandingPage/>
         <AboutBigaze/>
         <AboutUs/>
         <ContactUs/>
-
-
-
-        
-
-
+      </div>
     </section>
-  )
+  );
 }
 
-export default Home
+export default Home;
