@@ -38,13 +38,13 @@ function QuestionsWithOptions({
     }))
   }
   return (
-    <PurpleBorderContainer additionalStyles ="h-full w-4/5  p-10 flex flex-col gap-10 ">
-      <h1 className="text-3xl">
+    <PurpleBorderContainer additionalStyles ="h-full w-3/4  p-10 flex flex-col gap-10 ">
+      <h1 className="text-2xl">
         <span>Que:-{question.id} </span>
         {question.title}
       </h1>
 
-      <div className="flex flex-col gap-8 px-4">
+      <div className="flex flex-col gap-6 px-2">
         {question.options.map((option) => (
           <QuestionOptions
             key={`${option}`}

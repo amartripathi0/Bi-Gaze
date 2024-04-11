@@ -8,8 +8,8 @@ function QuestionOptions({optionValue , handleOptionClick ,  } : QuestionOptions
     <input
     type="button"
     name=""
-    className="w-1/5 p-6 bg-plum-300 border-2 border-purple-700 rounded-xl shadow-lg shadow-gray-400 hover:scale-[1.03] hover:transition-all duration-200
-    text-xl font-medium cursor-pointer bg-purple-100
+    className="w-1/4 p-2 px-4 bg-plum-300 border-2 border-purple-700 rounded-xl shadow-sm hover:shadow-gray-400 hover:scale-[1.03] hover:transition-all duration-200
+    text-md font-medium cursor-pointer 
     "
     onClick={() => handleOptionClick()} 
     value={optionValue}

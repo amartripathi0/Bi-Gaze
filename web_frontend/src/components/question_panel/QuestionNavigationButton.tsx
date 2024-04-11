@@ -6,11 +6,11 @@ type QuestionNavigationButtonProps = {
 
 }
 
-function QuestionNavigationButton({buttonLabel , handleButtonClick ,questionAttempted} : QuestionNavigationButtonProps) {
+function  QuestionNavigationButton({buttonLabel , handleButtonClick ,questionAttempted} : QuestionNavigationButtonProps) {
   
   return (
-    <button className={`border-black border-2 rounded-lg shadow-md shadow-gray-300 h-14 w-14 text-xl font-medium
-    ${questionAttempted ? "bg-green-500" : "bg-slate-300"}
+    <button className={` border  rounded shadow-sm hover:shadow-gray-300 h-10 aspect-square text-lg font-medium border-slate-500 
+    ${questionAttempted ? "bg-purple-500" : "bg-slate-800"}
     `}
     onClick={() => handleButtonClick(buttonLabel)}>
         {buttonLabel}

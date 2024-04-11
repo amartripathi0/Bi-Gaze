@@ -2,6 +2,7 @@ import { questionsArray } from "../../constants";
 import { userSelectedAnswerStateProps } from "../../types";
 import Button from "../shared/Button";
 import QuestionNavigationButton from "./QuestionNavigationButton";
+import WebcamFaceMeshViewer from "./WebcamFaceMeshViewer";
 import PurpleBorderContainer from "./containers/PurpleBorderContainer";
 
 type QuestionNavigationButtonProps = {
@@ -21,11 +22,18 @@ function QuestionNavigationPanel({
 }: QuestionNavigationButtonProps ) {
   
   return (
-    <PurpleBorderContainer additionalStyles="h-full w-1/5 rounded-md  p-6 bg-slate-200 flex items-center justify-between flex-col ">
+    <PurpleBorderContainer additionalStyles="h-full w-1/4 rounded-md  p-4  flex-center flex-col gap-4 ">
+      <div className="h-1/2 w-full flex-between bg-gray-900 p-2 rounded-xl  ">
+
+     <WebcamFaceMeshViewer webcamHeight="2/3" webcamWidth="full" />
+      </div>
+     
+     <div className="bg-gray-900 p-2 rounded-xl flex items-center flex-col">
+
       <h1 className="text-xl">{testName}</h1>
       <h1>Questions Attempted:</h1>
 
-      <div className="flex-center bg-red-100 p-6   gap-4 flex-wrap">
+      <div className="flex-center p-6   gap-4 flex-wrap">
         {questionsArray.map((eachQuestion) => (
           <QuestionNavigationButton
             handleButtonClick={handleQuestionChangeButtonClick}
@@ -36,7 +44,8 @@ function QuestionNavigationPanel({
         ))}
       </div>
 
-      <Button handleButtonClick={handleTestSubmit} label="Submit Test" />
+      <Button  handleButtonClick={handleTestSubmit} label="Submit Test" />
+     </div>
     </PurpleBorderContainer>
   );
 }
