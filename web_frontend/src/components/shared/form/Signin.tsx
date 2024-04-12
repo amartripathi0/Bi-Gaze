@@ -2,6 +2,7 @@ import { SigninFormData, UserSigninSchema } from '@/types';
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
+import PurpleBorderContainer from '@/components/quiz/containers/PurpleBorderContainer';
 function SigninForm() {
     const {register , handleSubmit  , formState : {errors}}  = useForm<SigninFormData>({resolver : zodResolver(UserSigninSchema)});
  
@@ -10,10 +11,12 @@ function SigninForm() {
             
     }
   return (
-    <div className="flex-center"> 
+    <div className="flex justify-end items-center h-screen w-screen"> 
         
-    <form onSubmit={handleSubmit(onSubmit)}>
-    <div className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)}
+    className="w-1/2 h-full flex-center "
+    >
+    <PurpleBorderContainer additionalStyles="flex-col gap-4 flex p-10  w-2/3 h-4/5 border-2 ">
 
       <FormField
         type="email"
@@ -34,7 +37,7 @@ function SigninForm() {
       <button type="submit" className="submit-button">
         Submit
       </button>
-    </div>
+    </PurpleBorderContainer>
   </form>
 </div>
   )

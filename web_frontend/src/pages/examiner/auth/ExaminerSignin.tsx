@@ -1,6 +1,8 @@
+import SigninForm from "@/components/shared/form/Signin"
+
 function ExaminerSignin() {
   return (
-    <div>ExaminerSignin</div>
+    <div><SigninForm/></div>
   )
 }
 
