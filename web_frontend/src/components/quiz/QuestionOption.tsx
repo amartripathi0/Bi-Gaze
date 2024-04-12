@@ -5,7 +5,7 @@ type QuestionOptionsProps = {
   optionValue: string;
   question: QuestionProp;
 };
-function QuestionOptions({ optionValue, question }: QuestionOptionsProps) {
+function QuestionOption({ optionValue, question }: QuestionOptionsProps) {
   const setExamineeOptionSelect = useExamineeTestStore(
     (state) => state.setExamineeTestResponse
   );
@@ -23,20 +23,23 @@ function QuestionOptions({ optionValue, question }: QuestionOptionsProps) {
         ...examineeTestResponse,
         examineeSelectedOption,
       ]);
-    }
-    examineeTestResponse.forEach((eachSelectedAnswerObj) => {
-      // question answered for first time -> add ans to the array
+    } else {
+      const questionAlreadyAnswered = examineeTestResponse.some(
+        (eachSelectedAnswerObj) => eachSelectedAnswerObj.id === question.id
+      );
 
-      if (eachSelectedAnswerObj.id !== question.id) {
+      // question answered for first time -> add ans to the array
+      if (!questionAlreadyAnswered) {
+        console.log("first time");
+
         setExamineeOptionSelect([
           ...examineeTestResponse,
           examineeSelectedOption,
         ]);
       }
-
       // question already answered with diff option -> replace the old ans with new one
       // question already answered with same option -> replace the old ans with new one
-      else if (eachSelectedAnswerObj.id === question.id) {
+      else {
         const removedExistingAttempedAns = examineeTestResponse.filter(
           (eachAns) => eachAns.id !== question.id
         );
@@ -45,8 +48,9 @@ function QuestionOptions({ optionValue, question }: QuestionOptionsProps) {
           examineeSelectedOption,
         ]);
       }
-    });
+    }
   }
+
   return (
     <input
       type="button"
@@ -60,4 +64,4 @@ function QuestionOptions({ optionValue, question }: QuestionOptionsProps) {
   );
 }
 
-export default QuestionOptions;
+export default QuestionOption;

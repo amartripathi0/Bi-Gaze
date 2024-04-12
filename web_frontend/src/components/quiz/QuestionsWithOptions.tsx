@@ -1,5 +1,5 @@
 import { QuestionProp } from "../../types";
-import QuestionOptions from "./QuestionOptions";
+import QuestionOptions from "./QuestionOption";
 import PurpleBorderContainer from "./containers/PurpleBorderContainer";
 
 function QuestionsWithOptions({ question }: { question: QuestionProp }) {

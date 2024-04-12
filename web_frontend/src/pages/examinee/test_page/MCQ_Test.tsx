@@ -1,5 +1,5 @@
-import QuestionsWithOptions from "../../../components/question_panel/QuestionsWithOptions";
-import QuestionNavigationPanel from "../../../components/question_panel/QuestionNavigationPanel";
+import QuestionsWithOptions from "../../../components/quiz/QuestionsWithOptions";
+import QuestionNavigationPanel from "../../../components/quiz/QuestionNavigationPanel";
 import { useExamineeTestStore } from "@/stores/examinee/utils/store";
 
 function MCQ_Test() {

@@ -1,4 +1,4 @@
-import { runDetector } from "@/lib/mediapipe/detectFaceLandmark";
+import { runDetector } from "@/utils/mediapipe/detectFaceLandmark";
 import React, { useRef, useState } from "react";
 import Webcam from "react-webcam";
 
