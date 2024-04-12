@@ -8,23 +8,12 @@ const examineeSchema = new mongoose.Schema({
     password: { type: String, required: true },
     profilePicture: { type: String, default: "" },
   },
-  quizs: [
+  quizzes: [
     {
       quizTitle: { type: String, required: true },
       createdBy: { type: String, required: true },
-      questions: [
-        {
-          id: { type: Number, required: true },
-          questionTitle: { type: String, required: true },
-          options: [
-            { type: String, required: true },
-            { type: String, required: true },
-            { type: String, required: true },
-            { type: String, required: true },
-          ],
-          answer: { type: String, required: true },
-        },
-      ],
+      quizScore : { type: Number, required: true } ,
+      
     },
   ],
 });
