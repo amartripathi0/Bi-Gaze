@@ -3,6 +3,7 @@ import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
 import PurpleBorderContainer from '@/components/quiz/containers/PurpleBorderContainer';
+import { useNavigate } from 'react-router-dom';
 function SigninForm() {
     const {register , handleSubmit  , formState : {errors}}  = useForm<SigninFormData>({resolver : zodResolver(UserSigninSchema)});
  
@@ -10,6 +11,7 @@ function SigninForm() {
             console.log(data);
             
     }
+    const navigate = useNavigate()
   return (
     <div className="flex justify-end items-center h-screen w-screen"> 
         
@@ -33,7 +35,7 @@ function SigninForm() {
         register={register}
         error={errors.password}
       />
-
+      <p>Don't have an account? <span onClick={() => navigate('/signup')}>Signup</span></p>
       <button type="submit" className="submit-button">
         Submit
       </button>
