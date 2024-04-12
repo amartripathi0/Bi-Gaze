@@ -14,6 +14,11 @@ import Quiz from "./pages/examinee/quiz/Quiz.tsx";
 import ExamineeLayout from "./pages/examiner/ExaminerLayout.tsx";
 import ExaminerLayout from "./pages/examiner/ExaminerLayout.tsx";
 import ExaminerDashboard from "./pages/examiner/Dashboard.tsx";
+import ExamineeSignup from "./pages/examinee/auth/ExamineeSignup.tsx";
+import ExamineeSignin from "./pages/examinee/auth/ExamineeSignin.tsx";
+import ExaminerSignup from "./pages/examiner/auth/ExaminerSignup.tsx";
+import ExaminerSignin from "./pages/examiner/auth/ExaminerSignin.tsx";
+
 
 const routes = [
   <Route path="/" element={<App />}>
@@ -23,10 +28,14 @@ const routes = [
     <Route path="/examinee" element={<ExamineeLayout />}>
       <Route path="/examinee" element={<ExamineeHomepage />} />
       <Route path="/examinee/quiz" element={<Quiz />} />
+      <Route path="/examinee/signup" element={<ExamineeSignup />} />
+      <Route path="/examinee/signin" element={<ExamineeSignin />} />
     </Route>
 
     <Route path="/examiner" element={<ExaminerLayout />}>
       <Route path="/examiner/dashboard" element={<ExaminerDashboard />} />
+      <Route path="/examiner/signup" element={<ExaminerSignup />} />
+      <Route path="/examiner/signin" element={<ExaminerSignin />} />
     </Route>
   </Route>,
 ];
