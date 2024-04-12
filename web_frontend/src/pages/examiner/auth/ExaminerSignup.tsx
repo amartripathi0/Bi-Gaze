@@ -1,8 +1,8 @@
-import React from 'react'
+import SignupForm from '@/components/shared/form/Signup'
 
 function ExaminerSignup() {
   return (
-    <div>ExaminerSignup</div>
+    <div><SignupForm /></div>
   )
 }
 
