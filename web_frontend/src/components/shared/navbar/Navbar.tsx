@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <motion.nav
-      className={`flex-between fixed top-0 left-0 z-50 backdrop-blur-lg  w-screen h-20  py-4 px-20 ${
+      className={`flex-between fixed top-0 left-0 z-50 backdrop-blur-lg  w-screen h-16  py-4 px-20  ${
         scrolled && "border-b border-purple-500 "
       }  `}
       initial={{
@@ -31,7 +31,7 @@ function Navbar() {
       </Link>
 
       {/* Right: Naviagtion bar */}
-      <div className="flex-between px-2 py-1 font-bold gap-10 h-full w-1/2">
+      <div className="flex-between  py-1 font-bold gap-5 h-full w-1/2" >
         {navbarItems.map((navItem) => (
           <NavButton
             key={navItem.label}
@@ -42,7 +42,7 @@ function Navbar() {
 
         <Button
           label="Social"
-          additionalStyles={"text-xs w-1/5 uppercase font-bold "}
+          additionalStyles={"text-xs w-1/6 uppercase font-bold "}
           handleButtonClick={() => {}}
         />
       </div>

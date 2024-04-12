@@ -13,9 +13,9 @@ import LandingPage from "../landing_page/LandingPage";
 
 function Home() {
   return (
-    <section className=" w-full relative">
+    <section className=" w-full  ">
       <Navbar  />
-      <div className=" h-[calc(100vh-5rem)] mt-20 border px-20">
+      <div className=" h-[calc(100vh-5rem)]  mt-20 px-24">
         <LandingPage/>
         {/* <AboutBigaze/>
         <AboutUs/>

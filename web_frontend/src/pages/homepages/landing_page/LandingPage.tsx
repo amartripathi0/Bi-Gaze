@@ -9,10 +9,10 @@ import { motion } from 'framer-motion'
 
 function LandingPage() {
   return (
-    <div id='/' className='flex-between h-full mx-20 border'>
+    <div id='/' className='flex-between h-full mx-20 '>
 
     {/* left side  */}
-      <motion.div className=' w-3/5 flex flex-col justify-center h-full gap-6 pt-10'
+      <motion.div className=' w-3/5 flex flex-col justify-center h-full gap-6 '
       initial =  {{
         opacity : 0,
         x:-100
@@ -46,7 +46,7 @@ function LandingPage() {
       </motion.div>
 
        {/* right side */}
-      <motion.div className='relative w-2/5 flex-center h-full'
+      <motion.div className='relative  flex-center h-full'
             initial =  {{
               opacity : 0,
               x:100

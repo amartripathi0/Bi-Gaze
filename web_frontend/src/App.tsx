@@ -4,9 +4,12 @@ import Home from './pages/homepages/home/Home'
 function App() {
 
   return (
-   <div className='min-h-screen w-screen relative'>
+   <div className='min-h-screen relative '>
     <Home />
     {/* <MCQ_Test/> */}
+    {/* <div className='h-screen'>
+
+    </div> */}
    </div>
   )
 }

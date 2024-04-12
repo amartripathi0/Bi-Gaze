@@ -28,7 +28,7 @@ function MCQ_Test() {
    const questionToDisplay = questionsArray[currentQuestion-1]
   return (
     <form onSubmit = {handleTestSubmit} 
-        className="w-screen h-screen flex-center p-16 rounded-lg gap-10">
+        className="w-screen h-screen flex-center p-16 rounded-lg gap-10 ">
         <QuestionsWithOptions question={{...questionToDisplay}} setUserSelectedAnswer = {setUserSelectedAnswer}  userSelectedAnswer = {userSelectedAnswer}  />
         <QuestionNavigationPanel testName = {"  "} handleQuestionChangeButtonClick ={handleQuestionChange}  handleTestSubmit = {handleTestSubmit} userSelectedAnswer = {userSelectedAnswer}/>
 
