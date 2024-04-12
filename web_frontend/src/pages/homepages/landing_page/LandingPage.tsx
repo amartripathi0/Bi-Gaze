@@ -3,11 +3,13 @@ import { bigazeLogo } from '@/constants'
 import PurpleGradientCard from '@/components/shared/cards/PurpleGradientCard'
 import BlueGreenGradientText from '@/components/shared/BlueGreenGradientText'
 import PurpleBlur from '@/components/shared/backgrounds/PurpleBlur'
-import PurpleButton from '@/components/shared/buttons/PurpleButton'
 import { User, UserSquareIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
+import IndigoButton from '@/components/shared/buttons/IndigoButton'
+import { useNavigate } from 'react-router-dom'
 
 function LandingPage() {
+  const navigate = useNavigate();
   return (
     <div id='/' className='flex-between h-full mx-20 '>
 
@@ -40,8 +42,8 @@ function LandingPage() {
 
         {/* Login buttons */}
         <div className='flex gap-10 mt-4'>
-        <PurpleButton label="Student Login" icon = {User} handleButtonClick={() => {}}/>
-        <PurpleButton label="Examiner Login" icon = {UserSquareIcon} handleButtonClick={() => {}}/>
+        <IndigoButton label="Examinee Signin" icon = {User} handleButtonClick={() => {navigate('/examinee/signin')}}/>
+        <IndigoButton label="Examiner Signin" icon = {UserSquareIcon} handleButtonClick={() => {navigate('/examiner/signin')}}/>
         </div>
       </motion.div>
 
