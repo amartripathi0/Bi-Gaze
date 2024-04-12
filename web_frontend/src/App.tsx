@@ -1,15 +1,10 @@
-import MCQ_Test from './pages/examinee/test_page/MCQ_Test'
-import Home from './pages/homepages/home/Home'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
   return (
    <div className='min-h-screen relative '>
-    <Home />
-    <MCQ_Test/>
-    {/* <div className='h-screen'>
-
-    </div> */}
+    <Outlet />
    </div>
   )
 }

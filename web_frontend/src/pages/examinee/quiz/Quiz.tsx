@@ -2,7 +2,7 @@ import QuestionsWithOptions from "../../../components/quiz/QuestionsWithOptions"
 import QuestionNavigationPanel from "../../../components/quiz/QuestionNavigationPanel";
 import { useExamineeTestStore } from "@/stores/examinee/utils/store";
 
-function MCQ_Test() {
+function Quiz() {
   const questionsArray = useExamineeTestStore((state) => state.quiz.questions);
   const currentQuestion = useExamineeTestStore(
     (state) => state.currentQuestionNumber
@@ -27,4 +27,4 @@ function MCQ_Test() {
   );
 }
 
-export default MCQ_Test;
+export default Quiz;
