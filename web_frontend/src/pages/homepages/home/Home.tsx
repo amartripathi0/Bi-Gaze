@@ -1,8 +1,8 @@
 // import Logo from '@/components/shared/Logo'
 import Navbar from "../../../components/shared/navbar/Navbar";
-import AboutBigaze from "../about_bigaze/AboutBigaze";
-import AboutUs from "../about_us/AboutUs";
-import ContactUs from "../contact_us/ContactUs";
+// import AboutBigaze from "../about_bigaze/AboutBigaze";
+// import AboutUs from "../about_us/AboutUs";
+// import ContactUs from "../contact_us/ContactUs";
 import LandingPage from "../landing_page/LandingPage";
 // import { bigazeLogo } from '@/constants'
 // import PurpleGradientCard from '@/components/shared/cards/PurpleGradientCard'

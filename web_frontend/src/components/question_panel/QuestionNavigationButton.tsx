@@ -1,18 +1,16 @@
-
+import { useExamineeTestStore } from "@/stores/examinee/utils/store"
 type QuestionNavigationButtonProps = {
     buttonLabel : number
     questionAttempted ?: boolean
-    handleButtonClick : (e : number) => void
-
 }
 
-function  QuestionNavigationButton({buttonLabel , handleButtonClick ,questionAttempted} : QuestionNavigationButtonProps) {
-  
+function  QuestionNavigationButton({buttonLabel ,questionAttempted} : QuestionNavigationButtonProps) {
+    const changeQuestion = useExamineeTestStore((state) => state.setCurrentQuestionNumber)
   return (
     <button className={` border  rounded shadow-sm hover:shadow-gray-300 h-10 aspect-square text-lg font-medium border-slate-500 
     ${questionAttempted ? "bg-purple-500" : "bg-slate-800"}
     `}
-    onClick={() => handleButtonClick(buttonLabel)}>
+    onClick={() => changeQuestion(buttonLabel)}>
         {buttonLabel}
     </button>
   )

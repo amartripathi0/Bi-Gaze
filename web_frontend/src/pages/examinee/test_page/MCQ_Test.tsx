@@ -1,40 +1,30 @@
-import { useEffect, useState } from "react";
-import QuestionsWithOptions from "../../../components/question_panel/QuestionsWithOptions"
+import QuestionsWithOptions from "../../../components/question_panel/QuestionsWithOptions";
 import QuestionNavigationPanel from "../../../components/question_panel/QuestionNavigationPanel";
-import { questionsArray } from "../../../constants";
-import { userSelectedAnswerStateProps } from "../../../types";
+import { useExamineeTestStore } from "@/stores/examinee/utils/store";
 
 function MCQ_Test() {
-    const [totalNumberOfQuestions , setTotalNumberOfQuestions] = useState(0)
-    const [currentQuestion, setCurrentQuestion] = useState(1)
-    const [userSelectedAnswer, setUserSelectedAnswer] = useState<userSelectedAnswerStateProps[]>([])
+  const questionsArray = useExamineeTestStore((state) => state.quiz.questions);
+  const currentQuestion = useExamineeTestStore(
+    (state) => state.currentQuestionNumber
+  );
+  const examineeTestResponse = useExamineeTestStore(
+    (state) => state.examineeTestResponse
+  );
 
-    
-   useEffect(() => {
-    console.log(totalNumberOfQuestions);
-    
-    setTotalNumberOfQuestions(questionsArray.length)
-   }, []);
-
-   function handleQuestionChange(questionNumber : number){
-            setCurrentQuestion(questionNumber);
-            
-   }
-   function handleTestSubmit(e ?: React.FormEvent<HTMLFormElement>  ){    
-     e?.preventDefault()
-     console.log(userSelectedAnswer);
-     
-   }
-   const questionToDisplay = questionsArray[currentQuestion-1]
+  function handleTestSubmit(e?: React.FormEvent<HTMLFormElement>) {
+    e?.preventDefault();
+    console.log(examineeTestResponse);
+  }
+  const questionToDisplay = questionsArray[currentQuestion - 1];
   return (
-    <form onSubmit = {handleTestSubmit} 
-        className="w-screen h-screen flex-center p-16 rounded-lg gap-10 ">
-        <QuestionsWithOptions question={{...questionToDisplay}} setUserSelectedAnswer = {setUserSelectedAnswer}  userSelectedAnswer = {userSelectedAnswer}  />
-        <QuestionNavigationPanel testName = {"  "} handleQuestionChangeButtonClick ={handleQuestionChange}  handleTestSubmit = {handleTestSubmit} userSelectedAnswer = {userSelectedAnswer}/>
-
-  
+    <form
+      onSubmit={handleTestSubmit}
+      className=" h-screen flex-center p-16 rounded-lg gap-10 "
+    >
+      <QuestionsWithOptions question={{ ...questionToDisplay }} />
+      <QuestionNavigationPanel handleTestSubmit={handleTestSubmit} />
     </form>
-  )
+  );
 }
 
-export default MCQ_Test
+export default MCQ_Test;
