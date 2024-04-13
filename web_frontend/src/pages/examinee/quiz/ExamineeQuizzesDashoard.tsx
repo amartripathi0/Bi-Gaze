@@ -1,5 +1,5 @@
 import QuizCard from "@/components/quiz/QuizCard"
-import { quizzes } from "@/constants"
+import { quizzesArray } from "@/constants"
 
 function ExamineeQuizzesDashoard() {
   return (
@@ -7,7 +7,7 @@ function ExamineeQuizzesDashoard() {
         <div className="flex flex-wrap gap-10 h-full w-full">
 
         {
-            quizzes.map(eachQuiz => (
+            quizzesArray.map(eachQuiz => (
                 <QuizCard 
                 key={eachQuiz.quizId}
                 quizId={eachQuiz.quizId}

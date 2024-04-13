@@ -130,7 +130,7 @@ export const quizArray: QuizProp = {
   ],
 };
 
-export const quizzes: QuizProp[] = [
+export const quizzesArray: QuizProp[] = [
   {
     quizId: 1,
     quizTitle: "General Knowledge",
