@@ -1,8 +1,8 @@
 import { QuizProp } from "@/types";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function QuizCard({
-//   quizId,
+  quizId,
   quizTitle,
   quizDescription,
   totalMarks,
@@ -20,7 +20,7 @@ function QuizCard({
         {quizDescription}
        
       </p>
-      {/* <Link to={`/examinee/quizzes/quiz:${quizId}`}  className="mx-2 text-xs border w-1/3 p-2 rounded">Attempt Quiz</Link> */}
+      <Link to={`/examinee/quizzes/quiz/${quizId}`}  className="mx-2 text-xs border w-1/3 p-2 rounded">Attempt Quiz</Link>
     </div>
   );
 }

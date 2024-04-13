@@ -28,10 +28,10 @@ const routes = [
 
     <Route path="/examinee" element={<ExamineeLayout />}>
       <Route path="/examinee" element={<ExamineeHomepage />} />
-      <Route path="/examinee/quiz" element={<Quiz />} />
       <Route path="/examinee/signup" element={<ExamineeSignup />} />
       <Route path="/examinee/signin" element={<ExamineeSignin />} />
       <Route path="/examinee/quizzes" element={<ExamineeQuizzesDashoard />} />
+      <Route path="/examinee/quizzes/quiz/:quizId" element={<Quiz />} />
     </Route>
 
     <Route path="/examiner" element={<ExaminerLayout />}>
