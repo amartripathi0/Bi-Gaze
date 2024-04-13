@@ -11,10 +11,10 @@ import { useNavigate } from "react-router-dom";
 function LandingPage() {
   const navigate = useNavigate();
   return (
-    <div id="/" className="flex-between h-full mx-20 ">
+    <div id="/" className="flex-between h-screen -mt-16 mx-20 ">
       {/* left side  */}
       <motion.div
-        className=" w-3/5 flex flex-col justify-center h-full gap-6 "
+        className=" w-3/5 flex flex-col justify-center h-full gap-6"
         initial={{
           opacity: 0,
           x: -100,
@@ -79,7 +79,7 @@ function LandingPage() {
 
         {/* logo and text */}
         <motion.div
-          className="flex-col-center text-xl h-2/3 w-full  z-20"
+          className="flex-col-center text-xl h-3/5 w-full  z-20"
           initial={{
             scale: 1,
           }}
