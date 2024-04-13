@@ -3,7 +3,10 @@ import { LucideIcon } from "lucide-react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 export type QuizProp = {
+  quizId : number;
   quizTitle: string;
+  quizDescription : string ;
+  totalMarks : number;
   createdBy: string;
   questions: QuestionProp[];
 };

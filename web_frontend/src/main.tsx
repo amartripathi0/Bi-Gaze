@@ -18,6 +18,7 @@ import ExamineeSignup from "./pages/examinee/auth/ExamineeSignup.tsx";
 import ExamineeSignin from "./pages/examinee/auth/ExamineeSignin.tsx";
 import ExaminerSignup from "./pages/examiner/auth/ExaminerSignup.tsx";
 import ExaminerSignin from "./pages/examiner/auth/ExaminerSignin.tsx";
+import ExamineeQuizzesDashoard from "./pages/examinee/quiz/ExamineeQuizzesDashoard.tsx";
 
 
 const routes = [
@@ -30,6 +31,7 @@ const routes = [
       <Route path="/examinee/quiz" element={<Quiz />} />
       <Route path="/examinee/signup" element={<ExamineeSignup />} />
       <Route path="/examinee/signin" element={<ExamineeSignin />} />
+      <Route path="/examinee/quizzes" element={<ExamineeQuizzesDashoard />} />
     </Route>
 
     <Route path="/examiner" element={<ExaminerLayout />}>
