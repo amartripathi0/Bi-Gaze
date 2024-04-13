@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import NavButton from "../NavButton";
 import { motion } from "framer-motion";
 import useTopScroll from "@/hooks/useTopScroll";
-import Button from "../Button";
 import { NavHashLink } from "react-router-hash-link";
 import { ArrowRight } from "lucide-react";
 
