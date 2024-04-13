@@ -5,13 +5,15 @@ import NavButton from "../NavButton";
 import { motion } from "framer-motion";
 import useTopScroll from "@/hooks/useTopScroll";
 import Button from "../Button";
+import { NavHashLink } from "react-router-hash-link";
+import { ArrowRight } from "lucide-react";
 
 function Navbar() {
   const scrolled = useTopScroll(10);
 
   return (
     <motion.nav
-      className={`flex-between fixed top-0 left-0 z-50 backdrop-blur-lg  w-screen h-16  py-4 px-20  ${
+      className={`flex-between fixed top-0 left-0 z-50 backdrop-blur-lg  w-screen h-16  py-2 px-20  ${
         scrolled && "border-b border-purple-500 "
       }  `}
       initial={{
@@ -31,7 +33,7 @@ function Navbar() {
       </Link>
 
       {/* Right: Naviagtion bar */}
-      <div className="flex-between  py-1 font-bold gap-5 h-full w-1/2" >
+      <div className="flex-between  py-1 font-bold gap-2 h-full w-2/5 " >
         {navbarItems.map((navItem) => (
           <NavButton
             key={navItem.label}
@@ -39,12 +41,13 @@ function Navbar() {
             link={navItem.link}
           />
         ))}
-
-        <Button
-          label="Social"
-          additionalStyles={"text-xs w-1/6 uppercase font-bold "}
-          handleButtonClick={() => {}}
-        />
+        <NavHashLink to ="#contact-us" smooth={true} className={"w-1/4 flex-center gap-1  h-full bg-gradient-to-r from-purple-800 rounded  via-indigo-900 to-purple-900 hover:scale-[1.02]"}>
+        <button
+          className={"text-xs  uppercase font-bold "}
+          >Contact Us
+          </button>
+          <ArrowRight size={14}/>
+        </NavHashLink>
       </div>
     </motion.nav>
   );

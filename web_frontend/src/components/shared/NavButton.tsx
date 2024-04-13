@@ -11,9 +11,9 @@ const scrollWithOffset = (el:HTMLElement) => {
   window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' }); 
 }
 
-<NavHashLink smooth to='/#link' scroll={el => scrollWithOffset(el)}>
+{/* <NavHashLink smooth to='/#link' scroll={el => scrollWithOffset(el)}>
    Link
-</NavHashLink>
+</NavHashLink> */}
 
 function NavButton({ link, label }: NavButtonProps) {
   // To be completed : Naviagtion button is active state colour change

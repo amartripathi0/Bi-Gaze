@@ -37,16 +37,12 @@ export const navbarItems = [
       "link" : "#/"
     },
     {
-      "label" : "About-Bigaze",
+      "label" : "About Bigaze",
       "link" : "#about-bigaze"
     },
     {
-      "label" : "About-Us",
+      "label" : "About Us",
       "link" : "#about-us"
-    },
-    {
-      "label" : "Contact-Us",
-      "link" : "#contact-us"
     },
 ]
 export const quizArray: QuizProp = 
