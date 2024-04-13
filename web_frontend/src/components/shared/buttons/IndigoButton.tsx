@@ -8,7 +8,7 @@ function IndigoButton({
   return (
     <button
       className={`${additionalStyles} 
-         border-indigo-900 border p-4 rounded text-xs font-bold uppercase  h-full flex-between gap-2
+         border-indigo-900 border p-4 rounded-xl text-xs font-bold uppercase  h-full flex-between gap-2
          bg-gradient-to-r from-purple-800 to-slate-900 via-indigo-900 hover:border-purple-500 hover:shadow-sm hover:shadow-purple-500
          hover:scale-[1.02] hover:transition-all duration-300 ease-in-out
     `}
