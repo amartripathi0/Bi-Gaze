@@ -1,4 +1,3 @@
-// import Logo from '@/components/shared/Logo'
 import Navbar from "../../../components/shared/navbar/Navbar";
 import AboutBigaze from "../about_bigaze/AboutBigaze";
 import AboutUs from "../about_us/AboutUs";
