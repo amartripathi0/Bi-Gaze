@@ -2,7 +2,7 @@ import SigninForm from "@/components/shared/form/Signin"
 
 function ExaminerSignin() {
   return (
-    <div><SigninForm/></div>
+    <div><SigninForm userType="examiner"/></div>
   )
 }
 

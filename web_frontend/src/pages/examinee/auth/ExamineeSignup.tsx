@@ -2,7 +2,7 @@ import SignupForm from '@/components/shared/form/Signup'
 
 function ExamineeSignup() {
   return (
-    <div><SignupForm /></div>
+    <div><SignupForm userType="examinee"/></div>
   )
 }
 
