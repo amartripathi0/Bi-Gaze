@@ -5,15 +5,11 @@ interface NavButtonProps {
   link: string;
   label: string;
 }
-const scrollWithOffset = (el:HTMLElement) => {
+const scrollWithOffset = (el: HTMLElement) => {
   const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
-  const yOffset = -65; 
-  window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' }); 
-}
-
-{/* <NavHashLink smooth to='/#link' scroll={el => scrollWithOffset(el)}>
-   Link
-</NavHashLink> */}
+  const yOffset = -65;
+  window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
+};
 
 function NavButton({ link, label }: NavButtonProps) {
   // To be completed : Naviagtion button is active state colour change
@@ -23,7 +19,7 @@ function NavButton({ link, label }: NavButtonProps) {
     <NavHashLink
       to={link}
       smooth={true}
-      scroll={el => scrollWithOffset(el)}      
+      scroll={(el) => scrollWithOffset(el)}
       className={`${
         hash === link
           ? " bg-gradient-to-r from-purple-500 to-indigo-300 text-transparent bg-clip-text opacity-100"

@@ -1,12 +1,17 @@
-import { ButtonProps } from "../../types"
-function Button({label , handleButtonClick , additionalStyles} : ButtonProps) {
+import { ButtonProps } from "../../types";
+function Button({ label, handleButtonClick, additionalStyles }: ButtonProps) {
   return (
-    <button className={`${additionalStyles} 
+    <button
+      className={`${additionalStyles} 
      bg-purple-900 h-10 rounded text-white text-lg 
     `}
-    onClick={() => handleButtonClick()}
-    >{label}</button>
-  )
+      onClick={() => {
+        handleButtonClick && handleButtonClick();
+      }}
+    >
+      {label}
+    </button>
+  );
 }
 
-export default Button
+export default Button;

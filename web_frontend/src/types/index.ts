@@ -15,8 +15,9 @@ export type QuestionProp = {
 };
 
 export type ButtonProps = {
+  type ?: "button" | "submit" | "reset" ;
   label: string;
-  handleButtonClick:
+  handleButtonClick ?:
     | (() => void)
     | ((e?: React.FormEvent<HTMLFormElement>) => void);
   additionalStyles?: string;

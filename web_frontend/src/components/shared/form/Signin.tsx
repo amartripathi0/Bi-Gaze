@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
 import { Link } from "react-router-dom";
+import PurpleZincButton from "../buttons/PurpleZincButton";
 function SigninForm({ userType }: { userType: string }) {
   const {
     register,
@@ -36,7 +37,7 @@ function SigninForm({ userType }: { userType: string }) {
             register={register}
             error={errors.password}
           />
-          <p>
+          <p className="text-sm my-4">
             Don't have an account?{" "}
             <Link
               to={"/" + userType + "/signup"}
@@ -46,9 +47,8 @@ function SigninForm({ userType }: { userType: string }) {
               Signup
             </Link>
           </p>
-          <button type="submit" className="submit-button">
-            Submit
-          </button>
+          <PurpleZincButton type="submit" label="Sign In" additionalStyles="w-1/3 mx-auto py-2 font-semibold uppercase"/>
+
         </PurpleBorderContainer>
       </form>
     </div>

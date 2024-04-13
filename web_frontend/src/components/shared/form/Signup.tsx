@@ -4,6 +4,7 @@ import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
 import { Link } from "react-router-dom";
+import PurpleZincButton from "../buttons/PurpleZincButton";
 
 function SignupForm({ userType }: { userType: string }) {
   const {
@@ -22,7 +23,7 @@ function SignupForm({ userType }: { userType: string }) {
         onSubmit={handleSubmit(onSubmit)}
         className="w-1/2 h-full flex-center "
       >
-        <PurpleBorderContainer additionalStyles="flex-col gap-4 flex p-10  w-2/3 h-4/5 border-2 ">
+        <PurpleBorderContainer additionalStyles="flex-col gap-4 flex p-10  w-2/3 h-5/6 border-2 ">
           <FormField
             type="email"
             placeholder="Email"
@@ -64,7 +65,7 @@ function SignupForm({ userType }: { userType: string }) {
             error={errors.confirmPassword}
           />
 
-          <p>
+          <p className="text-sm my-4">
             Already have an account?{" "}
             <Link
               to={"/" + userType + "/signin"}
@@ -75,9 +76,7 @@ function SignupForm({ userType }: { userType: string }) {
             </Link>
           </p>
 
-          <button type="submit" className="submit-button">
-            Submit
-          </button>
+        <PurpleZincButton type="submit" label="Sign Up" additionalStyles="w-1/3 mx-auto py-2 font-semibold uppercase"/>
         </PurpleBorderContainer>
       </form>
     </div>
