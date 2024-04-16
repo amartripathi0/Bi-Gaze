@@ -31,7 +31,7 @@ function WebcamFaceMeshViewer({
 
   return (
     <div
-      className={`h-${webcamHeight} w-${webcamWidth} relative rounded-xl flex-center overflow-hidden`}
+      className={`h-${webcamHeight} w-${webcamWidth} relative rounded-xl flex-center overflow-hidden bg-red-100`}
     >
       <Webcam
         className="absolute  object-fill h-full "
@@ -39,6 +39,7 @@ function WebcamFaceMeshViewer({
         onLoadedData={(vid) => handleVideoLoad(vid)}
       />
       <canvas ref={canvasRef} className="h-full object-fill absolute " />
+      
     </div>
   );
 }

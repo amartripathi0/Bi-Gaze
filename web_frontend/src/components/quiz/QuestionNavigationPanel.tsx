@@ -24,7 +24,7 @@ function QuestionNavigationPanel({
 
   return (
     <PurpleBorderContainer additionalStyles="h-full w-1/4 rounded-md  p-4  flex-center flex-col gap-4 ">
-      <div className="h-1/2 w-full flex-between bg-gray-900 p-2 rounded-xl  ">
+      <div className="h-1/2 w-full flex-between bg-gray-900 p-2 rounded-xl  border ">
         <WebcamFaceMeshViewer webcamHeight="2/3" webcamWidth="full" />
       </div>
 

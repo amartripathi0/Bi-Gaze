@@ -140,8 +140,8 @@ export const quizzesArray: QuizProp[] = [
     questions: [
       {
         id: 1,
-        title: "What is the capital of India?",
-        options: ["Delhi", "Mumbai", "Jaipur", "Kerala"],
+        title: "What was Stephen Hawking's minor project?",
+        options: ["Minor Blackhole", "Michal Jackson Moon", "White Hole Island", "13 Blackhole"],
         answer: "Delhi",
       },
       {

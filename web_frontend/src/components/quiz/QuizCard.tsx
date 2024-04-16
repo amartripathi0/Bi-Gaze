@@ -1,5 +1,7 @@
 import { QuizProp } from "@/types";
 import { Link } from "react-router-dom";
+import IndigoButton from "../shared/buttons/IndigoButton";
+import { ArrowRight } from "lucide-react";
 
 function QuizCard({
   quizId,
@@ -20,7 +22,10 @@ function QuizCard({
         {quizDescription}
        
       </p>
-      <Link to={`/examinee/quizzes/quiz/${quizId}`}  className="mx-2 text-xs border w-1/3 p-2 rounded">Attempt Quiz</Link>
+
+      <Link to={`/examinee/quizzes/quiz/${quizId}`}  className="">
+        <IndigoButton label="Attempt Quiz" additionalStyles="mx-2 text-xs border  gap-2 flex-center   p-2 rounded" icon={ArrowRight}/>
+        </Link>
     </div>
   );
 }
