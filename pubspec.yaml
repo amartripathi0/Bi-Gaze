@@ -34,6 +34,7 @@ dependencies:
   syncfusion_flutter_pdf: ^25.1.38
   photo_view: ^0.14.0
   path_provider: ^2.1.2
+  flutter_share: ^2.0.0
 
 
 dev_dependencies:
@@ -96,10 +97,10 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 icons_launcher:
-  image_path: "assets/images/AppIcons/android/mipmap-xhdpi/bigaze.png"
+  image_path: "assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png"
   platforms:
     android:
       enable: true
-      image_path: "assets/images/AppIcons/android/mipmap-xhdpi/bigaze.png"
+      image_path: "assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png"
       adaptive_background_color: '#000000'
-      adaptive_foreground_image: 'assets/images/AppIcons/android/mipmap-xhdpi/bigaze.png'
+      adaptive_foreground_image: 'assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png'

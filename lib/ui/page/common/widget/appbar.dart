@@ -39,7 +39,7 @@ class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: 50,
               ),
               const Text(
-                "BiGaze",
+                "BiG∆ZE",
                 style: TextStyle(color: Colors.white),
               )
             ],

@@ -4,9 +4,11 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- Optional, you'll have to check this permission by yourself. -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     
     <application
-        android:label="BiGaze"
+        android:label="BiG∆ZE"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

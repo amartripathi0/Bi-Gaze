@@ -37,15 +37,49 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: AppTheme.appTheme,
-        debugShowCheckedModeBanner: false,
-        home: AnimatedSplashScreen(
-            duration: 2000,
-            splash: 'assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png',
-            splashIconSize: 450,
-            nextScreen: const MyHomePage(),
-            splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0)));
+      title: 'Flutter Demo',
+      theme: AppTheme.appTheme,
+      debugShowCheckedModeBanner: false,
+      home: AnimatedSplashScreen(
+        duration: 2000,
+        splash: const SplashContent(), // Use custom widget for splash
+        splashIconSize: 450,
+        nextScreen: const MyHomePage(),
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      ),
+    );
+  }
+}
+
+class SplashContent extends StatelessWidget {
+  const SplashContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png',
+          width: 250,
+          height: 250,
+        ),
+        const SizedBox(height: 20),
+        const Text(
+          '  ',
+          style: TextStyle(
+            color: Color.fromARGB(255, 255, 245, 214),
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 20),
+        // const CircularProgressIndicator(
+        //   valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+        // ),
+      ],
+    );
   }
 }
