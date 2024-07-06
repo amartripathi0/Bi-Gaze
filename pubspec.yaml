@@ -36,6 +36,7 @@ dependencies:
   path_provider: ^2.1.2
   flutter_share: ^2.0.0
   wakelock: ^0.6.2
+  internet_speed_meter: ^1.0.2
 
 
 dev_dependencies:
