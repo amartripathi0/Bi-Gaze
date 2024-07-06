@@ -28,6 +28,7 @@ class _DetectScreenState extends State<DetectScreen> {
   late final OutputProvider outputProvider;
   late final ProctorModel newRecord;
   late Timer _timer;
+  late OverlayEntry _overlayEntry;
 
   // void _updateRecord() {
   //   // Get the current time
@@ -112,55 +113,82 @@ class _DetectScreenState extends State<DetectScreen> {
       _updateRecord();
     });
 
-    // Open the bottom modal sheet when the page is first opened
+    // // Open the bottom modal sheet when the page is first opened
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _openBottomModalSheet();
+    // });
+
+    _overlayEntry = _createOverlayEntry();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _openBottomModalSheet();
+      Overlay.of(context).insert(_overlayEntry);
     });
   }
 
   @override
   void dispose() {
     _timer.cancel();
+    _overlayEntry.remove();
     super.dispose();
   }
 
-  void _openBottomModalSheet() {
-    showModalBottomSheet(
-      context: context,
-      barrierColor: Colors.transparent,
-      elevation: 20,
-      enableDrag: true,
-
-      backgroundColor: const Color.fromARGB(
-          0, 0, 0, 0), // Set background color to transparent
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (BuildContext context) => Stack(
-        children: [
-          // Background widget covering the entire screen
-          Positioned.fill(
-            child: Container(
-              color: const Color.fromARGB(0, 0, 0, 0)
-                  .withOpacity(0), // Adjust opacity as needed
-            ),
-          ),
-          // Bottom modal sheet
-          SizedBox(
+  OverlayEntry _createOverlayEntry() {
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
             height: 160,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(130, 0, 0,
-                    0), // Change the color to the desired background color
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-              child: const AudioClassifier(),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(130, 0, 0, 0),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
+            child: const AudioClassifier(),
           ),
-        ],
+        ),
       ),
     );
   }
+
+  // void _openBottomModalSheet() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     barrierColor: Colors.transparent,
+  //     elevation: 20,
+  //     enableDrag: true,
+
+  //     backgroundColor: const Color.fromARGB(
+  //         0, 0, 0, 0), // Set background color to transparent
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (BuildContext context) => Stack(
+  //       children: [
+  //         // Background widget covering the entire screen
+  //         Positioned.fill(
+  //           child: Container(
+  //             color: const Color.fromARGB(0, 0, 0, 0)
+  //                 .withOpacity(0), // Adjust opacity as needed
+  //           ),
+  //         ),
+  //         // Bottom modal sheet
+  //         SizedBox(
+  //           height: 160,
+  //           child: Container(
+  //             decoration: const BoxDecoration(
+  //               color: Color.fromARGB(130, 0, 0,
+  //                   0), // Change the color to the desired background color
+  //               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //             ),
+  //             child: const AudioClassifier(),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   List<dynamic>? _recognitions;
   int _imageHeight = 0;
