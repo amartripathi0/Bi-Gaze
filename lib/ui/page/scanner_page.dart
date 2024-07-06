@@ -1,5 +1,6 @@
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
+import 'package:bigaze/widgets/countdowntimer.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -68,11 +69,9 @@ class _ScannerPageState extends State<ScannerPage> {
           currentIndex: _currentIndex, // Pass current index
           onTap: _onItemTapped, // Handle tap event
         ),
-        body: const Center(
-          child: Text(
-            'Scanner Page',
-            style: TextStyle(fontSize: 24),
-          ),
+        body: Container(
+          alignment: Alignment.bottomLeft,
+          child: const CountdownTimer(duration: 300),
         ),
       ),
     );

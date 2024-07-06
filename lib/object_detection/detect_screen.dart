@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
+import 'package:bigaze/widgets/countdowntimer.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/object_detection/bndbox.dart';
@@ -172,6 +173,12 @@ class _DetectScreenState extends State<DetectScreen> {
             screen.height,
             screen.width,
             widget.model,
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 200),
+            height: 400,
+            alignment: const Alignment(1.8, -1.1),
+            child: const CountdownTimer(duration: 300),
           ),
         ],
       ),
