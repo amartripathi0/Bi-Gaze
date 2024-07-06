@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:developer';
+
 import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:camera/camera.dart';
@@ -8,6 +10,7 @@ import 'package:bigaze/object_detection/bndbox.dart';
 import 'package:bigaze/object_detection/camera.dart';
 import 'package:bigaze/helper/boxes.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wakelock/wakelock.dart';
 import 'dart:async';
 import '../../model/proctor_model.dart';
 import 'dart:math' as math;
@@ -77,7 +80,7 @@ class _DetectScreenState extends State<DetectScreen> {
   @override
   void initState() {
     super.initState();
-    // provider
+    // Provider
     outputProvider = Provider.of<OutputProvider>(context, listen: false);
 
     // Initialize the ProctorModel object with an initial ID, date, and empty lists
@@ -86,19 +89,21 @@ class _DetectScreenState extends State<DetectScreen> {
     final date = DateTime.now().toString().split(' ')[0];
     newRecord = ProctorModel(id, date, [], [], []);
 
-    // Start a timer to trigger _addRecord every second
+    // Start a timer to trigger _updateRecord every second
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _updateRecord();
     });
 
-    // // Open the bottom modal sheet when the page is first opened
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   _openBottomModalSheet();
-    // });
-
     _overlayEntry = _createOverlayEntry();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Overlay.of(context).insert(_overlayEntry);
+    });
+
+    // Enable wakelock to prevent screen from going off
+    Wakelock.enable().then((_) {
+      log('Wakelock enabled');
+    }).catchError((e) {
+      log('Error enabling wakelock: $e');
     });
   }
 
@@ -106,6 +111,11 @@ class _DetectScreenState extends State<DetectScreen> {
   void dispose() {
     _timer.cancel();
     _overlayEntry.remove();
+    Wakelock.disable().then((_) {
+      log('Wakelock disabled');
+    }).catchError((e) {
+      log('Error disabling wakelock: $e');
+    });
     super.dispose();
   }
 
@@ -133,7 +143,8 @@ class _DetectScreenState extends State<DetectScreen> {
   List<dynamic>? _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
-  setRecognitions(recognitions, imageHeight, imageWidth) {
+
+  void setRecognitions(recognitions, imageHeight, imageWidth) {
     setState(() {
       _recognitions = recognitions;
       _imageHeight = imageHeight;
@@ -155,12 +166,13 @@ class _DetectScreenState extends State<DetectScreen> {
             setRecognitions,
           ),
           BndBox(
-              _recognitions ?? [],
-              math.max(_imageHeight, _imageWidth),
-              math.min(_imageHeight, _imageWidth),
-              screen.height,
-              screen.width,
-              widget.model),
+            _recognitions ?? [],
+            math.max(_imageHeight, _imageWidth),
+            math.min(_imageHeight, _imageWidth),
+            screen.height,
+            screen.width,
+            widget.model,
+          ),
         ],
       ),
     );
