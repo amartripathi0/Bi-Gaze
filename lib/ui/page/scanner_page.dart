@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:flutter/material.dart';

@@ -30,28 +30,6 @@ class _DetectScreenState extends State<DetectScreen> {
   late Timer _timer;
   late OverlayEntry _overlayEntry;
 
-  // void _updateRecord() {
-  //   // Get the current time
-  //   final currentTime = DateTime.now().toString().split(' ')[1];
-
-  //   // Append the current time to the time list of the record
-  //   newRecord.time.add(currentTime);
-
-  //   // Append the audio and object data from the output provider
-  //   newRecord.audio.addAll(outputProvider.audioOutput);
-  //   newRecord.object.addAll(outputProvider.objectOutput);
-
-  //   // Optionally, you can update the output provider here if needed
-
-  //   // Add the updated record to the Hive box
-  //   try {
-  //     boxProctor.add(newRecord);
-  //     print('Record updated with ID: ${newRecord.id}');
-  //   } catch (e) {
-  //     print('Error updating record: $e');
-  //   }
-  // }
-
   void _updateRecord() {
     // Get the current time
     final currentTime = DateTime.now().toString().split(' ')[1];
@@ -151,44 +129,6 @@ class _DetectScreenState extends State<DetectScreen> {
       ),
     );
   }
-
-  // void _openBottomModalSheet() {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     barrierColor: Colors.transparent,
-  //     elevation: 20,
-  //     enableDrag: true,
-
-  //     backgroundColor: const Color.fromARGB(
-  //         0, 0, 0, 0), // Set background color to transparent
-  //     shape: const RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //     ),
-  //     builder: (BuildContext context) => Stack(
-  //       children: [
-  //         // Background widget covering the entire screen
-  //         Positioned.fill(
-  //           child: Container(
-  //             color: const Color.fromARGB(0, 0, 0, 0)
-  //                 .withOpacity(0), // Adjust opacity as needed
-  //           ),
-  //         ),
-  //         // Bottom modal sheet
-  //         SizedBox(
-  //           height: 160,
-  //           child: Container(
-  //             decoration: const BoxDecoration(
-  //               color: Color.fromARGB(130, 0, 0,
-  //                   0), // Change the color to the desired background color
-  //               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //             ),
-  //             child: const AudioClassifier(),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   List<dynamic>? _recognitions;
   int _imageHeight = 0;
