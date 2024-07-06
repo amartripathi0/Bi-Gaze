@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bigaze/ui/dialogues/endsessiondialogue.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
-import 'package:bigaze/widgets/internetspeed.dart';
+import 'package:bigaze/ui/theme/color/alertcolors.dart';
+import 'package:bigaze/ui/theme/color/soothingcolors.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:bigaze/widgets/pingmeter.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -75,7 +78,62 @@ class _ScannerPageState extends State<ScannerPage> {
         body: Container(
           alignment: Alignment.center,
           // child: const CountdownTimer(duration: 300),
-          child: const PingWidget(),
+          // child: ElevatedButton(
+          //   onPressed: () {
+          //     showDialog(
+          //       context: context,
+          //       builder: (BuildContext context) {
+          //         return GiffyDialog.image(
+          //           Image.network(
+          //             "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif",
+          //             height: 200,
+          //             fit: BoxFit.cover,
+          //           ),
+          //           title: const Text(
+          //             'Image Animation',
+          //             textAlign: TextAlign.center,
+          //           ),
+          //           content: const Text(
+          //             'This is a image animation dialog box. This library helps you easily create fancy giffy dialog.',
+          //             textAlign: TextAlign.center,
+          //           ),
+          //           actions: [
+          //             TextButton(
+          //               onPressed: () => Navigator.pop(context, 'CANCEL'),
+          //               child: const Text('CANCEL'),
+          //             ),
+          //             TextButton(
+          //               onPressed: () => Navigator.pop(context, 'OK'),
+          //               child: const Text('OK'),
+          //             ),
+          //           ],
+          //         );
+          //       },
+          //     );
+          //   },
+          //   style: ButtonStyle(
+          //     elevation: MaterialStateProperty.all(5),
+          //     backgroundColor: MaterialStateProperty.all(Colors.black),
+          //     shape: MaterialStateProperty.all(
+          //       RoundedRectangleBorder(
+          //         side: const BorderSide(
+          //           color: alertbuttoncolors
+          //               .endsessioncolor, // Specify your border color here
+          //           width: 2, // Specify the border width
+          //         ),
+          //         borderRadius: BorderRadius.circular(
+          //             8), // Adjust the border radius as needed
+          //       ),
+          //     ),
+          //   ),
+          //   child: const Text(
+          //     "End Session",
+          //     style: TextStyle(color: Colors.white54, fontSize: 14),
+          //   ),
+          // ),
+
+          // Test=---------------------
+          child: const EndSessionButton(),
         ),
       ),
     );

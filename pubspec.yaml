@@ -38,6 +38,7 @@ dependencies:
   wakelock: ^0.6.2
   internet_speed_meter: ^1.0.2
   dart_ping: ^9.0.1
+  giffy_dialog: ^2.1.0
 
 
 dev_dependencies:

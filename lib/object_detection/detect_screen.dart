@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:bigaze/ui/dialogues/endsessiondialogue.dart';
 import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/widgets/countdowntimer.dart';
@@ -181,8 +182,8 @@ class _DetectScreenState extends State<DetectScreen> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 200),
-                height: 350,
+                padding: const EdgeInsets.only(top: 180),
+                height: 330,
                 alignment: const Alignment(1.8, -1.1),
                 child: const CountdownTimer(duration: 300),
               ),
@@ -196,7 +197,14 @@ class _DetectScreenState extends State<DetectScreen> {
               const Align(
                 alignment: Alignment(1.30, 0),
                 child: PingWidget(),
-              )
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 70),
+                child: Align(
+                  alignment: Alignment(1.18, 0),
+                  child: EndSessionButton(), // Add your EndSessionButton here
+                ),
+              ),
             ],
           ),
         ],
