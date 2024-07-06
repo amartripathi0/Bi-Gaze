@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CoolAppBar(),
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       bottomNavigationBar: CoolBottomNavigationBar(
         currentIndex: _currentIndex, // Pass current index
         onTap: (index) => _onItemTapped(context, index), // Handle tap event
