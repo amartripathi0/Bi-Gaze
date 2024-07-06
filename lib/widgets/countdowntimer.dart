@@ -56,15 +56,14 @@ class _CountdownTimerState extends State<CountdownTimer> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Time Left : ",
-                style: TextStyle(
-                    fontSize: 15, color: Color.fromARGB(255, 193, 193, 193)),
+              const Icon(
+                Icons.timer_outlined, // Replace with a suitable icon
+                color: Color.fromARGB(176, 255, 255, 255),
               ),
               Text(
-                _formatDuration(_remainingTime),
+                "  ${_formatDuration(_remainingTime)}",
                 style: const TextStyle(
-                    fontSize: 16, color: Color.fromARGB(255, 193, 193, 193)),
+                    fontSize: 15, color: Color.fromARGB(255, 193, 193, 193)),
               ),
             ],
           ),
