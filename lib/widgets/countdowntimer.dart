@@ -7,6 +7,7 @@ class CountdownTimer extends StatefulWidget {
   const CountdownTimer({super.key, required this.duration});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CountdownTimerState createState() => _CountdownTimerState();
 }
 
