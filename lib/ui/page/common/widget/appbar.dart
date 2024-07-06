@@ -127,7 +127,7 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(100),
-      shadowColor: SoothingColors.purpleGray,
+      shadowColor: const Color.fromARGB(255, 91, 74, 124),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.elliptical(30, 20),
@@ -150,7 +150,7 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
               angle: -pi / 2, // Rotate each letter by 90 degrees clockwise
               child: Text(letter,
                   style: TextStyle(
-                    color: SoothingColors.purpleGray,
+                    color: const Color.fromARGB(159, 224, 217, 239),
                     shadows: [
                       Shadow(
                         offset: const Offset(1, 1), // Set the shadow offset
@@ -160,6 +160,7 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                     decorationStyle: TextDecorationStyle.double,
+                    letterSpacing: 2.5,
                   )),
             );
           }).toList(),
