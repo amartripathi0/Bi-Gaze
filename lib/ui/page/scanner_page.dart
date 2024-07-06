@@ -1,7 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/widgets/internetspeed.dart';
-import 'package:internet_speed_meter/internet_speed_meter.dart';
+import 'package:bigaze/widgets/pingmeter.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -73,7 +75,7 @@ class _ScannerPageState extends State<ScannerPage> {
         body: Container(
           alignment: Alignment.center,
           // child: const CountdownTimer(duration: 300),
-          child: const InternetSpeedWidget(),
+          child: const PingWidget(),
         ),
       ),
     );

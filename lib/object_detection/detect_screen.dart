@@ -6,6 +6,7 @@ import 'package:bigaze/ui/page/audio_classifier_page.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/widgets/countdowntimer.dart';
 import 'package:bigaze/widgets/internetspeed.dart';
+import 'package:bigaze/widgets/pingmeter.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/object_detection/bndbox.dart';
@@ -185,9 +186,16 @@ class _DetectScreenState extends State<DetectScreen> {
                 alignment: const Alignment(1.8, -1.1),
                 child: const CountdownTimer(duration: 300),
               ),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 88.0),
+                child: Align(
+                  alignment: Alignment(1.30, 0),
+                  child: InternetSpeedWidget(),
+                ),
+              ),
               const Align(
                 alignment: Alignment(1.30, 0),
-                child: InternetSpeedWidget(),
+                child: PingWidget(),
               )
             ],
           ),

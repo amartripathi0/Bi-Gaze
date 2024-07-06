@@ -37,6 +37,7 @@ dependencies:
   flutter_share: ^2.0.0
   wakelock: ^0.6.2
   internet_speed_meter: ^1.0.2
+  dart_ping: ^9.0.1
 
 
 dev_dependencies:
