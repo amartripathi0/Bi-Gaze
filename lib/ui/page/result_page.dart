@@ -1,15 +1,17 @@
-// ignore_for_file: deprecated_member_use, avoid_print
+import 'dart:developer';
+
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
-import 'package:bigaze/widgets/coolcard.dart';
+
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/ui/page/records_detailed.dart';
 
+import '../../widgets/coolcard.dart';
 import '../theme/color/alertcolors.dart';
 
 class ResultsPage extends StatefulWidget {
@@ -21,7 +23,7 @@ class ResultsPage extends StatefulWidget {
 
 class _ResultsPageState extends State<ResultsPage> {
   int _currentIndex = 1;
-  final bool _isAscending = true;
+  bool _isAscending = true; // Variable to toggle sorting order
 
   void _onItemTapped(int index) {
     setState(() {
@@ -36,10 +38,7 @@ class _ResultsPageState extends State<ResultsPage> {
         );
         break;
       case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ResultsPage()),
-        );
+        // Do nothing if already on ResultsPage
         break;
       case 2:
         Navigator.push(
@@ -55,6 +54,12 @@ class _ResultsPageState extends State<ResultsPage> {
         break;
       // Add cases for other indexes as needed
     }
+  }
+
+  void _toggleSortingOrder() {
+    setState(() {
+      _isAscending = !_isAscending; // Toggle between ascending and descending
+    });
   }
 
   @override
@@ -73,11 +78,6 @@ class _ResultsPageState extends State<ResultsPage> {
           currentIndex: _currentIndex, // Pass current index
           onTap: _onItemTapped, // Handle tap event
         ),
-        // floatingActionButton: const SizedBox(
-        //   width: 130, // Adjust the width as needed
-        //   child: ClearRecordsButton(),
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: ResultAppBar(
           title: "Result",
           actions: [
@@ -99,16 +99,28 @@ class _ResultsPageState extends State<ResultsPage> {
             const SizedBox(
               height: 5,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Switch(
-                  value: false,
-                  onChanged: null,
-                  activeColor: Colors.greenAccent,
-                  inactiveThumbColor: Color.fromARGB(255, 89, 50, 128),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.sort_by_alpha,
+                      color: Colors.white70,
+                    ),
+                    const SizedBox(width: 5), // Adjust spacing as needed
+                    Switch(
+                      value: _isAscending,
+                      onChanged: (value) {
+                        _toggleSortingOrder(); // Toggle sorting order on switch change
+                      },
+                      activeColor: Colors.greenAccent,
+                      inactiveThumbColor:
+                          const Color.fromARGB(255, 89, 50, 128),
+                    ),
+                  ],
                 ),
-                ClearRecordsButton(),
+                const ClearRecordsButton(),
               ],
             ),
             Expanded(child: _buildResultsList(context)),
@@ -122,9 +134,10 @@ class _ResultsPageState extends State<ResultsPage> {
     List<ProctorModel> records =
         boxProctor.values.cast<ProctorModel>().toList();
 
-    // Sort records
-    records.sort((a, b) =>
-        _isAscending ? a.date.compareTo(b.date) : b.date.compareTo(a.date));
+    // Sort records based on _isAscending flag
+    records.sort((a, b) => _isAscending
+        ? a.time[0].compareTo(b.time[0])
+        : b.time[0].compareTo(a.time[0]));
 
     if (records.isEmpty) {
       return const Center(child: Text('No records found'));
@@ -138,7 +151,8 @@ class _ResultsPageState extends State<ResultsPage> {
               children: [
                 GlassListTile(
                   recordId: 'Record ID: ${record.id}',
-                  dateOfProctor: 'Date : ${record.date}',
+                  dateOfProctor:
+                      'Date : ${record.date}  | Time : ${record.time[0]}',
                   destinationPage: RecordDetailsPage(record: record),
                 ),
                 const SizedBox(
@@ -160,31 +174,66 @@ class ClearRecordsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        try {
-          boxProctor.clear();
-          print('All records cleared');
-          // Rebuild the UI after clearing records
-          // ignore: invalid_use_of_protected_member
-          (context as Element).reassemble();
-        } catch (e) {
-          print('Error clearing records: $e');
-          // Handle error here, such as showing an error message to the user
-        }
+        // Show confirmation dialog
+        showDialog(
+          barrierColor: const Color.fromARGB(51, 199, 84, 84),
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: const Color.fromARGB(207, 0, 0, 0),
+              shadowColor: const Color.fromARGB(255, 176, 168, 168),
+              title: const Text(
+                "⚠️ Clear all records",
+                style: TextStyle(color: Colors.white70),
+              ),
+              content: const Text(
+                  "Once cleared, records will vanish faster than a cake at a birthday party full of hungry toddlers!",
+                  style: TextStyle(color: Colors.white70)),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close dialog
+                  },
+                  child: const Text("❌ Cancel",
+                      style:
+                          TextStyle(color: Color.fromARGB(179, 255, 83, 83))),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    try {
+                      boxProctor.clear();
+                      log('All records cleared');
+                      // Rebuild the UI after clearing records
+                      // ignore: invalid_use_of_protected_member
+                      (context as Element).reassemble();
+                      Navigator.of(context).pop(); // Close dialog
+                    } catch (e) {
+                      log('Error clearing records: $e');
+                      // Handle error here, such as showing an error message to the user
+                      Navigator.of(context).pop(); // Close dialog on error
+                    }
+                  },
+                  child: const Text("✅ Clear",
+                      style:
+                          TextStyle(color: Color.fromARGB(228, 163, 255, 163))),
+                ),
+              ],
+            );
+          },
+        );
       },
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(5),
-        padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
         backgroundColor:
             MaterialStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             side: const BorderSide(
-              color: AlertButtonColors
-                  .endsessioncolor, // Specify your border color here
-              width: 2, // Specify the border width
+              color: AlertButtonColors.endsessioncolor,
+              width: 2,
             ),
-            borderRadius:
-                BorderRadius.circular(8), // Adjust the border radius as needed
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
@@ -298,7 +347,7 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
           .copyWith(color: Colors.white), // Change icon color
       brightness: Brightness.dark, // Adjust brightness if needed
       textTheme: theme.textTheme.copyWith(
-        headline6: const TextStyle(
+        titleLarge: const TextStyle(
           color: Color.fromARGB(255, 197, 197, 197),
           fontSize: 18,
         ), // Adjust text style
