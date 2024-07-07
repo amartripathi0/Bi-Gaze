@@ -170,3 +170,52 @@ class ProctorAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
+
+// App bar for the results page
+
+class ResultAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final List<Widget> actions;
+
+  const ResultAppBar({
+    super.key,
+    required this.title,
+    required this.actions,
+  });
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: const Color.fromARGB(2, 13, 13, 13).withAlpha(200),
+      shadowColor: SoothingColors.purpleGray,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.elliptical(30, 20),
+          bottomRight: Radius.elliptical(30, 20),
+        ),
+      ),
+      elevation: 3,
+      flexibleSpace: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        ),
+      ),
+      centerTitle: true,
+      title: GestureDetector(
+        onTap: () {
+          // Navigate to the home page when app bar is tapped
+          // Navigator.pop(context);
+        },
+        child: Text(
+          title,
+          style: const TextStyle(color: Colors.white60),
+        ),
+      ),
+      actions: actions,
+    );
+  }
+}

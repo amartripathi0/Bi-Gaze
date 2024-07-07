@@ -39,6 +39,7 @@ dependencies:
   internet_speed_meter: ^1.0.2
   dart_ping: ^9.0.1
   giffy_dialog: ^2.1.0
+  share_plus: ^6.3.4
 
 
 dev_dependencies:

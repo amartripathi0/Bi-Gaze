@@ -1,9 +1,12 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
+import 'dart:ui';
+
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
+import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -20,6 +23,7 @@ class ResultsPage extends StatefulWidget {
 
 class _ResultsPageState extends State<ResultsPage> {
   int _currentIndex = 1;
+  final bool _isAscending = true;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,20 +32,28 @@ class _ResultsPageState extends State<ResultsPage> {
     // Handle navigation based on index
     switch (index) {
       case 0:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const MyHomePage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
+        );
         break;
       case 1:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ResultsPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ResultsPage()),
+        );
         break;
       case 2:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ScannerPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ScannerPage()),
+        );
         break;
       case 3:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ProfilePage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
+        );
         break;
       // Add cases for other indexes as needed
     }
@@ -68,8 +80,21 @@ class _ResultsPageState extends State<ResultsPage> {
           child: ClearRecordsButton(),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        appBar: const CommonAppBar(
+        appBar: ResultAppBar(
           title: "Result",
+          actions: [
+            IconButton(
+              padding: const EdgeInsets.only(right: 30),
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white70,
+              ),
+              onPressed: () {
+                showSearch(context: context, delegate: RecordSearchDelegate());
+              },
+              tooltip: 'Search',
+            ),
+          ],
         ),
         body: _buildResultsList(context),
       ),
@@ -77,13 +102,20 @@ class _ResultsPageState extends State<ResultsPage> {
   }
 
   Widget _buildResultsList(BuildContext context) {
-    if (boxProctor.isEmpty) {
+    List<ProctorModel> records =
+        boxProctor.values.cast<ProctorModel>().toList();
+
+    // Sort records
+    records.sort((a, b) =>
+        _isAscending ? a.date.compareTo(b.date) : b.date.compareTo(a.date));
+
+    if (records.isEmpty) {
       return const Center(child: Text('No records found'));
     } else {
       return ListView.builder(
-        itemCount: boxProctor.length,
+        itemCount: records.length,
         itemBuilder: (context, index) {
-          final record = boxProctor.getAt(index)! as ProctorModel;
+          final record = records[index];
           return Center(
             child: Column(
               children: [
@@ -114,6 +146,8 @@ class ClearRecordsButton extends StatelessWidget {
         try {
           boxProctor.clear();
           print('All records cleared');
+          // Rebuild the UI after clearing records
+          (context as Element).reassemble();
         } catch (e) {
           print('Error clearing records: $e');
           // Handle error here, such as showing an error message to the user
@@ -139,6 +173,117 @@ class ClearRecordsButton extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<ProctorModel> records =
+        boxProctor.values.cast<ProctorModel>().toList();
+    records = records
+        .where((record) =>
+            record.id.contains(query) || record.date.contains(query))
+        .toList();
+
+    if (records.isEmpty) {
+      return const Center(child: Text('No records found'));
+    } else {
+      return ListView.builder(
+        itemCount: records.length,
+        itemBuilder: (context, index) {
+          final record = records[index];
+          return Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                GlassListTile(
+                  recordId: 'Record ID: ${record.id}',
+                  dateOfProctor: 'Date : ${record.date}',
+                  destinationPage: RecordDetailsPage(record: record),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<ProctorModel> records =
+        boxProctor.values.cast<ProctorModel>().toList();
+    records = records
+        .where((record) =>
+            record.id.contains(query) || record.date.contains(query))
+        .toList();
+
+    if (records.isEmpty) {
+      return const Center(child: Text('No records found'));
+    } else {
+      return ListView.builder(
+        itemCount: records.length,
+        itemBuilder: (context, index) {
+          final record = records[index];
+          return Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                GlassListTile(
+                  recordId: 'Record ID: ${record.id}',
+                  dateOfProctor: 'Date : ${record.date}',
+                  destinationPage: RecordDetailsPage(record: record),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return theme.copyWith(
+      primaryColor: Colors.black, // Change primary color
+      primaryIconTheme: theme.primaryIconTheme
+          .copyWith(color: Colors.white), // Change icon color
+      brightness: Brightness.dark, // Adjust brightness if needed
+      textTheme: theme.textTheme.copyWith(
+        headline6: const TextStyle(
+          color: Color.fromARGB(255, 197, 197, 197),
+          fontSize: 18,
+        ), // Adjust text style
       ),
     );
   }

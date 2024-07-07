@@ -15,7 +15,7 @@ class AppTheme {
       backgroundColor: SoothingColors.purpleGray,
     ),
     appBarTheme: const AppBarTheme(
-      color: SoothingColors.purpleGray,
+      color: Color.fromARGB(203, 33, 28, 41),
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
