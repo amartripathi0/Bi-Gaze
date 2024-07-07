@@ -73,6 +73,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
     super.key,
     required this.title,
+    // required List<PopupMenuButton<String>> actions,
   });
 
   @override
@@ -100,7 +101,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: GestureDetector(
         onTap: () {
           // Navigate to the home page when app bar is tapped
-          Navigator.pop(context);
+          // Navigator.pop(context);
         },
         child: Text(
           title,

@@ -12,7 +12,9 @@ class RecordDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(title: 'Detailed Records'),
+      appBar: const CommonAppBar(
+        title: 'Detailed Records',
+      ),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(

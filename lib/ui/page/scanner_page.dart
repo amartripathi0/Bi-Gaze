@@ -3,10 +3,6 @@
 import 'package:bigaze/ui/dialogues/endsessiondialogue.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
-import 'package:bigaze/ui/theme/color/alertcolors.dart';
-import 'package:bigaze/ui/theme/color/soothingcolors.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:bigaze/widgets/pingmeter.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';

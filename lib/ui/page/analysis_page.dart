@@ -16,7 +16,9 @@ class AnalysisReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     log(record.object.toString());
     return Scaffold(
-      appBar: const CommonAppBar(title: 'A N A L Y S I S'),
+      appBar: const CommonAppBar(
+        title: 'A N A L Y S I S',
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
