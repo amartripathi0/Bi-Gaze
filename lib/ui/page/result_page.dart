@@ -10,6 +10,8 @@ import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/ui/page/records_detailed.dart';
 
+import '../theme/color/alertcolors.dart';
+
 class ResultsPage extends StatefulWidget {
   const ResultsPage({super.key});
 
@@ -71,11 +73,11 @@ class _ResultsPageState extends State<ResultsPage> {
           currentIndex: _currentIndex, // Pass current index
           onTap: _onItemTapped, // Handle tap event
         ),
-        floatingActionButton: const SizedBox(
-          width: 130, // Adjust the width as needed
-          child: ClearRecordsButton(),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // floatingActionButton: const SizedBox(
+        //   width: 130, // Adjust the width as needed
+        //   child: ClearRecordsButton(),
+        // ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: ResultAppBar(
           title: "Result",
           actions: [
@@ -92,7 +94,26 @@ class _ResultsPageState extends State<ResultsPage> {
             ),
           ],
         ),
-        body: _buildResultsList(context),
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 5,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Switch(
+                  value: false,
+                  onChanged: null,
+                  activeColor: Colors.greenAccent,
+                  inactiveThumbColor: Color.fromARGB(255, 89, 50, 128),
+                ),
+                ClearRecordsButton(),
+              ],
+            ),
+            Expanded(child: _buildResultsList(context)),
+          ],
+        ),
       ),
     );
   }
@@ -115,13 +136,13 @@ class _ResultsPageState extends State<ResultsPage> {
           return Center(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
                 GlassListTile(
                   recordId: 'Record ID: ${record.id}',
                   dateOfProctor: 'Date : ${record.date}',
                   destinationPage: RecordDetailsPage(record: record),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
               ],
             ),
@@ -137,7 +158,7 @@ class ClearRecordsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return ElevatedButton(
       onPressed: () async {
         try {
           boxProctor.clear();
@@ -150,26 +171,26 @@ class ClearRecordsButton extends StatelessWidget {
           // Handle error here, such as showing an error message to the user
         }
       },
-      tooltip: 'Clear Records',
-      isExtended: true,
-      backgroundColor: const Color.fromARGB(255, 255, 67, 67).withOpacity(0.5),
-      child: const Padding(
-        padding: EdgeInsets.all(3.0),
-        child: Center(
-          child: Row(
-            children: [
-              Icon(
-                Icons.clear,
-                color: Colors.black,
-              ),
-              Text(
-                "Clear records",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black),
-              )
-            ],
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(5),
+        padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
+        backgroundColor:
+            MaterialStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            side: const BorderSide(
+              color: AlertButtonColors
+                  .endsessioncolor, // Specify your border color here
+              width: 2, // Specify the border width
+            ),
+            borderRadius:
+                BorderRadius.circular(8), // Adjust the border radius as needed
           ),
         ),
+      ),
+      child: const Text(
+        "Clear Records",
+        style: TextStyle(color: Colors.white54, fontSize: 14),
       ),
     );
   }
