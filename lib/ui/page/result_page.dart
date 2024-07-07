@@ -1,12 +1,8 @@
 // ignore_for_file: deprecated_member_use, avoid_print
-
-import 'dart:ui';
-
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
-import 'package:bigaze/ui/theme/color/soothingcolors.dart';
 import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -147,6 +143,7 @@ class ClearRecordsButton extends StatelessWidget {
           boxProctor.clear();
           print('All records cleared');
           // Rebuild the UI after clearing records
+          // ignore: invalid_use_of_protected_member
           (context as Element).reassemble();
         } catch (e) {
           print('Error clearing records: $e');
