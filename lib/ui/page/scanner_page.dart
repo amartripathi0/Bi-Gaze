@@ -80,6 +80,46 @@ class _ScannerPageState extends State<ScannerPage> {
                 SizedBox(
                   height: 10,
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ScannerGlassTile(
+                        destinationPage: MyHomePage(),
+                        cardName: "History",
+                        cardIcon: Icons.history),
+                    ScannerGlassTile(
+                        destinationPage: MyHomePage(),
+                        cardName: "Recent",
+                        cardIcon: Icons.recent_actors_outlined),
+                    ScannerGlassTile(
+                        destinationPage: MyHomePage(),
+                        cardName: "PDF",
+                        cardIcon: Icons.picture_as_pdf)
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ScannerGlassTile(
+                        destinationPage: MyHomePage(),
+                        cardName: "Gallery",
+                        cardIcon: Icons.photo_size_select_actual_rounded),
+                    ScannerGlassTile(
+                        destinationPage: MyHomePage(),
+                        cardName: "Camera",
+                        cardIcon: Icons.camera),
+                    ScannerGlassTile(
+                        destinationPage: MyHomePage(),
+                        cardName: "Folder",
+                        cardIcon: Icons.folder)
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 ScannerGlassCard(
                   destinationPage: MyHomePage(),
                   cardName: 'QR scanner',
@@ -100,7 +140,7 @@ class _ScannerPageState extends State<ScannerPage> {
                   destinationPage: MyHomePage(),
                   cardName: 'ID scanner',
                   cardIcon: Icons.verified_outlined,
-                )
+                ),
               ],
             ),
           ),

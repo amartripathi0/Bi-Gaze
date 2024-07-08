@@ -148,7 +148,7 @@ class ScannerGlassCard extends StatelessWidget {
         );
       },
       child: GlassmorphicContainer(
-        width: 280,
+        width: 290,
         height: 100,
         borderRadius: 20,
         blur: 20,
@@ -193,6 +193,77 @@ class ScannerGlassCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ScannerGlassTile extends StatelessWidget {
+  final Widget destinationPage;
+  final String cardName;
+  final IconData cardIcon; // Changed type to IconData
+
+  const ScannerGlassTile({
+    super.key, // Add Key parameter for proper widget identification
+    required this.destinationPage,
+    required this.cardName,
+    required this.cardIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destinationPage),
+        );
+      },
+      child: GlassmorphicContainer(
+        width: 80,
+        height: 80,
+        borderRadius: 20,
+        blur: 20,
+        alignment: Alignment.center,
+        border: 2,
+        linearGradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            const Color(0xFFffffff).withOpacity(0.1),
+            const Color(0xFFFFFFFF).withOpacity(0.05),
+          ],
+          stops: const [
+            0.1,
+            1,
+          ],
+        ),
+        borderGradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            const Color(0xFFffffff).withOpacity(0.5),
+            const Color(0xFFFFFFFF).withOpacity(0.5),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              cardIcon, // Using Icon widget with IconData
+              color: const Color.fromARGB(172, 178, 172, 179),
+              size: 30,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              cardName,
+              style: const TextStyle(
+                color: Color.fromARGB(172, 178, 172, 179),
+                fontSize: 13,
+              ),
+            ),
+          ],
         ),
       ),
     );
