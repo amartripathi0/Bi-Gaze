@@ -3,6 +3,7 @@
 import 'package:bigaze/ui/dialogues/endsessiondialogue.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
+import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -71,65 +72,38 @@ class _ScannerPageState extends State<ScannerPage> {
           currentIndex: _currentIndex, // Pass current index
           onTap: _onItemTapped, // Handle tap event
         ),
-        body: Container(
-          alignment: Alignment.center,
-          // child: const CountdownTimer(duration: 300),
-          // child: ElevatedButton(
-          //   onPressed: () {
-          //     showDialog(
-          //       context: context,
-          //       builder: (BuildContext context) {
-          //         return GiffyDialog.image(
-          //           Image.network(
-          //             "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif",
-          //             height: 200,
-          //             fit: BoxFit.cover,
-          //           ),
-          //           title: const Text(
-          //             'Image Animation',
-          //             textAlign: TextAlign.center,
-          //           ),
-          //           content: const Text(
-          //             'This is a image animation dialog box. This library helps you easily create fancy giffy dialog.',
-          //             textAlign: TextAlign.center,
-          //           ),
-          //           actions: [
-          //             TextButton(
-          //               onPressed: () => Navigator.pop(context, 'CANCEL'),
-          //               child: const Text('CANCEL'),
-          //             ),
-          //             TextButton(
-          //               onPressed: () => Navigator.pop(context, 'OK'),
-          //               child: const Text('OK'),
-          //             ),
-          //           ],
-          //         );
-          //       },
-          //     );
-          //   },
-          //   style: ButtonStyle(
-          //     elevation: MaterialStateProperty.all(5),
-          //     backgroundColor: MaterialStateProperty.all(Colors.black),
-          //     shape: MaterialStateProperty.all(
-          //       RoundedRectangleBorder(
-          //         side: const BorderSide(
-          //           color: alertbuttoncolors
-          //               .endsessioncolor, // Specify your border color here
-          //           width: 2, // Specify the border width
-          //         ),
-          //         borderRadius: BorderRadius.circular(
-          //             8), // Adjust the border radius as needed
-          //       ),
-          //     ),
-          //   ),
-          //   child: const Text(
-          //     "End Session",
-          //     style: TextStyle(color: Colors.white54, fontSize: 14),
-          //   ),
-          // ),
-
-          // Test=---------------------
-          child: const EndSessionButton(),
+        body: const Center(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                ScannerGlassCard(
+                  destinationPage: MyHomePage(),
+                  cardName: 'QR scanner',
+                  cardIcon: Icons.qr_code_scanner_outlined,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ScannerGlassCard(
+                  destinationPage: MyHomePage(),
+                  cardName: 'Document Scanner',
+                  cardIcon: Icons.document_scanner_outlined,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ScannerGlassCard(
+                  destinationPage: MyHomePage(),
+                  cardName: 'ID scanner',
+                  cardIcon: Icons.verified_outlined,
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
