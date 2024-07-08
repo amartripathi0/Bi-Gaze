@@ -1,11 +1,15 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:animated_background/space.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
+import 'package:animated_background/animated_background.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -14,7 +18,8 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage>
+    with TickerProviderStateMixin {
   int _currentIndex = 3;
 
   void _onItemTapped(int index) {
@@ -70,10 +75,15 @@ class _ProfilePageState extends State<ProfilePage> {
           currentIndex: _currentIndex, // Pass current index
           onTap: _onItemTapped, // Handle tap event
         ),
-        body: const Center(
-          child: Text(
-            'Profile Page',
-            style: TextStyle(fontSize: 24),
+        body: AnimatedBackground(
+          behaviour: SpaceBehaviour(
+              backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
+          vsync: this,
+          child: const Center(
+            child: Text(
+              'Profile Page',
+              style: TextStyle(fontSize: 24),
+            ),
           ),
         ),
       ),

@@ -40,6 +40,7 @@ dependencies:
   dart_ping: ^9.0.1
   giffy_dialog: ^2.1.0
   share_plus: ^6.3.4
+  animated_background: ^2.0.0
 
 
 dev_dependencies:
