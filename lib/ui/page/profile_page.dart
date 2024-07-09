@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:animated_background/space.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -9,7 +8,6 @@ import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -79,10 +77,79 @@ class _ProfilePageState extends State<ProfilePage>
           behaviour: SpaceBehaviour(
               backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
           vsync: this,
-          child: const Center(
-            child: Text(
-              'Profile Page',
-              style: TextStyle(fontSize: 24),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromARGB(219, 255, 255, 255)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(104, 103, 101, 101),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                            offset: Offset(0, 4), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                16.0), // Set the border radius here
+                            child: Image.asset(
+                              'assets/images/test_assets/profile_demo.jpeg', // Update the path to your profile picture
+                              width: 100,
+                              height: 100,
+
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          const Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Vikaṭa Bālakaḥ',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 255, 255, 255)),
+                              ),
+                              SizedBox(height: 6),
+                              Text(
+                                'User ID: vikaṭabālakaḥ13',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Color.fromARGB(255, 166, 166, 166),
+                                ),
+                              ),
+                              SizedBox(height: 6),
+                              // Add more profile information here if needed
+                              Text(
+                                'Additional Information',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color.fromARGB(255, 166, 166, 166)),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
