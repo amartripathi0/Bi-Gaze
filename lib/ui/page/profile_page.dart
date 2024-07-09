@@ -1,7 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bigaze/ui/page/charts/line_chart.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/widgets/profilecard.dart';
+import 'package:bigaze/widgets/profilecardplaceholder.dart';
+import 'package:bigaze/widgets/profileproctorcard.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -88,7 +93,22 @@ class _ProfilePageState extends State<ProfilePage>
                     name: 'Vikaṭa Bālakaḥ',
                     userId: 'vikaṭabālakaḥ13',
                     additionalInfo: 'Additional Information',
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ExamStatisticsWidget(
+                      proctoredSessions: 65, highestScore: 92.19),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  // ----------------------------------------------------------
+                  SizedBox(
+                    height: 250,
+                    child: ProfileCardPlaceholder(child: LineChartWidget()),
                   )
+
+                  // -----------------------------------------------------------
                 ],
               ),
             ),
