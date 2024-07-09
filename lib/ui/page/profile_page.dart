@@ -103,9 +103,17 @@ class _ProfilePageState extends State<ProfilePage>
                     height: 20,
                   ),
                   // ----------------------------------------------------------
-                  SizedBox(
-                    height: 250,
-                    child: ProfileCardPlaceholder(child: LineChartWidget()),
+                  ProfileCardPlaceholder(
+                    child: Text(
+                      "Comparative Analysis",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  ProfileCardPlaceholder(
+                    child: SizedBox(
+                      height: 250,
+                      child: LineChartWidget(),
+                    ),
                   )
 
                   // -----------------------------------------------------------
