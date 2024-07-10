@@ -11,7 +11,7 @@ class LineChartWidget extends StatefulWidget {
 }
 
 class _LineChartWidgetState extends State<LineChartWidget> {
-  bool isShowingMainData = true;
+  bool isShowingMainData = false;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _LineChart extends StatelessWidget {
   Widget _bottomTitleWidgets(double value) {
     const style = TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 16,
+        fontSize: 14,
         color: Color.fromARGB(255, 106, 106, 106));
     Widget text;
     switch (value.toInt()) {
@@ -134,7 +134,7 @@ class _LineChart extends StatelessWidget {
           getTitlesWidget: (value, meta) => _leftTitleWidgets(value),
           showTitles: true,
           interval: 1,
-          reservedSize: 40,
+          reservedSize: 30,
         ),
       );
 

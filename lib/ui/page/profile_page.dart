@@ -5,15 +5,12 @@ import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/widgets/profilecard.dart';
 import 'package:bigaze/widgets/profilecardplaceholder.dart';
 import 'package:bigaze/widgets/profileproctorcard.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:animated_background/animated_background.dart';
-import 'package:flutter/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -111,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                   ProfileCardPlaceholder(
                     child: SizedBox(
-                      height: 250,
+                      height: 200,
                       child: LineChartWidget(),
                     ),
                   )
