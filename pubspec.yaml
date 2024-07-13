@@ -41,6 +41,9 @@ dependencies:
   giffy_dialog: ^2.1.0
   share_plus: ^6.3.4
   animated_background: ^2.0.0
+  simple_barcode_scanner: ^0.1.1
+  mobile_scanner: ^5.1.1
+  qr_code_scanner: ^1.0.1
 
 
 dev_dependencies:
