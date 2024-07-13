@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'dart:async';
+
+import '../../../widgets/typingtext.dart';
 
 class QRScannerPage extends StatelessWidget {
   const QRScannerPage({super.key});
@@ -49,17 +52,19 @@ class _QRViewExampleState extends State<QRViewExample> {
             ],
           ),
           Positioned(
-              top: 40, // Adjust top position as needed
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                color: Colors.black54, // Background color
-                child: const Text(
-                  'Place your QR code in front of the camera',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.bold),
+            top: 40, // Adjust top position as needed
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              color: Colors.black54, // Background color
+              child: const Text(
+                'Place your QR code in front of the camera',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontWeight: FontWeight.bold,
                 ),
-              )),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -92,13 +97,11 @@ class _QRViewExampleState extends State<QRViewExample> {
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            backgroundColor:
-                Colors.transparent, // Transparent background for the dialog
+            backgroundColor: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: const Color.fromARGB(
-                    255, 181, 181, 181), // Dialog content background color
+                color: const Color.fromARGB(255, 181, 181, 181),
               ),
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -106,19 +109,34 @@ class _QRViewExampleState extends State<QRViewExample> {
                 children: <Widget>[
                   const Text(
                     'Scan Result',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 113, 112, 112),
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    scanResult,
-                    style: const TextStyle(fontSize: 16),
+                  // Text(scanResult),
+                  TypingTextAnimation(
+                    texts: [scanResult], // Show typing animation for scanResult
+                    textStyle: const TextStyle(
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    showCursor: false,
                   ),
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     },
-                    child: const Text('OK'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(240, 255, 92, 100),
+                    ),
+                    child: const Text(
+                      'Close',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -127,7 +145,6 @@ class _QRViewExampleState extends State<QRViewExample> {
         },
       );
     } else {
-      // Handle null case if needed
       print('Scanned result is null');
     }
   }
