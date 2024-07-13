@@ -69,6 +69,7 @@ flutter:
     - assets/images/AppIcons/android/mipmap-xhdpi/bigaze.png
     - assets/images/AppIcons/android/mipmap-xxhdpi/bigaze.png
     - assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png
+    - assets/images/cool_stuff/!.gif
     - assets/models/
     - assets/models/mobilenet_v1_1.0_224.tflite
     - assets/models/mobilenet_v1_1.0_224.txt
@@ -79,6 +80,7 @@ flutter:
     - assets/models/yamnet_label_list.txt
     - assets/models/ssd_mobilenet.txt
     - assets/models/ssd_mobilenet.tflite
+    
   #   - images/a_dot_ham.jpeg
 
 

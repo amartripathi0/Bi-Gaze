@@ -17,8 +17,8 @@ class EndSessionButton extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return GiffyDialog.image(
-                Image.network(
-                  "https://raw.githubusercontent.com/nayan1306/assets/main/13539-sign-for-error-or-explanation-alert.gif",
+                Image.asset(
+                  "assets/images/cool_stuff/!.gif",
                   height: 100,
                   fit: BoxFit.cover,
                 ),
