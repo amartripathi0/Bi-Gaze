@@ -11,25 +11,37 @@ class LineChartWidget extends StatefulWidget {
 }
 
 class _LineChartWidgetState extends State<LineChartWidget> {
-  bool isShowingMainData = false;
+  bool isShowingMainData = true;
+
+  void togglechartdata() {
+    setState(() {
+      isShowingMainData = !isShowingMainData;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(103, 43, 43, 43),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: _LineChart(isShowingMainData: isShowingMainData),
+        backgroundColor: const Color.fromARGB(103, 43, 43, 43),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: _LineChart(isShowingMainData: isShowingMainData),
+                ),
+              ],
+            ),
+            Positioned(
+              top: -10.0, // Adjust the top position as needed
+              right: -5.0, // Adjust the right position as needed
+              child: IconButton(
+                onPressed: togglechartdata,
+                icon: const Icon(Icons.analytics_outlined),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          ],
+        ));
   }
 }
 
