@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'dart:async';
-
+import '../../page/scanner_page.dart';
 import '../../../widgets/typingtext.dart';
 
 class QRScannerPage extends StatelessWidget {
@@ -128,7 +127,11 @@ class _QRViewExampleState extends State<QRViewExample> {
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ScannerPage(),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(240, 255, 92, 100),
