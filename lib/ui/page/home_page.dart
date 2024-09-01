@@ -5,6 +5,8 @@ import 'package:bigaze/object_detection/od_yolov2_tiny.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/proctor_page.dart';
+import 'package:bigaze/ui/page/quiz_generator_page.dart';
+import 'package:bigaze/widgets/aiquizcreatercard.dart';
 import 'package:bigaze/widgets/studyessentialscard.dart';
 import 'package:flutter/material.dart';
 
@@ -59,6 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
               StudyEsssentialsCard(
                 destinationPage: ProctorPage(),
                 cardName: "Study essentials card",
+              ),
+              SizedBox.square(
+                dimension: 20,
+              ),
+              AiQuizCreaterCard(
+                destinationPage: QuizGeneratorPage(),
+                cardTitle: "QuizΞrix",
+                cardSubTitle: "AI Powered Quiz Generator",
               ),
               SizedBox.square(
                 dimension: 20,
