@@ -1,5 +1,4 @@
 import 'package:bigaze/ui/page/home_page.dart';
-import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
