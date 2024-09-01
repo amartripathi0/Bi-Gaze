@@ -73,7 +73,7 @@ class _MainNotificationCardState extends State<MainNotificationCard> {
         width: 350,
         height: 150,
         borderRadius: 20,
-        blur: 20,
+        blur: 50,
         alignment: Alignment.center,
         border: 2,
         linearGradient: LinearGradient(
@@ -111,7 +111,7 @@ class _MainNotificationCardState extends State<MainNotificationCard> {
                       Text(
                         widget.cardTitle,
                         style: const TextStyle(
-                          color: Color.fromARGB(172, 178, 172, 179),
+                          color: Color.fromARGB(172, 255, 255, 255),
                           fontSize: 20,
                         ),
                       ),
@@ -138,7 +138,7 @@ class _MainNotificationCardState extends State<MainNotificationCard> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               LinearProgressIndicator(
                 value: _progress,
                 minHeight: 15,
