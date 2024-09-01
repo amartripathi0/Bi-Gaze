@@ -60,6 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 destinationPage: ProctorPage(),
                 cardName: "Study essentials card",
               ),
+              SizedBox.square(
+                dimension: 20,
+              ),
               GlassCard(
                 destinationPage: ProctorPage(),
                 cardName: "P R O C T O R",
