@@ -73,6 +73,7 @@ flutter:
     - assets/images/cool_stuff/!.gif
     - assets/images/cool_stuff/XVo6.gif
     - assets/images/cool_stuff/91w1.gif
+    - assets/images/cool_stuff/book.gif
     - assets/models/
     - assets/models/mobilenet_v1_1.0_224.tflite
     - assets/models/mobilenet_v1_1.0_224.txt

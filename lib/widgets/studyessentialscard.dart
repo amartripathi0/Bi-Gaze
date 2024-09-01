@@ -45,10 +45,25 @@ class StudyEsssentialsCard extends StatelessWidget {
         ),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Text(
-            cardName,
-            style: const TextStyle(
-                color: Color.fromARGB(255, 178, 172, 179), fontSize: 20),
+          Row(
+            children: [
+              const SizedBox(
+                width: 25,
+              ),
+              Image.asset(
+                "./assets/images/cool_stuff/book.gif",
+                width: 40,
+                height: 40,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                cardName,
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 178, 172, 179), fontSize: 24),
+              ),
+            ],
           ),
           const Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -109,7 +124,7 @@ class StudyGlassTile extends StatelessWidget {
       },
       child: GlassmorphicContainer(
         width: 300,
-        height: 50,
+        height: 55,
         borderRadius: 10,
         blur: 20,
         alignment: Alignment.center,
@@ -152,7 +167,7 @@ class StudyGlassTile extends StatelessWidget {
               cardName,
               style: const TextStyle(
                 color: Color.fromARGB(173, 255, 255, 255),
-                fontSize: 14,
+                fontSize: 18,
               ),
             ),
           ],

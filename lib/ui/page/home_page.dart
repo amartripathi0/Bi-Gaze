@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               StudyEsssentialsCard(
                 destinationPage: ProctorPage(),
-                cardName: "Study essentials card",
+                cardName: "Study essentials",
               ),
               SizedBox.square(
                 dimension: 20,
