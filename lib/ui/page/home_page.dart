@@ -12,6 +12,7 @@ import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:bigaze/widgets/coolcard.dart';
 import 'package:bigaze/ui/page/audio_classifier_page.dart';
+import '../../widgets/mainnotificationcard.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -43,7 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox.square(
-                dimension: 100,
+                dimension: 110,
+              ),
+              MainNotificationCard(
+                destinationPage: ProctorPage(),
+                cardTitle: "Upcoming Session",
+                cardSubTitle: "Proctor session name",
+                countdownDuration: Duration(minutes: 15),
+              ),
+              SizedBox.square(
+                dimension: 20,
               ),
               GlassCard(
                 destinationPage: ProctorPage(),

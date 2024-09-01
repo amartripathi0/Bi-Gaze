@@ -71,6 +71,7 @@ flutter:
     - assets/images/AppIcons/android/mipmap-xxhdpi/bigaze.png
     - assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png
     - assets/images/cool_stuff/!.gif
+    - assets/images/cool_stuff/XVo6.gif
     - assets/models/
     - assets/models/mobilenet_v1_1.0_224.tflite
     - assets/models/mobilenet_v1_1.0_224.txt
