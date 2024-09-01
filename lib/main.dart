@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         duration: 2000,
-        splash: const SplashContent(), // Use custom widget for splash
+        splash: const SplashContent(), // Use custom widget for splashq
         splashIconSize: 450,
         nextScreen: const MyHomePage(),
         splashTransition: SplashTransition.fadeTransition,

@@ -44,6 +44,7 @@ dependencies:
   simple_barcode_scanner: ^0.1.1
   mobile_scanner: ^5.1.1
   qr_code_scanner: ^1.0.1
+  cool_card_swiper: ^1.0.3
 
  
 
