@@ -68,7 +68,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  # To add assets to your application, add an assets section, like this
   assets:
     - assets/images/test_assets/profile_demo.jpeg
     - assets/images/AppIcons/android/mipmap-xhdpi/bigaze.png
