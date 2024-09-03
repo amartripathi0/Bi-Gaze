@@ -1,5 +1,5 @@
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
-import 'package:bigaze/ui/page/login_signup_pages/login_page.dart';
+import 'package:bigaze/ui/page/login_signup_pages/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class AssignmentPage extends StatefulWidget {

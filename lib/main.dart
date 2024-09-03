@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bigaze/firebase_options.dart';
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +21,12 @@ void main() async {
   log('Hive initialized.');
 
   try {
-    await Firebase.initializeApp();
+    if (Firebase.apps.isNotEmpty) {
+      await Firebase.apps.first.delete();
+    }
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   } catch (e) {
     log('Error initializing Firebase: $e');
   }
@@ -29,7 +35,6 @@ void main() async {
   boxProctor = await Hive.openBox('proctorBox');
   log('Hive box opened.');
 
-  // Create an instance of OutputProvider
   final outputProvider = OutputProvider();
 
   runApp(
