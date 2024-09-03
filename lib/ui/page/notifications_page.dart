@@ -3,10 +3,6 @@
 import 'package:cool_card_swiper/card/cool_swiper.dart';
 import 'package:flutter/material.dart';
 import 'common/widget/appbar.dart';
-<<<<<<< HEAD
-import '../page/home_page.dart';
-=======
->>>>>>> appv2
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});

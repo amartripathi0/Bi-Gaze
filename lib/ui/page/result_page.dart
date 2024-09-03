@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-=======
 // ignore_for_file: deprecated_member_use
 
->>>>>>> appv2
 import 'dart:developer';
 
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
-<<<<<<< HEAD
-
-=======
->>>>>>> appv2
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -70,19 +63,6 @@ class _ResultsPageState extends State<ResultsPage> {
     });
   }
 
-<<<<<<< HEAD
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // Navigate to the home page when the back button is pressed
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const MyHomePage()),
-        );
-        return false; // Prevent the default back button behavior
-      },
-=======
   Future<bool> _onWillPop() async {
     // Navigate to the home page when the back button is pressed
     Navigator.pushReplacement(
@@ -96,7 +76,6 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
->>>>>>> appv2
       child: Scaffold(
         bottomNavigationBar: CoolBottomNavigationBar(
           currentIndex: _currentIndex, // Pass current index
@@ -247,19 +226,11 @@ class ClearRecordsButton extends StatelessWidget {
         );
       },
       style: ButtonStyle(
-<<<<<<< HEAD
-        elevation: MaterialStateProperty.all(5),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
-        backgroundColor:
-            MaterialStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
-        shape: MaterialStateProperty.all(
-=======
         elevation: WidgetStateProperty.all(5),
         padding: WidgetStateProperty.all(const EdgeInsets.all(10)),
         backgroundColor:
             WidgetStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
         shape: WidgetStateProperty.all(
->>>>>>> appv2
           RoundedRectangleBorder(
             side: const BorderSide(
               color: AlertButtonColors.endsessioncolor,
@@ -345,61 +316,21 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
         .toList();
 
     if (records.isEmpty) {
-<<<<<<< HEAD
-      return const Center(child: Text('No records found'));
-=======
       return const Center(child: Text('No suggestions found'));
->>>>>>> appv2
     } else {
       return ListView.builder(
         itemCount: records.length,
         itemBuilder: (context, index) {
           final record = records[index];
-<<<<<<< HEAD
-          return Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                GlassListTile(
-                  recordId: 'Record ID: ${record.id}',
-                  dateOfProctor: 'Date : ${record.date}',
-                  destinationPage: RecordDetailsPage(record: record),
-                ),
-              ],
-            ),
-=======
           return ListTile(
             title: Text('Record ID: ${record.id}'),
             subtitle: Text('Date : ${record.date}'),
             onTap: () {
               showResults(context);
             },
->>>>>>> appv2
           );
         },
       );
     }
   }
-<<<<<<< HEAD
-
-  @override
-  ThemeData appBarTheme(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return theme.copyWith(
-      primaryColor: Colors.black, // Change primary color
-      primaryIconTheme: theme.primaryIconTheme
-          .copyWith(color: Colors.white), // Change icon color
-      brightness: Brightness.dark, // Adjust brightness if needed
-      textTheme: theme.textTheme.copyWith(
-        titleLarge: const TextStyle(
-          color: Color.fromARGB(255, 197, 197, 197),
-          fontSize: 18,
-        ), // Adjust text style
-      ),
-    );
-  }
-=======
->>>>>>> appv2
 }

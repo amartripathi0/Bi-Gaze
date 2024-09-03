@@ -79,53 +79,33 @@ class _ObjectDetectionAllState extends State<ObjectDetectionAll> {
             ElevatedButton(
               onPressed: () => onSelect(ssd),
               style: const ButtonStyle(
-<<<<<<< HEAD
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(255, 153, 99, 167))),
-=======
                 backgroundColor:
                     WidgetStatePropertyAll(Color.fromARGB(255, 153, 99, 167)),
               ),
->>>>>>> appv2
               child: const Text(ssd),
             ),
             ElevatedButton(
               onPressed: () => onSelect(yolo),
               style: const ButtonStyle(
-<<<<<<< HEAD
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(255, 153, 99, 167))),
-=======
                 backgroundColor:
                     WidgetStatePropertyAll(Color.fromARGB(255, 153, 99, 167)),
               ),
->>>>>>> appv2
               child: const Text(yolo),
             ),
             ElevatedButton(
               onPressed: () => onSelect(mobilenet),
               style: const ButtonStyle(
-<<<<<<< HEAD
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(255, 153, 99, 167))),
-=======
                 backgroundColor:
                     WidgetStatePropertyAll(Color.fromARGB(255, 153, 99, 167)),
               ),
->>>>>>> appv2
               child: const Text(mobilenet),
             ),
             ElevatedButton(
               onPressed: () => onSelect(posenet),
               style: const ButtonStyle(
-<<<<<<< HEAD
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(255, 153, 99, 167))),
-=======
                 backgroundColor:
                     WidgetStatePropertyAll(Color.fromARGB(255, 153, 99, 167)),
               ),
->>>>>>> appv2
               child: const Text(posenet),
             ),
           ],

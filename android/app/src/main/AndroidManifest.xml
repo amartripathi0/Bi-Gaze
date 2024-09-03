@@ -1,39 +1,13 @@
-<<<<<<< HEAD
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.bigaze.bigaze">
-
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- Optional, you'll have to check this permission by yourself. -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
-
-    
-    <application
-        android:label="BiG∆ZE"
-        android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:enableOnBackInvokedCallback="true"
-        >
-        
-=======
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"  package="org.bigaze.bigaze">
     <application
         android:label="BiG∆ZE"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
->>>>>>> appv2
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
-<<<<<<< HEAD
-=======
             android:taskAffinity=""
->>>>>>> appv2
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -41,11 +15,7 @@
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
-<<<<<<< HEAD
-                 to determine the Window background behind the Flutter UI. check -->
-=======
                  to determine the Window background behind the Flutter UI. -->
->>>>>>> appv2
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
@@ -60,10 +30,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-<<<<<<< HEAD
-           
-    </application>
-=======
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
@@ -76,5 +42,4 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
->>>>>>> appv2
 </manifest>

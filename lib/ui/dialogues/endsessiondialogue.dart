@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import 'package:bigaze/ui/theme/color/alertcolors.dart';
-import 'package:flutter/material.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
-=======
 // import 'package:bigaze/ui/theme/color/alertcolors.dart';
 // import 'package:flutter/material.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
@@ -102,7 +97,6 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
->>>>>>> appv2
 
 import '../page/home_page.dart'; // Ensure you have imported the necessary library
 
@@ -118,25 +112,6 @@ class EndSessionButton extends StatelessWidget {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-<<<<<<< HEAD
-              return GiffyDialog.image(
-                Image.asset(
-                  "assets/images/cool_stuff/!.gif",
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
-                title: const Text(
-                  'End Session',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AlertCardColors.endsessioncolor),
-                  textAlign: TextAlign.center,
-                ),
-                content: const Text(
-                  'Once ENDED the session can\'t be restarted and the Session will be premanently terminated.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Color.fromARGB(255, 238, 225, 225)),
-=======
               return AlertDialog(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +147,6 @@ class EndSessionButton extends StatelessWidget {
                           TextStyle(color: Color.fromARGB(255, 238, 225, 225)),
                     ),
                   ],
->>>>>>> appv2
                 ),
                 actions: [
                   TextButton(
@@ -210,22 +184,13 @@ class EndSessionButton extends StatelessWidget {
         },
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(5),
-<<<<<<< HEAD
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
-=======
           padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
->>>>>>> appv2
           backgroundColor:
               MaterialStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               side: const BorderSide(
-<<<<<<< HEAD
-                color: AlertButtonColors
-                    .endsessioncolor, // Specify your border color here
-=======
                 color: Colors.redAccent, // Specify your border color here
->>>>>>> appv2
                 width: 2, // Specify the border width
               ),
               borderRadius: BorderRadius.circular(
