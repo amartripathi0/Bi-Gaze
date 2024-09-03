@@ -1,4 +1,5 @@
 import 'package:bigaze/ui/page/home_page.dart';
+import 'package:bigaze/ui/page/study_essentials/assignment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
@@ -69,7 +70,7 @@ class StudyEsssentialsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               StudyGlassTile(
-                  destinationPage: MyHomePage(),
+                  destinationPage: AssignmentPage(),
                   cardName: "Assignment",
                   cardIcon: Icons.school_sharp),
               SizedBox(

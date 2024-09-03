@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/model/proctor_model.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -11,19 +14,25 @@ import './provider/detections_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Hive
+  log('Initializing Hive...');
   await Hive.initFlutter();
   Hive.registerAdapter(ProctorModelAdapter());
-  // firebase auth
+  log('Hive initialized.');
 
-  // Open the Hive box
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    log('Error initializing Firebase: $e');
+  }
+
+  log('Opening Hive box...');
   boxProctor = await Hive.openBox('proctorBox');
+  log('Hive box opened.');
 
   // Create an instance of OutputProvider
   final outputProvider = OutputProvider();
 
   runApp(
-    // Wrap your app with ChangeNotifierProvider
     ChangeNotifierProvider(
       create: (_) => outputProvider,
       child: const MyApp(),
