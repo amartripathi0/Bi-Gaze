@@ -1,4 +1,4 @@
-package com.example.bigaze
+package com.turingstorm.bigaze
 
 
 import android.Manifest
