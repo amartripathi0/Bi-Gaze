@@ -14,6 +14,7 @@ void main() async {
   // Initialize Hive
   await Hive.initFlutter();
   Hive.registerAdapter(ProctorModelAdapter());
+  // firebase auth
 
   // Open the Hive box
   boxProctor = await Hive.openBox('proctorBox');
