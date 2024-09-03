@@ -5,7 +5,10 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_linux
   printing
+<<<<<<< HEAD
   rive_common
+=======
+>>>>>>> appv2
   url_launcher_linux
 )
 

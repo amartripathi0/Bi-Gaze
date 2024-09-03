@@ -6,7 +6,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   permission_handler_windows
   printing
+<<<<<<< HEAD
   rive_common
+=======
+>>>>>>> appv2
   share_plus
   url_launcher_windows
   webview_windows

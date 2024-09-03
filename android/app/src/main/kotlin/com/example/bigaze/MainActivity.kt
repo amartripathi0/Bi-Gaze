@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 package org.bigaze.bigaze
+=======
+package com.example.bigaze
+
+>>>>>>> appv2
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -164,4 +169,8 @@ class MainActivity : FlutterActivity() {
             false
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> appv2

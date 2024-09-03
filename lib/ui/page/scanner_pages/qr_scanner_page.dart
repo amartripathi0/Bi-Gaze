@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+// ignore_for_file: library_private_types_in_public_api
+
+import 'dart:developer';
+
+>>>>>>> appv2
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../page/scanner_page.dart';
@@ -148,7 +155,11 @@ class _QRViewExampleState extends State<QRViewExample> {
         },
       );
     } else {
+<<<<<<< HEAD
       print('Scanned result is null');
+=======
+      log('Scanned result is null');
+>>>>>>> appv2
     }
   }
 

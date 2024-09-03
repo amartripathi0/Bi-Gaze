@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   icons_launcher: ^2.0.7
   animated_splash_screen: ^1.3.0
+  flutter_native_splash: 2.2.16
   animated_bottom_navigation_bar: ^1.3.3
   glassmorphism: ^3.0.0
   permission_handler: ^11.3.1
@@ -38,13 +39,16 @@ dependencies:
   wakelock: ^0.6.2
   internet_speed_meter: ^1.0.2
   dart_ping: ^9.0.1
-  giffy_dialog: ^2.1.0
+  # giffy_dialog: ^2.1.0
   share_plus: ^6.3.4
   animated_background: ^2.0.0
   simple_barcode_scanner: ^0.1.1
   mobile_scanner: ^5.1.1
   qr_code_scanner: ^1.0.1
   cool_card_swiper: ^1.0.3
+  typed_data: ^1.3.0
+  # rive: ^0.13.13
+  
 
  
 
@@ -70,10 +74,15 @@ flutter:
     - assets/images/AppIcons/android/mipmap-xhdpi/bigaze.png
     - assets/images/AppIcons/android/mipmap-xxhdpi/bigaze.png
     - assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png
+    - assets/images/AppIcons/playstore.png
+    - assets/images/AppIcons/splash_image.png
     - assets/images/cool_stuff/!.gif
     - assets/images/cool_stuff/XVo6.gif
     - assets/images/cool_stuff/91w1.gif
     - assets/images/cool_stuff/book.gif
+    - assets/images/cool_stuff/CCNP.gif
+    - assets/images/cool_stuff/BTek.gif
+    - assets/images/cool_stuff/7RMn.gif
     - assets/models/
     - assets/models/mobilenet_v1_1.0_224.tflite
     - assets/models/mobilenet_v1_1.0_224.txt
@@ -115,10 +124,11 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 icons_launcher:
-  image_path: "assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png"
+  image_path: "assets/images/AppIcons/splash_image.png"
   platforms:
     android:
       enable: true
-      image_path: "assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png"
+      image_path: "assets/images/AppIcons/splash_image.png"
       adaptive_background_color: '#000000'
-      adaptive_foreground_image: 'assets/images/AppIcons/android/mipmap-xxxhdpi/bigaze.png'
+      adaptive_foreground_image: 'assets/images/AppIcons/splash_image.png'
+

@@ -1,10 +1,18 @@
+<<<<<<< HEAD
+=======
+// ignore_for_file: deprecated_member_use
+
+>>>>>>> appv2
 import 'dart:developer';
 
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
+<<<<<<< HEAD
 
+=======
+>>>>>>> appv2
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -62,6 +70,7 @@ class _ResultsPageState extends State<ResultsPage> {
     });
   }
 
+<<<<<<< HEAD
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -73,6 +82,21 @@ class _ResultsPageState extends State<ResultsPage> {
         );
         return false; // Prevent the default back button behavior
       },
+=======
+  Future<bool> _onWillPop() async {
+    // Navigate to the home page when the back button is pressed
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MyHomePage()),
+    );
+    return false; // Prevent the default back button behavior
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: _onWillPop,
+>>>>>>> appv2
       child: Scaffold(
         bottomNavigationBar: CoolBottomNavigationBar(
           currentIndex: _currentIndex, // Pass current index
@@ -223,11 +247,19 @@ class ClearRecordsButton extends StatelessWidget {
         );
       },
       style: ButtonStyle(
+<<<<<<< HEAD
         elevation: MaterialStateProperty.all(5),
         padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
         backgroundColor:
             MaterialStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
         shape: MaterialStateProperty.all(
+=======
+        elevation: WidgetStateProperty.all(5),
+        padding: WidgetStateProperty.all(const EdgeInsets.all(10)),
+        backgroundColor:
+            WidgetStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
+        shape: WidgetStateProperty.all(
+>>>>>>> appv2
           RoundedRectangleBorder(
             side: const BorderSide(
               color: AlertButtonColors.endsessioncolor,
@@ -313,12 +345,17 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
         .toList();
 
     if (records.isEmpty) {
+<<<<<<< HEAD
       return const Center(child: Text('No records found'));
+=======
+      return const Center(child: Text('No suggestions found'));
+>>>>>>> appv2
     } else {
       return ListView.builder(
         itemCount: records.length,
         itemBuilder: (context, index) {
           final record = records[index];
+<<<<<<< HEAD
           return Center(
             child: Column(
               children: [
@@ -332,11 +369,20 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
                 ),
               ],
             ),
+=======
+          return ListTile(
+            title: Text('Record ID: ${record.id}'),
+            subtitle: Text('Date : ${record.date}'),
+            onTap: () {
+              showResults(context);
+            },
+>>>>>>> appv2
           );
         },
       );
     }
   }
+<<<<<<< HEAD
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -354,4 +400,6 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
       ),
     );
   }
+=======
+>>>>>>> appv2
 }

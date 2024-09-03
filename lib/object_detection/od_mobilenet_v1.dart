@@ -51,8 +51,14 @@ class _OdMobileNetVoneState extends State<OdMobileNetVone> {
         child: ElevatedButton(
           onPressed: onSelect,
           style: const ButtonStyle(
+<<<<<<< HEAD
               backgroundColor:
                   MaterialStatePropertyAll(Color.fromARGB(255, 153, 99, 167))),
+=======
+            backgroundColor:
+                WidgetStatePropertyAll(Color.fromARGB(255, 153, 99, 167)),
+          ),
+>>>>>>> appv2
           child: const Text('Launch 🚀'),
         ),
       ),
