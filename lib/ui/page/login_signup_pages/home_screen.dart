@@ -14,16 +14,25 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // when user signs anonymously or with phone, there is no email
-          if (!user.isAnonymous && user.phoneNumber == null) Text(user.email!),
           if (!user.isAnonymous && user.phoneNumber == null)
-            Text(user.providerData[0].providerId),
-          // display phone number only when user's phone number is not null
-          if (user.phoneNumber != null) Text(user.phoneNumber!),
-          // uid is always available for every sign in method
-          Text(user.uid),
-          // display the button only when the user email is not verified
-          // or isnt an anonymous user
+            Text(
+              user.email!,
+              style: const TextStyle(color: Colors.white),
+            ),
+          if (!user.isAnonymous && user.phoneNumber == null)
+            Text(
+              user.providerData[0].providerId,
+              style: const TextStyle(color: Colors.white),
+            ),
+          if (user.phoneNumber != null)
+            Text(
+              user.phoneNumber!,
+              style: const TextStyle(color: Colors.white),
+            ),
+          Text(
+            user.uid,
+            style: const TextStyle(color: Colors.white),
+          ),
           if (!user.emailVerified && !user.isAnonymous)
             CustomButton(
               onTap: () {

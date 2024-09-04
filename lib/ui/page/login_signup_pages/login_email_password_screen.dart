@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bigaze/services/firebase_auth_methods.dart';
 import 'package:bigaze/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class _EmailPasswordLoginState extends State<EmailPasswordLogin> {
           password: passwordController.text,
           context: context,
         );
+    log("Login Successful");
   }
 
   @override
@@ -31,7 +34,7 @@ class _EmailPasswordLoginState extends State<EmailPasswordLogin> {
         children: [
           const Text(
             "Login",
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, color: Colors.white),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.08),
           Container(

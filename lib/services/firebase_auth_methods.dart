@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bigaze/utils/showOtpDialog.dart';
 import 'package:bigaze/utils/showSnackbar.dart';
@@ -40,9 +42,9 @@ class FirebaseAuthMethods {
     } on FirebaseAuthException catch (e) {
       // if you want to display your own custom error message
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        log('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        log('The account already exists for that email.');
       }
       showSnackBar(
           context, e.message!); // Displaying the usual firebase error message

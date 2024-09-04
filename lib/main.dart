@@ -3,6 +3,7 @@ import 'package:bigaze/firebase_options.dart';
 import 'package:bigaze/helper/boxes.dart';
 import 'package:bigaze/model/proctor_model.dart';
 import 'package:bigaze/services/firebase_auth_methods.dart';
+import 'package:bigaze/ui/page/login_signup_pages/home_screen.dart';
 import 'package:bigaze/ui/page/login_signup_pages/login_email_password_screen.dart';
 import 'package:bigaze/ui/page/login_signup_pages/phone_screen.dart';
 import 'package:bigaze/ui/page/login_signup_pages/signup_email_password_screen.dart';
@@ -87,7 +88,8 @@ class AuthWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User?>();
 
     if (firebaseUser != null) {
-      return const MyHomePage();
+      // return const MyHomePage();
+      return const HomeScreen();
     }
     return const LoginScreen();
   }
