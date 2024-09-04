@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bigaze/services/firebase_auth_methods.dart';
+import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,22 +54,10 @@ class _EmailPasswordLoginState extends State<EmailPasswordLogin> {
             ),
           ),
           const SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: loginUser,
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              textStyle: WidgetStateProperty.all(
-                const TextStyle(color: Colors.white),
-              ),
-              minimumSize: WidgetStateProperty.all(
-                Size(MediaQuery.of(context).size.width / 2.5, 50),
-              ),
-            ),
-            child: const Text(
-              "Login",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
+          CustomButton(
+            onTap: loginUser, // onTap replaces onPressed
+            text: 'Login', // The text displayed on the button
+          )
         ],
       ),
     );

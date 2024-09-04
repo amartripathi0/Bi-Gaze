@@ -91,6 +91,7 @@ flutter:
     - assets/images/cool_stuff/google.png
     - assets/images/cool_stuff/hacker.png
     - assets/images/cool_stuff/sms.png
+    - assets/images/cool_stuff/gmail.png
     - assets/models/
     - assets/models/mobilenet_v1_1.0_224.tflite
     - assets/models/mobilenet_v1_1.0_224.txt
