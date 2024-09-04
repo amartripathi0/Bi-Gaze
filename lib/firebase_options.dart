@@ -43,11 +43,12 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB1CD3E2g-zmUoWqK1Le_RNEpPbpb5TrDc',
-    appId: '1:599030350718:android:bff62dc1dc7685abb6292f',
-    messagingSenderId: '599030350718',
-    projectId: 'fir-auth-demo-ec48c',
-    storageBucket: 'fir-auth-demo-ec48c.appspot.com',
+    apiKey: 'AIzaSyASZlDDYcdU2E1d1mfrrNBDIzjfErQsq4E',
+    appId: '1:216830322809:android:81da7ea027845db4128ca8',
+    messagingSenderId: '216830322809',
+    projectId: 'bigaze-c10db',
+    databaseURL: 'https://bigaze-c10db-default-rtdb.firebaseio.com',
+    storageBucket: 'bigaze-c10db.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
