@@ -25,54 +25,72 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Image.asset(
                 'assets/images/cool_stuff/login.gif',
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
               ),
               const SizedBox(
                 height: 10,
               ),
-              CustomButton(
-                onTap: () {
-                  Navigator.pushNamed(context, EmailPasswordSignup.routeName);
-                },
-                text: 'Sign Up',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomButton(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, EmailPasswordLogin.routeName);
+                    },
+                    text: 'LOGIN',
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  CustomButton(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, EmailPasswordSignup.routeName);
+                    },
+                    text: 'SIGN UP',
+                  ),
+                ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              CustomButton(
-                onTap: () {
-                  Navigator.pushNamed(context, EmailPasswordLogin.routeName);
-                },
-                text: 'Login',
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomButton(
-                  onTap: () {
-                    Navigator.pushNamed(context, PhoneScreen.routeName);
-                  },
-                  text: 'Phone Sign In'),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomButton(
-                onTap: () {
-                  context.read<FirebaseAuthMethods>().signInWithGoogle(context);
-                },
-                text: 'Google Sign In',
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomButton(
-                onTap: () {
-                  context
-                      .read<FirebaseAuthMethods>()
-                      .signInAnonymously(context);
-                },
-                text: 'Anonymous Sign In',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // phone
+                  CustomIconButton(
+                    onTap: () {
+                      Navigator.pushNamed(context, PhoneScreen.routeName);
+                    },
+                    imagePath: 'assets/images/cool_stuff/sms.png',
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  //  google
+                  CustomIconButton(
+                    onTap: () {
+                      context
+                          .read<FirebaseAuthMethods>()
+                          .signInWithGoogle(context);
+                    },
+                    imagePath: 'assets/images/cool_stuff/google.png',
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  // anonymous
+                  CustomIconButton(
+                    onTap: () {
+                      context
+                          .read<FirebaseAuthMethods>()
+                          .signInAnonymously(context);
+                    },
+                    imagePath: 'assets/images/cool_stuff/hacker.png',
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
