@@ -87,6 +87,7 @@ flutter:
     - assets/images/cool_stuff/CCNP.gif
     - assets/images/cool_stuff/BTek.gif
     - assets/images/cool_stuff/7RMn.gif
+    - assets/images/cool_stuff/login.gif
     - assets/models/
     - assets/models/mobilenet_v1_1.0_224.tflite
     - assets/models/mobilenet_v1_1.0_224.txt
