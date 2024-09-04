@@ -110,9 +110,9 @@ class FirebaseAuthMethods {
           // for google sign in and google sign up, only one as of now),
           // do the following:
 
-          // if (userCredential.user != null) {
-          //   if (userCredential.additionalUserInfo!.isNewUser) {}
-          // }
+          if (userCredential.user != null) {
+            if (userCredential.additionalUserInfo!.isNewUser) {}
+          }
         }
       }
     } on FirebaseAuthException catch (e) {
