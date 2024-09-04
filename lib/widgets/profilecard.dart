@@ -45,35 +45,39 @@ class ProfileCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 255, 255, 255),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'User ID: $userId',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color.fromARGB(255, 166, 166, 166),
+                  const SizedBox(height: 6),
+                  Text(
+                    'User ID: $userId',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color.fromARGB(255, 166, 166, 166),
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  additionalInfo,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color.fromARGB(255, 166, 166, 166),
+                  const SizedBox(height: 6),
+                  Text(
+                    additionalInfo,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color.fromARGB(255, 166, 166, 166),
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
