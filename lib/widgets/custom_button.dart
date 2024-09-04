@@ -106,3 +106,62 @@ class CustomIconButton extends StatelessWidget {
     );
   }
 }
+
+class CustomAlertButton extends StatelessWidget {
+  const CustomAlertButton({
+    super.key,
+    required this.onTap,
+    required this.text,
+  });
+
+  final String text;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 140,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color:
+                const Color.fromARGB(255, 245, 103, 103), // White border color
+            width: 2, // Border width
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(255, 255, 0, 0)
+                  .withOpacity(0.6), // Cyan shadow color with opacity
+              spreadRadius: 3, // Spreads the shadow to create a glowing effect
+              blurRadius: 10, // Softens the shadow
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius:
+              BorderRadius.circular(8), // Same border radius as container
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  const Color.fromARGB(193, 0, 0, 0), // Transparent background
+              shadowColor:
+                  const Color.fromARGB(209, 0, 0, 0), // No internal shadow
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                    8), // Match the shape of the container
+              ),
+            ),
+            onPressed: onTap,
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.white), // White text color
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

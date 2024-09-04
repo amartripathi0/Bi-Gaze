@@ -1,7 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bigaze/services/firebase_auth_methods.dart';
 import 'package:bigaze/ui/page/charts/line_chart.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
+import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/profilecard.dart';
 import 'package:bigaze/widgets/profilecardplaceholder.dart';
 import 'package:bigaze/widgets/profileproctorcard.dart';
@@ -11,6 +13,7 @@ import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -59,6 +62,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<FirebaseAuthMethods>().user;
     return WillPopScope(
       onWillPop: () async {
         // Navigate to the home page when the back button is pressed
@@ -80,40 +84,64 @@ class _ProfilePageState extends State<ProfilePage>
           behaviour: SpaceBehaviour(
               backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
           vsync: this,
-          child: const Center(
+          child: Center(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   ProfileCard(
                     imagePath: 'assets/images/test_assets/profile_demo.jpeg',
-                    name: 'Vikaṭa Bālakaḥ',
-                    userId: 'vikaṭabālakaḥ13',
-                    additionalInfo: 'Additional Information',
+                    name:
+                        user.displayName != null && user.displayName!.isNotEmpty
+                            ? user.displayName!
+                            : 'Vikaṭa Bālakaḥ',
+                    userId: user.uid,
+                    additionalInfo: '✉️ ${user.email}' ?? '🫰🏻',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  ExamStatisticsWidget(
+                  const ExamStatisticsWidget(
                       proctoredSessions: 65, highestScore: 92.19),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // ----------------------------------------------------------
-                  ProfileCardPlaceholder(
+                  const ProfileCardPlaceholder(
                     child: Text(
                       "Comparative Analysis",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  ProfileCardPlaceholder(
+                  const ProfileCardPlaceholder(
                     child: SizedBox(
                       height: 200,
                       child: LineChartWidget(),
                     ),
-                  )
-
+                  ),
                   // -----------------------------------------------------------
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomAlertButton(
+                        onTap: () {
+                          context.read<FirebaseAuthMethods>().signOut(context);
+                        },
+                        text: 'Sign Out',
+                      ),
+                      CustomAlertButton(
+                        onTap: () {
+                          context
+                              .read<FirebaseAuthMethods>()
+                              .deleteAccount(context);
+                        },
+                        text: 'Delete Account',
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
