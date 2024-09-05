@@ -25,6 +25,9 @@ class ProfileCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => ProfileDetailsPage(
               userId: userId,
+              initialEmail: additionalInfo,
+              initialName: name,
+              initialUsername: name,
             ),
           ),
         );

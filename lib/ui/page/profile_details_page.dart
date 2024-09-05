@@ -2,151 +2,152 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileDetailsPage extends StatefulWidget {
-  final String
-      userId; // Assuming userId is used to fetch the user data from Firebase
+  final String userId;
+  final String initialName;
+  final String initialUsername;
+  final String initialEmail;
 
-  const ProfileDetailsPage({super.key, required this.userId});
+  const ProfileDetailsPage({
+    super.key,
+    required this.userId,
+    required this.initialName,
+    required this.initialUsername,
+    required this.initialEmail,
+  });
 
   @override
   _ProfileDetailsPageState createState() => _ProfileDetailsPageState();
 }
 
 class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
+  bool isLoading = true;
   late TextEditingController nameController;
   late TextEditingController usernameController;
-  late TextEditingController dobController;
   late TextEditingController emailController;
+  late TextEditingController dobController;
   late TextEditingController mobnoController;
   late TextEditingController nationalityController;
-  String? profileImage;
-
-  bool isLoading = true; // Add a loading state
 
   @override
   void initState() {
     super.initState();
+    _initializeControllers();
     _fetchUserData();
+  }
+
+  void _initializeControllers() {
+    nameController = TextEditingController(text: widget.initialName);
+    usernameController = TextEditingController(text: widget.initialUsername);
+    emailController = TextEditingController(text: widget.initialEmail);
+    dobController = TextEditingController();
+    mobnoController = TextEditingController();
+    nationalityController = TextEditingController();
   }
 
   Future<void> _fetchUserData() async {
     try {
-      // Fetch user data from Firebase based on userId
-      final userDoc = await FirebaseFirestore.instance
+      print("Fetching data from Firebase for user: ${widget.userId}");
+
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
           .collection('userinfo')
           .doc(widget.userId)
           .get();
 
-      if (userDoc.exists) {
+      if (snapshot.exists) {
+        print("Data fetched: ${snapshot.data()}");
         setState(() {
-          nameController = TextEditingController(text: userDoc['name'] ?? '');
-          usernameController =
-              TextEditingController(text: userDoc['uname'] ?? '');
-          dobController = TextEditingController(text: userDoc['dob'] ?? '');
-          emailController = TextEditingController(text: userDoc['email'] ?? '');
-          mobnoController = TextEditingController(text: userDoc['mobno'] ?? '');
-          nationalityController =
-              TextEditingController(text: userDoc['nationality'] ?? '');
-          profileImage =
-              'assets/images/profile_placeholder.png'; // Default profile image
-          isLoading = false; // Loading is done
+          nameController.text = snapshot['name'];
+          usernameController.text = snapshot['uname'];
+          emailController.text = snapshot['email'];
+          dobController.text = snapshot['dob'];
+          mobnoController.text = snapshot['mobno'];
+          nationalityController.text = snapshot['nationality'];
+          isLoading = false;
         });
+      } else {
+        print(
+            "No data found for user: ${widget.userId}. Creating new record...");
+        _createUserRecord();
+        isLoading = false;
       }
-    } catch (e) {
-      // Handle any errors that might occur
-      print('Error fetching user data: $e');
+    } catch (error) {
+      print("Error fetching user data: $error");
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _createUserRecord() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('userinfo')
+          .doc(widget.userId)
+          .set({
+        'name': widget.initialName,
+        'uname': widget.initialUsername,
+        'email': widget.initialEmail,
+        'dob': '', // Initially empty, user can edit it
+        'mobno': '', // Initially empty, user can edit it
+        'nationality': '', // Initially empty, user can edit it
+      });
+      print("User record created for: ${widget.userId}");
+    } catch (error) {
+      print("Error creating user record: $error");
     }
   }
 
   Future<void> _saveChanges() async {
-    // Save updated data to Firebase
-    await FirebaseFirestore.instance
-        .collection('userinfo')
-        .doc(widget.userId)
-        .update({
-      'name': nameController.text,
-      'uname': usernameController.text,
-      'dob': dobController.text,
-      'email': emailController.text,
-      'mobno': mobnoController.text,
-      'nationality': nationalityController.text,
-    });
-
-    Navigator.pop(context); // After saving, return to the previous screen
-  }
-
-  Future<void> _changeProfilePicture() async {
-    // Simulate picking an image. Replace this with actual image picking logic.
-    setState(() {
-      profileImage =
-          'assets/images/new_profile.png'; // Temporary new image path
-    });
+    try {
+      await FirebaseFirestore.instance
+          .collection('userinfo')
+          .doc(widget.userId)
+          .update({
+        'name': nameController.text,
+        'uname': usernameController.text,
+        'email': emailController.text,
+        'dob': dobController.text,
+        'mobno': mobnoController.text,
+        'nationality': nationalityController.text,
+      });
+      print("User data updated successfully for user: ${widget.userId}");
+    } catch (error) {
+      print("Error updating user data: $error");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(isLoading ? 'Loading...' : 'Edit Profile'),
         backgroundColor: Colors.black,
-        title: const Text(
-          "Edit Profile",
-          style: TextStyle(
-            color: Colors.cyanAccent,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
       ),
-      body: isLoading // Show loading indicator while fetching data
-          ? const Center(
-              child: CircularProgressIndicator(color: Colors.cyanAccent),
-            )
-          : Container(
-              color: Colors.black,
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
               padding: const EdgeInsets.all(16.0),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
-                      child: GestureDetector(
-                        onTap: _changeProfilePicture,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16.0),
-                          child: Image.asset(
-                            profileImage ??
-                                'assets/images/profile_placeholder.png', // Safely use profileImage
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Tap the image to change profile picture',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white38,
-                        fontStyle: FontStyle.italic,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    _buildEditableField('Full Name', nameController),
+                    _buildEditableField('Name', nameController),
                     const SizedBox(height: 16),
                     _buildEditableField('Username', usernameController),
                     const SizedBox(height: 16),
-                    _buildEditableField('Date of Birth', dobController),
-                    const SizedBox(height: 16),
                     _buildEditableField('Email', emailController),
+                    const SizedBox(height: 16),
+                    _buildEditableField('Date of Birth', dobController),
                     const SizedBox(height: 16),
                     _buildEditableField('Mobile Number', mobnoController),
                     const SizedBox(height: 16),
                     _buildEditableField('Nationality', nationalityController),
                     const SizedBox(height: 30),
                     ElevatedButton(
-                      onPressed: _saveChanges,
+                      onPressed: () {
+                        _saveChanges();
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.cyanAccent.withOpacity(0.2),
                         padding: const EdgeInsets.symmetric(
