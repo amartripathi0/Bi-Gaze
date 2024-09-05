@@ -1,7 +1,4 @@
-// ignore_for_file: deprecated_member_use
-
 import 'dart:developer';
-
 import 'package:bigaze/services/firebase_auth_methods.dart';
 import 'package:bigaze/ui/page/charts/line_chart.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
@@ -9,6 +6,7 @@ import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/profilecard.dart';
 import 'package:bigaze/widgets/profilecardplaceholder.dart';
 import 'package:bigaze/widgets/profileproctorcard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/home_page.dart';
@@ -28,16 +26,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
   int _currentIndex = 3;
-  bool isLoading = true;
-  String? imagePath;
-  String? name;
-  String? email;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchUserData();
-  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -68,33 +56,24 @@ class _ProfilePageState extends State<ProfilePage>
     }
   }
 
-  Future<void> _fetchUserData() async {
+  Future<void> _createDefaultUserRecord(String userId) async {
     final user = context.read<FirebaseAuthMethods>().user;
+    log('${user.displayName}');
     try {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('userinfo')
-          .doc(user.uid)
-          .get();
-
-      if (snapshot.exists) {
-        setState(() {
-          imagePath = snapshot['imagePath'] ??
-              'assets/images/test_assets/profile_demo.jpeg';
-          name = snapshot['name'];
-          email = snapshot['email'];
-          isLoading = false;
-        });
-      } else {
-        log("No data found for user: ${user.uid}");
-        setState(() {
-          isLoading = false;
-        });
-      }
-    } catch (e) {
-      log("Error fetching user data: $e");
-      setState(() {
-        isLoading = false;
+      await FirebaseFirestore.instance.collection('userinfo').doc(userId).set({
+        'name': user.displayName ?? "Full name",
+        'uname': 'set_user_name',
+        'email': user.email ??
+            "user@example.com", // Initially empty, user can update it
+        'dob': '05/09/2024', // Initially empty, user can update it
+        'mobno': user.phoneNumber ??
+            "+91 2508202423", // Initially empty, user can update it
+        'nationality': '', // Initially empty, user can update it
+        'imagePath': 'assets/images/test_assets/profile_demo.jpeg',
       });
+      log("Default user record created for: $userId");
+    } catch (error) {
+      log("Error creating user record: $error");
     }
   }
 
@@ -118,73 +97,99 @@ class _ProfilePageState extends State<ProfilePage>
           currentIndex: _currentIndex,
           onTap: _onItemTapped,
         ),
-        body: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : AnimatedBackground(
-                behaviour: SpaceBehaviour(
-                    backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
-                vsync: this,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        ProfileCard(
-                          imagePath:
-                              imagePath ?? 'assets/images/default_profile.png',
-                          name: name ?? 'Vikaṭa Bālakaḥ',
-                          userId: user.uid,
-                          additionalInfo: email ?? user.email!,
+        body: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('userinfo')
+              .doc(user.uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasError) {
+              log("Error fetching user data: ${snapshot.error}");
+              return const Center(child: Text("Error fetching data"));
+            }
+
+            if (!snapshot.hasData || !snapshot.data!.exists) {
+              log("No data found for user: ${user.uid}. Creating new record...");
+              _createDefaultUserRecord(user.uid); // Create default record
+              return const Center(child: Text("Creating user record..."));
+            }
+
+            final data = snapshot.data!;
+            final imagePath = data['imagePath'] ??
+                'assets/images/test_assets/profile_demo.jpeg';
+            final name = data['name'] ?? 'Vikaṭa Bālakaḥ';
+            final email = data['email'] ?? user.email!;
+
+            return AnimatedBackground(
+              behaviour: SpaceBehaviour(
+                  backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
+              vsync: this,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      ProfileCard(
+                        imagePath: imagePath,
+                        name: name,
+                        userId: user.uid,
+                        additionalInfo: email,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const ExamStatisticsWidget(
+                          proctoredSessions: 65, highestScore: 92.19),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const ProfileCardPlaceholder(
+                        child: Text(
+                          "Comparative Analysis",
+                          style: TextStyle(color: Colors.white),
                         ),
-                        const SizedBox(
-                          height: 20,
+                      ),
+                      const ProfileCardPlaceholder(
+                        child: SizedBox(
+                          height: 200,
+                          child: LineChartWidget(),
                         ),
-                        const ExamStatisticsWidget(
-                            proctoredSessions: 65, highestScore: 92.19),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const ProfileCardPlaceholder(
-                          child: Text(
-                            "Comparative Analysis",
-                            style: TextStyle(color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomAlertButton(
+                            onTap: () {
+                              context
+                                  .read<FirebaseAuthMethods>()
+                                  .signOut(context);
+                            },
+                            text: 'Sign Out',
                           ),
-                        ),
-                        const ProfileCardPlaceholder(
-                          child: SizedBox(
-                            height: 200,
-                            child: LineChartWidget(),
+                          CustomAlertButton(
+                            onTap: () {
+                              context
+                                  .read<FirebaseAuthMethods>()
+                                  .deleteAccount(context);
+                            },
+                            text: 'Delete Account',
                           ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomAlertButton(
-                              onTap: () {
-                                context
-                                    .read<FirebaseAuthMethods>()
-                                    .signOut(context);
-                              },
-                              text: 'Sign Out',
-                            ),
-                            CustomAlertButton(
-                              onTap: () {
-                                context
-                                    .read<FirebaseAuthMethods>()
-                                    .deleteAccount(context);
-                              },
-                              text: 'Delete Account',
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
+import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -145,7 +146,12 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
                     CustomSaveButton(
                         onTap: () {
                           _saveChanges();
-                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfilePage(),
+                            ),
+                          );
                         },
                         text: "Save Changes"),
                   ],
