@@ -14,6 +14,7 @@ import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:animated_background/animated_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -172,16 +173,21 @@ class _ProfilePageState extends State<ProfilePage>
                                 await context
                                     .read<FirebaseAuthMethods>()
                                     .signOut(context);
-                                // Use pushReplacement to replace the current screen with LoginScreen
+
                                 Navigator.pushNamedAndRemoveUntil(
                                   context,
-                                  LoginScreen
-                                      .routeName, // Use the static route name for LoginScreen
+                                  LoginScreen.routeName,
                                   (route) =>
                                       false, // Remove all previous routes
                                 );
+
+                                // Add a short delay before restarting
+                                await Future.delayed(
+                                    const Duration(milliseconds: 100));
+
+                                // Restart the app
+                                SystemNavigator.pop();
                               } catch (e) {
-                                // Handle any errors that occur during sign-out
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content: Text('Failed to sign out: $e')),
