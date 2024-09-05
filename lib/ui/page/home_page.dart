@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const CoolAppBar(),
+      appBar: const CoolAppBar("BiGΔZE"),
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       bottomNavigationBar: CoolBottomNavigationBar(
         currentIndex: _currentIndex, // Pass current index

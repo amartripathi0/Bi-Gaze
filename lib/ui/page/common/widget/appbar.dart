@@ -7,7 +7,7 @@ import 'dart:math';
 class CoolAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-  const CoolAppBar({super.key});
+  const CoolAppBar(String s, {super.key});
 
   @override
   Widget build(BuildContext context) {
