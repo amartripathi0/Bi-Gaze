@@ -1,4 +1,5 @@
 import 'package:bigaze/services/firebase_auth_methods.dart';
+import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
         children: [
           const Text(
             "Sign Up",
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, color: Colors.white54),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.08),
           Container(
@@ -50,22 +51,7 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
             ),
           ),
           const SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: signUpUser,
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              textStyle: WidgetStateProperty.all(
-                const TextStyle(color: Colors.white),
-              ),
-              minimumSize: WidgetStateProperty.all(
-                Size(MediaQuery.of(context).size.width / 2.5, 50),
-              ),
-            ),
-            child: const Text(
-              "Sign Up",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
+          CustomButton(onTap: signUpUser, text: "Sign Up")
         ],
       ),
     );
