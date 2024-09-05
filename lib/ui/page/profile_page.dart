@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage>
                             ? user.displayName!
                             : 'Vikaṭa Bālakaḥ',
                     userId: user.uid,
-                    additionalInfo: '✉️ ${user.email}',
+                    additionalInfo: '${user.email}',
                   ),
                   const SizedBox(
                     height: 20,
