@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:bigaze/services/firebase_auth_methods.dart';
 import 'package:bigaze/ui/page/charts/line_chart.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
+import 'package:bigaze/ui/page/login_signup_pages/login_screen.dart';
 import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/profilecard.dart';
 import 'package:bigaze/widgets/profilecardplaceholder.dart';
@@ -166,18 +167,51 @@ class _ProfilePageState extends State<ProfilePage>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomAlertButton(
-                            onTap: () {
-                              context
-                                  .read<FirebaseAuthMethods>()
-                                  .signOut(context);
+                            onTap: () async {
+                              try {
+                                await context
+                                    .read<FirebaseAuthMethods>()
+                                    .signOut(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                );
+                              } catch (e) {
+                                // Handle any errors that occur during the account deletion
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content:
+                                          Text('Failed to delete account: $e')),
+                                );
+                              }
                             },
                             text: 'Sign Out',
                           ),
                           CustomAlertButton(
-                            onTap: () {
-                              context
-                                  .read<FirebaseAuthMethods>()
-                                  .deleteAccount(context);
+                            onTap: () async {
+                              try {
+                                // Call the deleteAccount method and wait for it to complete
+                                await context
+                                    .read<FirebaseAuthMethods>()
+                                    .deleteAccount(context);
+
+                                // Navigate to LoginScreen only after the account is successfully deleted
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                );
+                              } catch (e) {
+                                // Handle any errors that occur during the account deletion
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content:
+                                          Text('Failed to delete account: $e')),
+                                );
+                              }
                             },
                             text: 'Delete Account',
                           ),
