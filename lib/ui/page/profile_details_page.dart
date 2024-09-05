@@ -1,4 +1,5 @@
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
+import 'package:bigaze/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -141,28 +142,12 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
                     const SizedBox(height: 16),
                     _buildEditableField('Nationality', nationalityController),
                     const SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: () {
-                        _saveChanges();
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.cyanAccent.withOpacity(0.2),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: const Text(
-                        'Save Changes',
-                        style: TextStyle(
-                          color: Colors.cyanAccent,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    CustomSaveButton(
+                        onTap: () {
+                          _saveChanges();
+                          Navigator.pop(context);
+                        },
+                        text: "Save Changes"),
                   ],
                 ),
               ),
