@@ -3,6 +3,9 @@ import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class ProfileDetailsPage extends StatefulWidget {
   final String userId;
@@ -30,6 +33,9 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
   late TextEditingController dobController;
   late TextEditingController mobnoController;
   late TextEditingController nationalityController;
+  String? imageUrl;
+  final ImagePicker _picker = ImagePicker();
+  File? _imageFile;
 
   @override
   void initState() {
@@ -65,6 +71,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
           dobController.text = snapshot['dob'];
           mobnoController.text = snapshot['mobno'];
           nationalityController.text = snapshot['nationality'];
+          imageUrl = snapshot['imagePath'];
           isLoading = false;
         });
       } else {
@@ -93,6 +100,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'dob': '', // Initially empty, user can edit it
         'mobno': '', // Initially empty, user can edit it
         'nationality': '', // Initially empty, user can edit it
+        'imagePath': 'assets/images/test_assets/profile_demo.jpeg',
       });
       print("User record created for: ${widget.userId}");
     } catch (error) {
@@ -112,10 +120,46 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'dob': dobController.text,
         'mobno': mobnoController.text,
         'nationality': nationalityController.text,
+        'imagePath': imageUrl ?? 'assets/images/test_assets/profile_demo.jpeg',
       });
       print("User data updated successfully for user: ${widget.userId}");
     } catch (error) {
       print("Error updating user data: $error");
+    }
+  }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+      await _uploadImage();
+    }
+  }
+
+  Future<void> _uploadImage() async {
+    if (_imageFile == null) return;
+    try {
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('profile_images/${widget.userId}');
+      final uploadTask = storageRef.putFile(_imageFile!);
+      final snapshot = await uploadTask.whenComplete(() {});
+      final downloadUrl = await snapshot.ref.getDownloadURL();
+
+      setState(() {
+        imageUrl = downloadUrl;
+      });
+
+      // Update Firestore with the new image URL
+      await FirebaseFirestore.instance
+          .collection('userinfo')
+          .doc(widget.userId)
+          .update({'imagePath': downloadUrl});
+      print("Profile image uploaded successfully.");
+    } catch (error) {
+      print("Error uploading image: $error");
     }
   }
 
@@ -131,6 +175,21 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: _imageFile != null
+                            ? FileImage(_imageFile!)
+                            : imageUrl != null
+                                ? NetworkImage(imageUrl!)
+                                : const AssetImage(
+                                        'assets/images/test_assets/profile_demo.jpeg')
+                                    as ImageProvider,
+                        backgroundColor: Colors.grey[800],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     _buildEditableField('Name', nameController),
                     const SizedBox(height: 16),
                     _buildEditableField('Username', usernameController),
