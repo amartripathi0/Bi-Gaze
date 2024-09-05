@@ -172,18 +172,19 @@ class _ProfilePageState extends State<ProfilePage>
                                 await context
                                     .read<FirebaseAuthMethods>()
                                     .signOut(context);
-                                Navigator.push(
+                                // Use pushReplacement to replace the current screen with LoginScreen
+                                Navigator.pushNamedAndRemoveUntil(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
+                                  LoginScreen
+                                      .routeName, // Use the static route name for LoginScreen
+                                  (route) =>
+                                      false, // Remove all previous routes
                                 );
                               } catch (e) {
-                                // Handle any errors that occur during the account deletion
+                                // Handle any errors that occur during sign-out
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                      content:
-                                          Text('Failed to delete account: $e')),
+                                      content: Text('Failed to sign out: $e')),
                                 );
                               }
                             },
@@ -198,7 +199,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     .deleteAccount(context);
 
                                 // Navigate to LoginScreen only after the account is successfully deleted
-                                Navigator.push(
+                                Navigator.pop(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const LoginScreen(),

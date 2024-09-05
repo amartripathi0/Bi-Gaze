@@ -73,6 +73,7 @@ class MyApp extends StatelessWidget {
               const EmailPasswordSignup(),
           EmailPasswordLogin.routeName: (context) => const EmailPasswordLogin(),
           PhoneScreen.routeName: (context) => const PhoneScreen(),
+          LoginScreen.routeName: (context) => const LoginScreen(),
         },
       ),
     );
