@@ -1,33 +1,90 @@
-import 'package:bigaze/ui/page/profile_details_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:bigaze/ui/page/profile_details_page.dart';
 
-class ProfileCard extends StatelessWidget {
-  final String imagePath;
-  final String name;
+class ProfileCard extends StatefulWidget {
   final String userId;
-  final String additionalInfo;
 
   const ProfileCard({
     super.key,
-    required this.imagePath,
-    required this.name,
     required this.userId,
-    required this.additionalInfo,
+    required String imagePath,
+    required String name,
+    required String additionalInfo,
   });
 
   @override
+  _ProfileCardState createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+  bool isLoading = true;
+  String? imagePath;
+  String? name;
+  String? uname;
+  String? additionalInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
+
+  Future<void> _fetchUserData() async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('userinfo')
+          .doc(widget.userId)
+          .get();
+
+      if (snapshot.exists) {
+        setState(() {
+          imagePath = snapshot['imagePath'] ??
+              'assets/images/test_assets/profile_demo.jpeg';
+          name = snapshot['name'];
+          uname = snapshot['uname'];
+          additionalInfo = snapshot['email'];
+          isLoading = false;
+        });
+      } else {
+        print("No data found for user: ${widget.userId}");
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print("Error fetching user data: $e");
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (name == null || additionalInfo == null) {
+      return const Center(
+        child: Text(
+          'No User Data Available',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
+
     return InkWell(
       onTap: () {
-        // Navigate to ProfileDetailsPage when the card is tapped
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ProfileDetailsPage(
-              userId: userId,
-              initialEmail: additionalInfo,
-              initialName: name,
-              initialUsername: name,
+              userId: widget.userId,
+              initialEmail: additionalInfo!,
+              initialName: name!,
+              initialUsername: name!,
             ),
           ),
         );
@@ -49,12 +106,11 @@ class ProfileCard extends StatelessWidget {
             ],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
                 child: Image.asset(
-                  imagePath,
+                  imagePath!,
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
@@ -66,7 +122,7 @@ class ProfileCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      name!,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -76,7 +132,7 @@ class ProfileCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'User name: $userId',
+                      'User name: $uname',
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color.fromARGB(255, 166, 166, 166),
@@ -85,7 +141,7 @@ class ProfileCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      additionalInfo,
+                      additionalInfo!,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color.fromARGB(255, 166, 166, 166),

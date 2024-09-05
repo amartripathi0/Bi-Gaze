@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:bigaze/services/firebase_auth_methods.dart';
 import 'package:bigaze/ui/page/charts/line_chart.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
@@ -13,6 +15,7 @@ import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/result_page.dart';
 import 'package:bigaze/ui/page/scanner_page.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -25,128 +28,163 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
   int _currentIndex = 3;
+  bool isLoading = true;
+  String? imagePath;
+  String? name;
+  String? email;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-    // Handle navigation based on index
     switch (index) {
       case 0:
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
         break;
       case 1:
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const ResultsPage()),
         );
         break;
       case 2:
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const ScannerPage()),
         );
         break;
       case 3:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ProfilePage()),
-        );
+        // Already on ProfilePage, do nothing
         break;
-      // Add cases for other indexes as needed
+    }
+  }
+
+  Future<void> _fetchUserData() async {
+    final user = context.read<FirebaseAuthMethods>().user;
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('userinfo')
+          .doc(user.uid)
+          .get();
+
+      if (snapshot.exists) {
+        setState(() {
+          imagePath = snapshot['imagePath'] ??
+              'assets/images/test_assets/profile_demo.jpeg';
+          name = snapshot['name'];
+          email = snapshot['email'];
+          isLoading = false;
+        });
+      } else {
+        log("No data found for user: ${user.uid}");
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      log("Error fetching user data: $e");
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final user = context.read<FirebaseAuthMethods>().user;
+
     return WillPopScope(
       onWillPop: () async {
-        // Navigate to the home page when the back button is pressed
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MyHomePage()),
         );
-        return false; // Prevent the default back button behavior
+        return false;
       },
       child: Scaffold(
         appBar: const CommonAppBar(
           title: "Profile",
         ),
         bottomNavigationBar: CoolBottomNavigationBar(
-          currentIndex: _currentIndex, // Pass current index
-          onTap: _onItemTapped, // Handle tap event
+          currentIndex: _currentIndex,
+          onTap: _onItemTapped,
         ),
-        body: AnimatedBackground(
-          behaviour: SpaceBehaviour(
-              backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
-          vsync: this,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  ProfileCard(
-                    imagePath: 'assets/images/test_assets/profile_demo.jpeg',
-                    name:
-                        user.displayName != null && user.displayName!.isNotEmpty
-                            ? user.displayName!
-                            : 'Vikaṭa Bālakaḥ',
-                    userId: user.uid,
-                    additionalInfo: '${user.email}',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const ExamStatisticsWidget(
-                      proctoredSessions: 65, highestScore: 92.19),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // ----------------------------------------------------------
-                  const ProfileCardPlaceholder(
-                    child: Text(
-                      "Comparative Analysis",
-                      style: TextStyle(color: Colors.white),
+        body: isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : AnimatedBackground(
+                behaviour: SpaceBehaviour(
+                    backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
+                vsync: this,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        ProfileCard(
+                          imagePath:
+                              imagePath ?? 'assets/images/default_profile.png',
+                          name: name ?? 'Vikaṭa Bālakaḥ',
+                          userId: user.uid,
+                          additionalInfo: email ?? user.email!,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const ExamStatisticsWidget(
+                            proctoredSessions: 65, highestScore: 92.19),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const ProfileCardPlaceholder(
+                          child: Text(
+                            "Comparative Analysis",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        const ProfileCardPlaceholder(
+                          child: SizedBox(
+                            height: 200,
+                            child: LineChartWidget(),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomAlertButton(
+                              onTap: () {
+                                context
+                                    .read<FirebaseAuthMethods>()
+                                    .signOut(context);
+                              },
+                              text: 'Sign Out',
+                            ),
+                            CustomAlertButton(
+                              onTap: () {
+                                context
+                                    .read<FirebaseAuthMethods>()
+                                    .deleteAccount(context);
+                              },
+                              text: 'Delete Account',
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  const ProfileCardPlaceholder(
-                    child: SizedBox(
-                      height: 200,
-                      child: LineChartWidget(),
-                    ),
-                  ),
-                  // -----------------------------------------------------------
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomAlertButton(
-                        onTap: () {
-                          context.read<FirebaseAuthMethods>().signOut(context);
-                        },
-                        text: 'Sign Out',
-                      ),
-                      CustomAlertButton(
-                        onTap: () {
-                          context
-                              .read<FirebaseAuthMethods>()
-                              .deleteAccount(context);
-                        },
-                        text: 'Delete Account',
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }
