@@ -1,3 +1,4 @@
+import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -119,10 +120,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(isLoading ? 'Loading...' : 'Edit Profile'),
-        backgroundColor: Colors.black,
-      ),
+      appBar: const CommonAppBar(title: "Profile Page"),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
