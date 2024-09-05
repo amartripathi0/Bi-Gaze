@@ -68,7 +68,8 @@ class _ProfilePageState extends State<ProfilePage>
         'mobno': user.phoneNumber ??
             "+91 2508202423", // Initially empty, user can update it
         'nationality': '', // Initially empty, user can update it
-        'imagePath': 'assets/images/test_assets/profile_demo.jpeg',
+        'imagePath': user.photoURL ??
+            'https://github.com/nayan1306/assets/blob/main/profile_demo.jpeg',
       });
       log("Default user record created for: $userId");
     } catch (error) {

@@ -109,7 +109,7 @@ class _ProfileCardState extends State<ProfileCard> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
-                child: Image.asset(
+                child: Image.network(
                   imagePath!,
                   width: 100,
                   height: 100,
