@@ -162,9 +162,8 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         Text(
           label,
           style: const TextStyle(
-            color: Colors.cyanAccent,
+            color: Color.fromARGB(255, 201, 184, 255),
             fontSize: 18,
-            fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 8),
@@ -177,19 +176,20 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(
-                color: Colors.cyanAccent,
+                color: Color.fromARGB(255, 218, 175, 255),
                 width: 1,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(
-                color: Colors.cyanAccent,
+                color: Color.fromARGB(255, 175, 153, 248),
                 width: 1,
               ),
             ),
             hintText: 'Enter $label',
-            hintStyle: const TextStyle(color: Colors.white38),
+            hintStyle:
+                const TextStyle(color: Color.fromARGB(68, 255, 255, 255)),
           ),
         ),
       ],
