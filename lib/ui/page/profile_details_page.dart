@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/widgets/custom_button.dart';
@@ -55,7 +56,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
 
   Future<void> _fetchUserData() async {
     try {
-      print("Fetching data from Firebase for user: ${widget.userId}");
+      log("Fetching data from Firebase for user: ${widget.userId}");
 
       DocumentSnapshot snapshot = await FirebaseFirestore.instance
           .collection('userinfo')
@@ -63,25 +64,26 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
           .get();
 
       if (snapshot.exists) {
-        print("Data fetched: ${snapshot.data()}");
+        log("Data fetched: ${snapshot.data()}");
         setState(() {
-          nameController.text = snapshot['name'];
-          usernameController.text = snapshot['uname'];
-          emailController.text = snapshot['email'];
-          dobController.text = snapshot['dob'];
-          mobnoController.text = snapshot['mobno'];
-          nationalityController.text = snapshot['nationality'];
+          nameController.text = snapshot['name'] ?? '';
+          usernameController.text = snapshot['uname'] ?? '';
+          emailController.text = snapshot['email'] ?? '';
+          dobController.text = snapshot['dob'] ?? '';
+          mobnoController.text = snapshot['mobno'] ?? '';
+          nationalityController.text = snapshot['nationality'] ?? '';
           imageUrl = snapshot['imagePath'];
           isLoading = false;
         });
       } else {
-        print(
-            "No data found for user: ${widget.userId}. Creating new record...");
-        _createUserRecord();
-        isLoading = false;
+        log("No data found for user: ${widget.userId}. Creating new record...");
+        await _createUserRecord();
+        setState(() {
+          isLoading = false;
+        });
       }
     } catch (error) {
-      print("Error fetching user data: $error");
+      log("Error fetching user data: $error");
       setState(() {
         isLoading = false;
       });
@@ -97,15 +99,15 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'name': widget.initialName,
         'uname': widget.initialUsername,
         'email': widget.initialEmail,
-        'dob': '', // Initially empty, user can edit it
-        'mobno': '', // Initially empty, user can edit it
-        'nationality': '', // Initially empty, user can edit it
+        'dob': '',
+        'mobno': '',
+        'nationality': '',
         'imagePath':
             'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg',
       });
-      print("User record created for: ${widget.userId}");
+      log("User record created for: ${widget.userId}");
     } catch (error) {
-      print("Error creating user record: $error");
+      log("Error creating user record: $error");
     }
   }
 
@@ -124,9 +126,9 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'imagePath': imageUrl ??
             'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg',
       });
-      print("User data updated successfully for user: ${widget.userId}");
+      log("User data updated successfully for user: ${widget.userId}");
     } catch (error) {
-      print("Error updating user data: $error");
+      log("Error updating user data: $error");
     }
   }
 
@@ -142,26 +144,45 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
 
   Future<void> _uploadImage() async {
     if (_imageFile == null) return;
-    try {
-      final storageRef = FirebaseStorage.instance
-          .ref()
-          .child('profile_images/${widget.userId}');
-      final uploadTask = storageRef.putFile(_imageFile!);
-      final snapshot = await uploadTask.whenComplete(() {});
-      final downloadUrl = await snapshot.ref.getDownloadURL();
 
-      setState(() {
-        imageUrl = downloadUrl;
+    try {
+      // Create a unique file name for the image
+      final fileName =
+          '${widget.userId}_${DateTime.now().millisecondsSinceEpoch}';
+      final storageRef =
+          FirebaseStorage.instance.ref().child('profile_images/$fileName');
+
+      // Start the upload task
+      UploadTask uploadTask = storageRef.putFile(_imageFile!);
+
+      // Listen to upload progress
+      uploadTask.snapshotEvents.listen((taskSnapshot) {
+        log('Upload progress: ${taskSnapshot.bytesTransferred}/${taskSnapshot.totalBytes}');
       });
 
-      // Update Firestore with the new image URL
-      await FirebaseFirestore.instance
-          .collection('userinfo')
-          .doc(widget.userId)
-          .update({'imagePath': downloadUrl});
-      print("Profile image uploaded successfully.");
+      // Wait for the upload to complete
+      TaskSnapshot snapshot = await uploadTask;
+
+      if (snapshot.state == TaskState.success) {
+        // Get the download URL
+        final downloadUrl = await snapshot.ref.getDownloadURL();
+
+        // Update the Firestore document with the new image URL
+        await FirebaseFirestore.instance
+            .collection('userinfo')
+            .doc(widget.userId)
+            .update({'imagePath': downloadUrl});
+
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+
+        log("Profile image uploaded and Firestore updated successfully.");
+      } else {
+        log("Upload failed: ${snapshot.state}");
+      }
     } catch (error) {
-      print("Error uploading image: $error");
+      log("Error uploading image: $error");
     }
   }
 
@@ -178,19 +199,29 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: _pickImage,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _imageFile != null
-                            ? FileImage(_imageFile!)
-                            : imageUrl != null
-                                ? NetworkImage(imageUrl!)
-                                : const AssetImage(
-                                        'assets/images/test_assets/profile_demo.jpeg')
-                                    as ImageProvider,
-                        backgroundColor: Colors.grey[800],
-                      ),
-                    ),
+                        onTap: _pickImage,
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[800],
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 2,
+                            ),
+                            image: DecorationImage(
+                              image: _imageFile != null
+                                  ? FileImage(_imageFile!)
+                                  : imageUrl != null
+                                      ? NetworkImage(imageUrl!)
+                                      : const AssetImage(
+                                              'assets/images/test_assets/profile_demo.jpeg')
+                                          as ImageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )),
                     const SizedBox(height: 16),
                     _buildEditableField('Name', nameController),
                     const SizedBox(height: 16),
