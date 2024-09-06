@@ -216,7 +216,7 @@ class FirebaseAuthMethods {
       ConfirmationResult result =
           await _auth.signInWithPhoneNumber(phoneNumber);
 
-      // Diplay Dialog Box To accept OTP
+      // Display Dialog Box To accept OTP
       showOTPDialog(
         codeController: codeController,
         context: context,
@@ -226,18 +226,36 @@ class FirebaseAuthMethods {
             smsCode: codeController.text.trim(),
           );
 
-          await _auth.signInWithCredential(credential);
+          // Sign in with the credential
+          UserCredential userCredential =
+              await _auth.signInWithCredential(credential);
+
           Navigator.of(context).pop(); // Remove the dialog box
+
+          if (userCredential.user != null) {
+            // If sign-in is successful, navigate to home page
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          } else {
+            showSnackBar(context, 'Phone sign-in failed');
+          }
         },
       );
     } else {
       // FOR ANDROID, IOS
       await _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
-        //  Automatic handling of the SMS code
+        // Automatic handling of the SMS code
         verificationCompleted: (PhoneAuthCredential credential) async {
-          // !!! works only on android !!!
-          await _auth.signInWithCredential(credential);
+          // !!! Works only on Android !!!
+          UserCredential userCredential =
+              await _auth.signInWithCredential(credential);
+
+          // If sign-in is successful, navigate to home page
+          if (userCredential.user != null) {
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          } else {
+            showSnackBar(context, 'Phone sign-in failed');
+          }
         },
         // Displays a message when verification fails
         verificationFailed: (e) {
@@ -254,9 +272,19 @@ class FirebaseAuthMethods {
                 smsCode: codeController.text.trim(),
               );
 
-              // !!! Works only on Android, iOS !!!
-              await _auth.signInWithCredential(credential);
+              // Sign in with the credential
+              UserCredential userCredential =
+                  await _auth.signInWithCredential(credential);
+
               Navigator.of(context).pop(); // Remove the dialog box
+
+              // If sign-in is successful, navigate to home page
+              if (userCredential.user != null) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (route) => false);
+              } else {
+                showSnackBar(context, 'Phone sign-in failed');
+              }
             },
           );
         }),
