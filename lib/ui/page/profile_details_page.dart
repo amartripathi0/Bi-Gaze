@@ -129,9 +129,26 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text("Profile updated successfully!"),
-            backgroundColor: Color.fromARGB(248, 114, 204, 117)),
+        SnackBar(
+          content: const Text(
+            "Profile updated successfully! 🥁",
+            style: TextStyle(
+              color:
+                  Color.fromARGB(219, 255, 255, 255), // Neon green text color
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor:
+              const Color.fromARGB(0, 0, 0, 0), // Black background for contrast
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(
+              color: Color.fromARGB(255, 134, 245, 103), // Neon green border
+              width: 2,
+            ),
+          ),
+        ),
       );
 
       log("User data updated successfully for user: ${widget.userId}");
