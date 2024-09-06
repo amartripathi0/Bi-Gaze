@@ -126,9 +126,25 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'imagePath': imageUrl ??
             'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg',
       });
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Profile updated successfully!"),
+            backgroundColor: Color.fromARGB(248, 114, 204, 117)),
+      );
+
       log("User data updated successfully for user: ${widget.userId}");
     } catch (error) {
       log("Error updating user data: $error");
+
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error updating profile: $error"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
