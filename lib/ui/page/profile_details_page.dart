@@ -138,6 +138,8 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
       setState(() {
         _imageFile = File(pickedFile.path);
       });
+
+      // Call the upload method to upload the selected image
       await _uploadImage();
     }
   }
@@ -151,6 +153,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
           '${widget.userId}_${DateTime.now().millisecondsSinceEpoch}';
       final storageRef =
           FirebaseStorage.instance.ref().child('profile_images/$fileName');
+      log('Uploading to: profile_images/$fileName');
 
       // Start the upload task
       UploadTask uploadTask = storageRef.putFile(_imageFile!);
@@ -163,8 +166,8 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
       // Wait for the upload to complete
       TaskSnapshot snapshot = await uploadTask;
 
+      // Get the download URL if the upload is successful
       if (snapshot.state == TaskState.success) {
-        // Get the download URL
         final downloadUrl = await snapshot.ref.getDownloadURL();
 
         // Update the Firestore document with the new image URL
@@ -173,6 +176,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
             .doc(widget.userId)
             .update({'imagePath': downloadUrl});
 
+        // Update the UI with the new image
         setState(() {
           imageUrl = downloadUrl;
         });
