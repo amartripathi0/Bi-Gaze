@@ -83,42 +83,87 @@ class FirebaseAuthMethods {
   }
 
   // GOOGLE SIGN IN
+
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      if (kIsWeb) {
-        GoogleAuthProvider googleProvider = GoogleAuthProvider();
-        googleProvider
-            .addScope('https://www.googleapis.com/auth/contacts.readonly');
-        await _auth.signInWithPopup(googleProvider);
-      } else {
-        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-        final GoogleSignInAuthentication? googleAuth =
-            await googleUser?.authentication;
+      // Create a GoogleSignIn instance
+      final GoogleSignIn googleSignIn = GoogleSignIn();
 
-        if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
-          final credential = GoogleAuthProvider.credential(
-            accessToken: googleAuth?.accessToken,
-            idToken: googleAuth?.idToken,
-          );
-          UserCredential userCredential =
-              await _auth.signInWithCredential(credential);
+      // Start the sign-in process
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-          // Check if the user is signed in successfully
-          if (userCredential.user != null) {
-            log('Google sign-in successful for user: ${userCredential.user?.email}');
-            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-          } else {
-            log('Google sign-in failed: user is null');
-          }
+      if (googleUser != null) {
+        // Obtain the authentication details from the request
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+
+        // Create a new credential
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // Sign in with the credential
+        UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+
+        // Check if the user is signed in successfully
+        if (userCredential.user != null) {
+          log('Google sign-in successful for user: ${userCredential.user?.email}');
+          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
         } else {
-          log('Google sign-in failed: accessToken or idToken is null');
+          log('Google sign-in failed: user is null');
+          showSnackBar(context, 'Google sign-in failed');
         }
+      } else {
+        log('Google sign-in canceled by user');
+        showSnackBar(context, 'Google sign-in canceled');
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
       log('Google sign-in error: ${e.message}');
+    } catch (e) {
+      showSnackBar(context, 'An unexpected error occurred');
+      log('Google sign-in unexpected error: $e');
     }
   }
+
+  // Future<void> signInWithGoogle(BuildContext context) async {
+  //   try {
+  //     if (kIsWeb) {
+  //       GoogleAuthProvider googleProvider = GoogleAuthProvider();
+  //       googleProvider
+  //           .addScope('https://www.googleapis.com/auth/contacts.readonly');
+  //       await _auth.signInWithPopup(googleProvider);
+  //     } else {
+  //       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //       final GoogleSignInAuthentication? googleAuth =
+  //           await googleUser?.authentication;
+
+  //       if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+  //         final credential = GoogleAuthProvider.credential(
+  //           accessToken: googleAuth?.accessToken,
+  //           idToken: googleAuth?.idToken,
+  //         );
+  //         UserCredential userCredential =
+  //             await _auth.signInWithCredential(credential);
+
+  //         // Check if the user is signed in successfully
+  //         if (userCredential.user != null) {
+  //           log('Google sign-in successful for user: ${userCredential.user?.email}');
+  //           Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  //         } else {
+  //           log('Google sign-in failed: user is null');
+  //         }
+  //       } else {
+  //         log('Google sign-in failed: accessToken or idToken is null');
+  //       }
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     showSnackBar(context, e.message!);
+  //     log('Google sign-in error: ${e.message}');
+  //   }
+  // }
 
   // ANONYMOUS SIGN IN
   Future<void> signInAnonymously(BuildContext context) async {
