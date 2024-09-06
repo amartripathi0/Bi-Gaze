@@ -168,9 +168,26 @@ class FirebaseAuthMethods {
   // ANONYMOUS SIGN IN
   Future<void> signInAnonymously(BuildContext context) async {
     try {
-      await _auth.signInAnonymously();
+      // Attempt to sign in anonymously
+      UserCredential userCredential = await _auth.signInAnonymously();
+
+      // Check if the user is signed in successfully
+      if (userCredential.user != null) {
+        log('Anonymous sign-in successful');
+        // Navigate to the home screen and remove all previous routes
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      } else {
+        log('Anonymous sign-in failed: user is null');
+        showSnackBar(context, 'Anonymous sign-in failed');
+      }
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Displaying the error message
+      // Show the error message
+      showSnackBar(context, e.message!);
+      log('Anonymous sign-in error: ${e.message}');
+    } catch (e) {
+      // Handle any other errors
+      showSnackBar(context, 'An unexpected error occurred');
+      log('Anonymous sign-in unexpected error: $e');
     }
   }
 
