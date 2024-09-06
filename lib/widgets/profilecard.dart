@@ -44,8 +44,8 @@ class ProfileCard extends StatelessWidget {
         }
 
         final data = snapshot.data!.data() as Map<String, dynamic>;
-        final imagePath =
-            data['imagePath'] ?? 'assets/images/test_assets/profile_demo.jpeg';
+        final imagePath = data['imagePath'] ??
+            'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg';
         final name = data['name'];
         final uname = data['uname'];
         final additionalInfo = data['email'];

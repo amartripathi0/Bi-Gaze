@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage>
             "+91 2508202423", // Initially empty, user can update it
         'nationality': '', // Initially empty, user can update it
         'imagePath': user.photoURL ??
-            'https://github.com/nayan1306/assets/blob/main/profile_demo.jpeg',
+            'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg',
       });
       log("Default user record created for: $userId");
     } catch (error) {
@@ -180,13 +180,6 @@ class _ProfilePageState extends State<ProfilePage>
                                   (route) =>
                                       false, // Remove all previous routes
                                 );
-
-                                // Add a short delay before restarting
-                                await Future.delayed(
-                                    const Duration(milliseconds: 100));
-
-                                // Restart the app
-                                SystemNavigator.pop();
                               } catch (e) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

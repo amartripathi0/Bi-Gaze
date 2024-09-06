@@ -100,7 +100,8 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'dob': '', // Initially empty, user can edit it
         'mobno': '', // Initially empty, user can edit it
         'nationality': '', // Initially empty, user can edit it
-        'imagePath': 'assets/images/test_assets/profile_demo.jpeg',
+        'imagePath':
+            'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg',
       });
       print("User record created for: ${widget.userId}");
     } catch (error) {
@@ -120,7 +121,8 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
         'dob': dobController.text,
         'mobno': mobnoController.text,
         'nationality': nationalityController.text,
-        'imagePath': imageUrl ?? 'assets/images/test_assets/profile_demo.jpeg',
+        'imagePath': imageUrl ??
+            'https://raw.githubusercontent.com/nayan1306/assets/main/profile_demo.jpeg',
       });
       print("User data updated successfully for user: ${widget.userId}");
     } catch (error) {
