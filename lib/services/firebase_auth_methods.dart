@@ -87,19 +87,15 @@ class FirebaseAuthMethods {
     try {
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
-
         googleProvider
             .addScope('https://www.googleapis.com/auth/contacts.readonly');
-
         await _auth.signInWithPopup(googleProvider);
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
         final GoogleSignInAuthentication? googleAuth =
             await googleUser?.authentication;
 
         if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
-          // Create a new credential
           final credential = GoogleAuthProvider.credential(
             accessToken: googleAuth?.accessToken,
             idToken: googleAuth?.idToken,
@@ -107,18 +103,20 @@ class FirebaseAuthMethods {
           UserCredential userCredential =
               await _auth.signInWithCredential(credential);
 
-          // if you want to do specific task like storing information in firestore
-          // only for new users using google sign in (since there are no two options
-          // for google sign in and google sign up, only one as of now),
-          // do the following:
-
+          // Check if the user is signed in successfully
           if (userCredential.user != null) {
-            if (userCredential.additionalUserInfo!.isNewUser) {}
+            log('Google sign-in successful for user: ${userCredential.user?.email}');
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          } else {
+            log('Google sign-in failed: user is null');
           }
+        } else {
+          log('Google sign-in failed: accessToken or idToken is null');
         }
       }
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Displaying the error message
+      showSnackBar(context, e.message!);
+      log('Google sign-in error: ${e.message}');
     }
   }
 
