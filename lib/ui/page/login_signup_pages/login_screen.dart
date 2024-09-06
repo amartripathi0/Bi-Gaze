@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bigaze/services/firebase_auth_methods.dart';
+import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/login_signup_pages/phone_screen.dart';
 import 'package:bigaze/ui/page/login_signup_pages/signup_email_password_screen.dart';
 import 'package:bigaze/widgets/custom_button.dart';
@@ -20,13 +21,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void loginUser() {
-    context.read<FirebaseAuthMethods>().loginWithEmail(
+  void loginUser() async {
+    await context.read<FirebaseAuthMethods>().loginWithEmail(
           email: emailController.text,
           password: passwordController.text,
           context: context,
         );
-    log("Login Successful");
+    log("Login attempt made");
+
+    // Optional: Check if the user is logged in
+    final firebaseUser = context.read<FirebaseAuthMethods>().user;
+    log("Login successful: ${firebaseUser.email}");
+    // Navigate to home page manually after login
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MyHomePage()),
+    );
   }
 
   @override

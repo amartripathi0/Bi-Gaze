@@ -87,14 +87,16 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     // Listen for the authentication state
     final firebaseUser = context.watch<User?>();
-    log('Current user: $firebaseUser');
+    log('Current user in AuthWrapper: $firebaseUser');
 
     // If user is logged in, go to home page
     if (firebaseUser != null) {
+      log('Navigating to HomePage...');
       return const MyHomePage();
     }
 
     // If not logged in, go to login screen
+    log('Navigating to LoginScreen...');
     return const LoginScreen();
   }
 }
