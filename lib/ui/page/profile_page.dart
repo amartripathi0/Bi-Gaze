@@ -173,12 +173,12 @@ class _ProfilePageState extends State<ProfilePage>
                                 await context
                                     .read<FirebaseAuthMethods>()
                                     .signOut(context);
-
-                                Navigator.pushNamedAndRemoveUntil(
+                                // Use pushReplacement to ensure the screen is replaced
+                                Navigator.pushReplacement(
                                   context,
-                                  LoginScreen.routeName,
-                                  (route) =>
-                                      false, // Remove all previous routes
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()),
                                 );
                               } catch (e) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -192,20 +192,17 @@ class _ProfilePageState extends State<ProfilePage>
                           CustomAlertButton(
                             onTap: () async {
                               try {
-                                // Call the deleteAccount method and wait for it to complete
+                                // Delete account and navigate to login screen
                                 await context
                                     .read<FirebaseAuthMethods>()
                                     .deleteAccount(context);
-
-                                // Navigate to LoginScreen only after the account is successfully deleted
-                                Navigator.pop(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
+                                      builder: (context) =>
+                                          const LoginScreen()),
                                 );
                               } catch (e) {
-                                // Handle any errors that occur during the account deletion
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                       content:
