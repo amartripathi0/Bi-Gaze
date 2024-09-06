@@ -27,32 +27,44 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "Sign Up",
-            style: TextStyle(fontSize: 30, color: Colors.white54),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.08),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: CustomTextField(
-              controller: emailController,
-              hintText: 'Enter your email',
+      backgroundColor: Colors.black, // Futuristic background color
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Sign Up",
+              style: TextStyle(
+                fontSize: 36,
+                color: Colors.blueAccent,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.5,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: CustomTextField(
-              controller: passwordController,
-              hintText: 'Enter your password',
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomTextField(
+                controller: emailController,
+                hintText: 'Enter your email',
+              ),
             ),
-          ),
-          const SizedBox(height: 40),
-          CustomButton(onTap: signUpUser, text: "Sign Up")
-        ],
+            const SizedBox(height: 20),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomPasswordTextField(
+                controller: passwordController,
+                hintText: 'Enter your password',
+                obscureText: true,
+              ),
+            ),
+            const SizedBox(height: 30),
+            CustomButton(
+              onTap: signUpUser,
+              text: "Sign Up",
+            ),
+          ],
+        ),
       ),
     );
   }
