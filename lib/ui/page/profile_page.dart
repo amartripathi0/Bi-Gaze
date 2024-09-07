@@ -7,6 +7,7 @@ import 'package:bigaze/widgets/clearcardplaceholder.dart';
 import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/heatmap.dart';
 import 'package:bigaze/widgets/profilecard.dart';
+import 'package:bigaze/widgets/profilecardplaceholder.dart';
 import 'package:bigaze/widgets/profileproctorcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -172,11 +173,28 @@ class _ProfilePageState extends State<ProfilePage>
                         const SizedBox(
                           height: 20,
                         ),
-                        const ExamStatisticsWidget(
-                            proctoredSessions: 65, highestScore: 92.19),
+
+                        // proctor session stats
+                        const ClearCardPlaceholder(
+                          child: Text(
+                            "Proctor stats",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        const ClearCardPlaceholder(
+                          child: ExamStatisticsWidget(
+                            proctoredSessions: 65,
+                            highestScore: 92.19,
+                            avgObjectDetectionAccuracy: 10,
+                            completedExams: 11,
+                            avgAudioClassificationAccuracy: 99.99,
+                            pendingExams: 0,
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

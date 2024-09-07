@@ -3,76 +3,155 @@ import 'package:flutter/material.dart';
 class ExamStatisticsWidget extends StatelessWidget {
   final int proctoredSessions;
   final double highestScore;
+  final double avgObjectDetectionAccuracy;
+  final double avgAudioClassificationAccuracy;
+  final int completedExams;
+  final int pendingExams;
 
   const ExamStatisticsWidget({
     super.key,
     required this.proctoredSessions,
     required this.highestScore,
+    required this.avgObjectDetectionAccuracy,
+    required this.avgAudioClassificationAccuracy,
+    required this.completedExams,
+    required this.pendingExams,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(1)),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
-        padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(219, 255, 255, 255)),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromARGB(104, 103, 101, 101),
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: Offset(0, 4), // changes position of shadow
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromARGB(
+                  0, 128, 0, 128), // Light purple with 50% transparency
+              Color.fromARGB(
+                  0, 102, 51, 153), // Medium purple with 100% transparency
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildStatCard(
+              title: 'Proctored Sessions',
+              value: '$proctoredSessions',
+              icon: Icons.settings_input_svideo_rounded,
+              borderColor:
+                  const Color.fromARGB(150, 153, 102, 204), // Purple border
+              fillColor:
+                  const Color.fromARGB(70, 153, 102, 204), // 70% transparency
+            ),
+            const SizedBox(height: 10),
+            _buildStatCard(
+              title: 'Highest Score',
+              value: '$highestScore',
+              icon: Icons.star,
+              borderColor:
+                  const Color.fromARGB(150, 136, 85, 255), // Purple border
+              fillColor:
+                  const Color.fromARGB(70, 136, 85, 255), // 70% transparency
+            ),
+            const SizedBox(height: 10),
+            _buildStatCard(
+              title: 'Object Detection Accuracy',
+              value: '${avgObjectDetectionAccuracy.toStringAsFixed(1)}%',
+              icon: Icons.visibility,
+              borderColor:
+                  const Color.fromARGB(150, 108, 66, 222), // Purple border
+              fillColor:
+                  const Color.fromARGB(70, 108, 66, 222), // 70% transparency
+            ),
+            const SizedBox(height: 10),
+            _buildStatCard(
+              title: 'Audio Classification Accuracy',
+              value: '${avgAudioClassificationAccuracy.toStringAsFixed(1)}%',
+              icon: Icons.audiotrack,
+              borderColor:
+                  const Color.fromARGB(150, 92, 51, 204), // Purple border
+              fillColor:
+                  const Color.fromARGB(70, 92, 51, 204), // 70% transparency
+            ),
+            const SizedBox(height: 10),
+            _buildStatCard(
+              title: 'Completed Exams',
+              value: '$completedExams',
+              icon: Icons.check_circle,
+              borderColor:
+                  const Color.fromARGB(150, 79, 41, 153), // Purple border
+              fillColor:
+                  const Color.fromARGB(70, 79, 41, 153), // 70% transparency
+            ),
+            const SizedBox(height: 10),
+            _buildStatCard(
+              title: 'Pending Exams',
+              value: '$pendingExams',
+              icon: Icons.pending,
+              borderColor:
+                  const Color.fromARGB(150, 75, 25, 125), // Purple border
+              fillColor:
+                  const Color.fromARGB(70, 75, 25, 125), // 70% transparency
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(width: 16),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Text(
-                      'Proctored Sessions: ',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 166, 166, 166)),
-                    ),
-                    Text(
-                      '$proctoredSessions',
-                      style: const TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 221, 218, 218)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    const Text(
-                      'Highest Score: ',
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 166, 166, 166)),
-                    ),
-                    Text(
-                      '$highestScore',
-                      style: const TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(255, 221, 218, 218)),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ],
-        ),
+      ),
+    );
+  }
+
+  Widget _buildStatCard({
+    required String title,
+    required String value,
+    required IconData icon,
+    required Color borderColor,
+    required Color fillColor,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: fillColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: borderColor), // Border color
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            offset: Offset(0, 4),
+            blurRadius: 8,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: Colors.white,
+            size: 24,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
