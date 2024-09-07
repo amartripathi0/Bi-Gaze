@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
-import 'package:bigaze/ui/page/scanner_pages/qr_scanner_page.dart';
+import 'package:bigaze/ui/page/scanner_screens/qr_scanner_screen.dart';
 import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';

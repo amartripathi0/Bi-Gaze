@@ -4,7 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import '../../page/scanner_page.dart';
+import '../scanner_page.dart';
 import '../../../widgets/typingtext.dart';
 
 class QRScannerPage extends StatelessWidget {
