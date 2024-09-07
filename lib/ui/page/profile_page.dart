@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage>
                       ),
                       const ProfileCardPlaceholder(
                         child: Text(
-                          "Comparative Analysis",
+                          "Growth Analysis",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

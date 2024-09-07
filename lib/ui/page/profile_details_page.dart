@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/widgets/custom_button.dart';
-import 'package:bigaze/widgets/neonsnackbar,dart';
+import 'package:bigaze/widgets/neonsnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
