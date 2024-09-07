@@ -162,6 +162,12 @@ class _ProfilePageState extends State<ProfilePage>
                           height: 15,
                         ),
                         // palce a heatmap
+                        const ClearCardPlaceholder(
+                          child: Text(
+                            "Consistency counter",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
                         const ClearCardPlaceholder(child: CustomHeatMap()),
                         const SizedBox(
                           height: 20,
