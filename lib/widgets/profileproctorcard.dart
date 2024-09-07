@@ -13,12 +13,12 @@ class ExamStatisticsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(15)),
+      borderRadius: const BorderRadius.all(Radius.circular(1)),
       child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           border: Border.all(color: const Color.fromARGB(219, 255, 255, 255)),
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: const [
             BoxShadow(
               color: Color.fromARGB(104, 103, 101, 101),

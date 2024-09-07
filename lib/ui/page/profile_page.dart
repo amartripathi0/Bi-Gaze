@@ -3,6 +3,7 @@ import 'package:bigaze/services/firebase_auth_methods.dart';
 import 'package:bigaze/ui/page/charts/line_chart.dart';
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/login_signup_pages/login_screen.dart';
+import 'package:bigaze/widgets/clearcardplaceholder.dart';
 import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/profilecard.dart';
 import 'package:bigaze/widgets/profilecardplaceholder.dart';
@@ -144,18 +145,13 @@ class _ProfilePageState extends State<ProfilePage>
                       const SizedBox(
                         height: 20,
                       ),
-                      const ExamStatisticsWidget(
-                          proctoredSessions: 65, highestScore: 92.19),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const ProfileCardPlaceholder(
+                      const ClearCardPlaceholder(
                         child: Text(
                           "Growth Analysis",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      const ProfileCardPlaceholder(
+                      const ClearCardPlaceholder(
                         child: SizedBox(
                           height: 200,
                           child: LineChartWidget(),
@@ -163,6 +159,16 @@ class _ProfilePageState extends State<ProfilePage>
                       ),
                       const SizedBox(
                         height: 15,
+                      ),
+                      // palce a heatmap
+                      //
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const ExamStatisticsWidget(
+                          proctoredSessions: 65, highestScore: 92.19),
+                      const SizedBox(
+                        height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -188,6 +194,9 @@ class _ProfilePageState extends State<ProfilePage>
                               }
                             },
                             text: 'Sign Out',
+                          ),
+                          const SizedBox(
+                            width: 5,
                           ),
                           CustomAlertButton(
                             onTap: () async {
