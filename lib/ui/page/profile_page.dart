@@ -5,8 +5,8 @@ import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/login_signup_pages/login_screen.dart';
 import 'package:bigaze/widgets/clearcardplaceholder.dart';
 import 'package:bigaze/widgets/custom_button.dart';
+import 'package:bigaze/widgets/heatmap.dart';
 import 'package:bigaze/widgets/profilecard.dart';
-import 'package:bigaze/widgets/profilecardplaceholder.dart';
 import 'package:bigaze/widgets/profileproctorcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -131,99 +131,102 @@ class _ProfilePageState extends State<ProfilePage>
               behaviour: SpaceBehaviour(
                   backgroundColor: const Color.fromARGB(255, 0, 0, 0)),
               vsync: this,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      ProfileCard(
-                        imagePath: imagePath,
-                        name: name,
-                        userId: user.uid,
-                        additionalInfo: email,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const ClearCardPlaceholder(
-                        child: Text(
-                          "Growth Analysis",
-                          style: TextStyle(color: Colors.white),
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        ProfileCard(
+                          imagePath: imagePath,
+                          name: name,
+                          userId: user.uid,
+                          additionalInfo: email,
                         ),
-                      ),
-                      const ClearCardPlaceholder(
-                        child: SizedBox(
-                          height: 200,
-                          child: LineChartWidget(),
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // palce a heatmap
-                      //
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const ExamStatisticsWidget(
-                          proctoredSessions: 65, highestScore: 92.19),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomAlertButton(
-                            onTap: () async {
-                              try {
-                                await context
-                                    .read<FirebaseAuthMethods>()
-                                    .signOut(context);
-                                // Use pushReplacement to ensure the screen is replaced
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen()),
-                                );
-                              } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text('Failed to sign out: $e')),
-                                );
-                              }
-                            },
-                            text: 'Sign Out',
+                        const ClearCardPlaceholder(
+                          child: Text(
+                            "Growth Analysis",
+                            style: TextStyle(color: Colors.white),
                           ),
-                          const SizedBox(
-                            width: 5,
+                        ),
+                        const ClearCardPlaceholder(
+                          child: SizedBox(
+                            height: 200,
+                            child: LineChartWidget(),
                           ),
-                          CustomAlertButton(
-                            onTap: () async {
-                              try {
-                                // Delete account and navigate to login screen
-                                await context
-                                    .read<FirebaseAuthMethods>()
-                                    .deleteAccount(context);
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen()),
-                                );
-                              } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content:
-                                          Text('Failed to delete account: $e')),
-                                );
-                              }
-                            },
-                            text: 'Delete Account',
-                          ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        // palce a heatmap
+                        const ClearCardPlaceholder(child: CustomHeatMap()),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const ExamStatisticsWidget(
+                            proctoredSessions: 65, highestScore: 92.19),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomAlertButton(
+                              onTap: () async {
+                                try {
+                                  await context
+                                      .read<FirebaseAuthMethods>()
+                                      .signOut(context);
+                                  // Use pushReplacement to ensure the screen is replaced
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen()),
+                                  );
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Failed to sign out: $e')),
+                                  );
+                                }
+                              },
+                              text: 'Sign Out',
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            CustomAlertButton(
+                              onTap: () async {
+                                try {
+                                  // Delete account and navigate to login screen
+                                  await context
+                                      .read<FirebaseAuthMethods>()
+                                      .deleteAccount(context);
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen()),
+                                  );
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            'Failed to delete account: $e')),
+                                  );
+                                }
+                              },
+                              text: 'Delete Account',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
