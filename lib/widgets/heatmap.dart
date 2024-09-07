@@ -26,17 +26,18 @@ class CustomHeatMap extends StatelessWidget {
       colorMode: ColorMode.opacity,
       textColor: Colors.white60,
       // startDate: DateTime.now().subtract(const Duration(days: 70)),
+      defaultColor: const Color.fromARGB(33, 92, 92, 92),
       endDate: currentDate,
       showText: false,
       scrollable: true,
       colorsets: const {
-        1: Color(0xFF8e44ad), // Dark lavender
-        3: Color(0xFF6c3483), // Deep violet
-        5: Color(0xFF5b2c6f), // Medium dark purple
-        7: Color(0xFF4a235a), // Dark calming purple
-        9: Color(0xFF3d1e50), // Rich dark purple
-        11: Color(0xFF2e1432), // Deeper violet
-        13: Color(0xFF1d0e23), // Almost black purple
+        1: Color.fromARGB(255, 237, 224, 255), // Light lavender
+        3: Color.fromARGB(255, 221, 200, 255), // Soft violet
+        5: Color.fromARGB(255, 208, 186, 255), // Light purple
+        7: Color.fromARGB(255, 191, 146, 255), // Gentle purple
+        9: Color.fromARGB(255, 162, 117, 255), // Light lilac
+        11: Color.fromARGB(255, 139, 96, 255), // Pastel purple
+        13: Color.fromARGB(255, 96, 69, 183), // Faint purple
       },
       onClick: (value) {
         ScaffoldMessenger.of(context).showSnackBar(
