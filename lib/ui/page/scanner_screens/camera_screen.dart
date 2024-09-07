@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class GalleryScreen extends StatefulWidget {
-  const GalleryScreen({super.key});
+class CameraScreen extends StatefulWidget {
+  const CameraScreen({super.key});
 
   @override
-  _GalleryScreenState createState() => _GalleryScreenState();
+  _CameraScreenState createState() => _CameraScreenState();
 }
 
-class _GalleryScreenState extends State<GalleryScreen> {
+class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();

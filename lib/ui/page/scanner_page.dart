@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
+import 'package:bigaze/ui/page/scanner_screens/camera_screen.dart';
 import 'package:bigaze/ui/page/scanner_screens/document_scanner_screen.dart';
 import 'package:bigaze/ui/page/scanner_screens/gallery_screen.dart';
 import 'package:bigaze/ui/page/scanner_screens/history_screen.dart';
@@ -113,7 +114,7 @@ class _ScannerPageState extends State<ScannerPage> {
                         cardName: "Gallery",
                         cardIcon: Icons.photo_size_select_actual_rounded),
                     ScannerGlassTile(
-                        destinationPage: MyHomePage(),
+                        destinationPage: CameraScreen(),
                         cardName: "Camera",
                         cardIcon: Icons.camera),
                     ScannerGlassTile(
