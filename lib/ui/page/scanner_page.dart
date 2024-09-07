@@ -1,7 +1,13 @@
 // ignore_for_file: deprecated_member_use
 import 'package:bigaze/ui/page/common/widget/bottomnavigationbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
+import 'package:bigaze/ui/page/scanner_screens/document_scanner_screen.dart';
+import 'package:bigaze/ui/page/scanner_screens/gallery_screen.dart';
+import 'package:bigaze/ui/page/scanner_screens/history_screen.dart';
+import 'package:bigaze/ui/page/scanner_screens/id_scanner_screen.dart';
+import 'package:bigaze/ui/page/scanner_screens/pdf_screen.dart';
 import 'package:bigaze/ui/page/scanner_screens/qr_scanner_screen.dart';
+import 'package:bigaze/ui/page/scanner_screens/recent_screen.dart';
 import 'package:bigaze/widgets/coolcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -83,15 +89,15 @@ class _ScannerPageState extends State<ScannerPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ScannerGlassTile(
-                        destinationPage: MyHomePage(),
+                        destinationPage: HistoryScreen(),
                         cardName: "History",
                         cardIcon: Icons.history),
                     ScannerGlassTile(
-                        destinationPage: MyHomePage(),
+                        destinationPage: RecentScreen(),
                         cardName: "Recent",
                         cardIcon: Icons.recent_actors_outlined),
                     ScannerGlassTile(
-                        destinationPage: MyHomePage(),
+                        destinationPage: PdfScreen(),
                         cardName: "PDF",
                         cardIcon: Icons.picture_as_pdf)
                   ],
@@ -103,7 +109,7 @@ class _ScannerPageState extends State<ScannerPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ScannerGlassTile(
-                        destinationPage: MyHomePage(),
+                        destinationPage: GalleryScreen(),
                         cardName: "Gallery",
                         cardIcon: Icons.photo_size_select_actual_rounded),
                     ScannerGlassTile(
@@ -128,7 +134,7 @@ class _ScannerPageState extends State<ScannerPage> {
                   height: 20,
                 ),
                 ScannerGlassCard(
-                  destinationPage: MyHomePage(),
+                  destinationPage: DocumentScannerScreen(),
                   cardName: 'Document Scanner',
                   cardIcon: Icons.document_scanner_outlined,
                 ),
@@ -136,7 +142,7 @@ class _ScannerPageState extends State<ScannerPage> {
                   height: 20,
                 ),
                 ScannerGlassCard(
-                  destinationPage: MyHomePage(),
+                  destinationPage: IdScannerScreen(),
                   cardName: 'ID scanner',
                   cardIcon: Icons.verified_outlined,
                 ),
