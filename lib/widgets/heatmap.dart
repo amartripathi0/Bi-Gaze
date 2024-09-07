@@ -7,7 +7,10 @@ class CustomHeatMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime currentDate = DateTime.now();
+    DateTime currentDate =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+
+    print(currentDate);
 
     // Initialize Random
     final Random random = Random();
@@ -15,15 +18,15 @@ class CustomHeatMap extends StatelessWidget {
     // Generate random data for the previous 101 days
     final Map<DateTime, int> heatMapData = {
       for (int i = 0; i < 101; i++)
-        DateTime(2024, 9, 7).subtract(Duration(days: i)):
-            random.nextInt(14) + 1,
+        currentDate.subtract(Duration(days: i)): random.nextInt(14) + 1,
     };
 
     return HeatMap(
       datasets: heatMapData,
       colorMode: ColorMode.opacity,
       textColor: Colors.white60,
-      startDate: DateTime.now().subtract(const Duration(days: 70)),
+      // startDate: DateTime.now().subtract(const Duration(days: 70)),
+      endDate: currentDate,
       showText: false,
       scrollable: true,
       colorsets: const {
