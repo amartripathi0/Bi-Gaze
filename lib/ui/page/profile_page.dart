@@ -7,7 +7,7 @@ import 'package:bigaze/widgets/clearcardplaceholder.dart';
 import 'package:bigaze/widgets/custom_button.dart';
 import 'package:bigaze/widgets/heatmap.dart';
 import 'package:bigaze/widgets/profilecard.dart';
-import 'package:bigaze/widgets/profilecardplaceholder.dart';
+
 import 'package:bigaze/widgets/profileproctorcard.dart';
 import 'package:flutter/material.dart';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
@@ -97,6 +97,7 @@ class _ProfilePageState extends State<ProfilePage>
         appBar: const CommonAppBar(
           title: "Profile",
         ),
+        extendBodyBehindAppBar: true,
         bottomNavigationBar: CoolBottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: _onItemTapped,
@@ -138,6 +139,9 @@ class _ProfilePageState extends State<ProfilePage>
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
+                        const SizedBox(
+                          height: 90,
+                        ),
                         ProfileCard(
                           imagePath: imagePath,
                           name: name,

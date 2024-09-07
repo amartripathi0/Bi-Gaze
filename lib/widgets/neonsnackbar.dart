@@ -9,7 +9,8 @@ SnackBar neonSnackBar(String message) {
         fontWeight: FontWeight.bold,
       ),
     ),
-    backgroundColor: Colors.transparent, // Transparent background for contrast
+    backgroundColor: const Color.fromARGB(
+        140, 0, 0, 0), // Transparent background for contrast
     behavior: SnackBarBehavior.floating,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
