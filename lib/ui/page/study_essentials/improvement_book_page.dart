@@ -12,7 +12,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CommonAppBar(title: "ASSIGNMENT"),
+      appBar: CommonAppBar(title: "IMPOROVEMENT BOOK"),
       // body: Center(
       //   child: ElevatedButton(
       //     onPressed: () {
