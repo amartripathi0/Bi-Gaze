@@ -186,8 +186,7 @@ class CustomSaveButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color:
-                const Color.fromARGB(255, 134, 245, 103), // White border color
+            color: const Color.fromARGB(255, 134, 245, 103),
             width: 2, // Border width
           ),
           boxShadow: [

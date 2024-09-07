@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:bigaze/ui/page/profile_page.dart';
 import 'package:bigaze/widgets/custom_button.dart';
+import 'package:bigaze/widgets/neonsnackbar,dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
@@ -129,26 +130,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            "Profile updated successfully! 🥁",
-            style: TextStyle(
-              color:
-                  Color.fromARGB(219, 255, 255, 255), // Neon green text color
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          backgroundColor:
-              const Color.fromARGB(0, 0, 0, 0), // Black background for contrast
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(
-              color: Color.fromARGB(255, 134, 245, 103), // Neon green border
-              width: 2,
-            ),
-          ),
-        ),
+        neonSnackBar("Profile updated successfully!"),
       );
 
       log("User data updated successfully for user: ${widget.userId}");
