@@ -1,5 +1,8 @@
 import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/study_essentials/assignment_page.dart';
+import 'package:bigaze/ui/page/study_essentials/custom_practice_page.dart';
+import 'package:bigaze/ui/page/study_essentials/improvement_book_page.dart';
+import 'package:bigaze/ui/page/study_essentials/study_planner_page.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 
@@ -77,21 +80,21 @@ class StudyEsssentialsCard extends StatelessWidget {
                 height: 6,
               ),
               StudyGlassTile(
-                  destinationPage: MyHomePage(),
+                  destinationPage: ImprovementBook(),
                   cardName: "Improvement Book",
                   cardIcon: Icons.chrome_reader_mode_outlined),
               SizedBox(
                 height: 6,
               ),
               StudyGlassTile(
-                  destinationPage: MyHomePage(),
+                  destinationPage: StudyPlanner(),
                   cardName: "Study Planner",
                   cardIcon: Icons.play_lesson_outlined),
               SizedBox(
                 height: 6,
               ),
               StudyGlassTile(
-                  destinationPage: MyHomePage(),
+                  destinationPage: CustomPractice(),
                   cardName: "Custom practice",
                   cardIcon: Icons.task),
             ],

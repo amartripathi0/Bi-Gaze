@@ -1,14 +1,14 @@
 import 'package:bigaze/ui/page/common/widget/appbar.dart';
 import 'package:flutter/material.dart';
 
-class AssignmentPage extends StatefulWidget {
-  const AssignmentPage({super.key});
+class StudyPlanner extends StatefulWidget {
+  const StudyPlanner({super.key});
 
   @override
-  State<AssignmentPage> createState() => _AssignmentPageState();
+  State<StudyPlanner> createState() => _StudyPlannerState();
 }
 
-class _AssignmentPageState extends State<AssignmentPage> {
+class _StudyPlannerState extends State<StudyPlanner> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
