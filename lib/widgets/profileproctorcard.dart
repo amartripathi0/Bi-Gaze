@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ExamStatisticsWidget extends StatelessWidget {
   final int proctoredSessions;
   final double highestScore;
-  final double avgObjectDetectionAccuracy;
-  final double avgAudioClassificationAccuracy;
+  final double mostRecentExamScore;
+  final int leaderboardRank;
   final int completedExams;
   final int pendingExams;
 
@@ -12,8 +12,8 @@ class ExamStatisticsWidget extends StatelessWidget {
     super.key,
     required this.proctoredSessions,
     required this.highestScore,
-    required this.avgObjectDetectionAccuracy,
-    required this.avgAudioClassificationAccuracy,
+    required this.mostRecentExamScore,
+    required this.leaderboardRank,
     required this.completedExams,
     required this.pendingExams,
   });
@@ -60,9 +60,9 @@ class ExamStatisticsWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _buildStatCard(
-              title: 'Object Detection Accuracy',
-              value: '${avgObjectDetectionAccuracy.toStringAsFixed(1)}%',
-              icon: Icons.visibility,
+              title: 'Completed Exams',
+              value: '$completedExams',
+              icon: Icons.check_circle,
               borderColor:
                   const Color.fromARGB(150, 108, 66, 222), // Purple border
               fillColor:
@@ -70,9 +70,9 @@ class ExamStatisticsWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _buildStatCard(
-              title: 'Audio Classification Accuracy',
-              value: '${avgAudioClassificationAccuracy.toStringAsFixed(1)}%',
-              icon: Icons.audiotrack,
+              title: 'Pending Exams',
+              value: '$pendingExams',
+              icon: Icons.pending,
               borderColor:
                   const Color.fromARGB(150, 92, 51, 204), // Purple border
               fillColor:
@@ -80,9 +80,9 @@ class ExamStatisticsWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _buildStatCard(
-              title: 'Completed Exams',
-              value: '$completedExams',
-              icon: Icons.check_circle,
+              title: 'Recent Exam Score',
+              value: mostRecentExamScore.toStringAsFixed(1),
+              icon: Icons.receipt,
               borderColor:
                   const Color.fromARGB(150, 79, 41, 153), // Purple border
               fillColor:
@@ -90,9 +90,9 @@ class ExamStatisticsWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _buildStatCard(
-              title: 'Pending Exams',
-              value: '$pendingExams',
-              icon: Icons.pending,
+              title: 'Rank ',
+              value: '$leaderboardRank',
+              icon: Icons.auto_graph_outlined,
               borderColor:
                   const Color.fromARGB(150, 75, 25, 125), // Purple border
               fillColor:

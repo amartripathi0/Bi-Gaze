@@ -185,10 +185,10 @@ class _ProfilePageState extends State<ProfilePage>
                           child: ExamStatisticsWidget(
                             proctoredSessions: 65,
                             highestScore: 92.19,
-                            avgObjectDetectionAccuracy: 10,
                             completedExams: 11,
-                            avgAudioClassificationAccuracy: 99.99,
                             pendingExams: 0,
+                            mostRecentExamScore: 100,
+                            leaderboardRank: 1,
                           ),
                         ),
                         const SizedBox(
