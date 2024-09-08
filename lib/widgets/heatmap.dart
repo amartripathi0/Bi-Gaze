@@ -1,3 +1,4 @@
+import 'package:bigaze/widgets/neonsnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'dart:math';
@@ -41,11 +42,9 @@ class CustomHeatMap extends StatelessWidget {
       },
       onClick: (value) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
+          neonSnackBar(
             value.toString(),
-            style: const TextStyle(color: Colors.white70),
-          )),
+          ),
         );
       },
     );

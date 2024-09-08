@@ -130,7 +130,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
-        neonSnackBar("Profile updated successfully!"),
+        neonSnackBar("Profile updated successfully! 🥁"),
       );
 
       log("User data updated successfully for user: ${widget.userId}");
