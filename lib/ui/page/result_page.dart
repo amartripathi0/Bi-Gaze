@@ -230,6 +230,7 @@ class ClearRecordsButton extends StatelessWidget {
                     try {
                       boxProctor.clear();
                       log('All records cleared');
+                      // ignore: invalid_use_of_protected_member
                       (context as Element).reassemble();
                       Navigator.of(context).pop(); // Close dialog
                     } catch (e) {
