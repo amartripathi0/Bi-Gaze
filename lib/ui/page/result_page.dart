@@ -31,7 +31,6 @@ class _ResultsPageState extends State<ResultsPage> {
     setState(() {
       _currentIndex = index;
     });
-    // Handle navigation based on index
     switch (index) {
       case 0:
         Navigator.push(
@@ -54,7 +53,6 @@ class _ResultsPageState extends State<ResultsPage> {
           MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
         break;
-      // Add cases for other indexes as needed
     }
   }
 
@@ -71,7 +69,6 @@ class _ResultsPageState extends State<ResultsPage> {
   }
 
   Future<bool> _onWillPop() async {
-    // Navigate to the home page when the back button is pressed
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const MyHomePage()),
@@ -81,18 +78,20 @@ class _ResultsPageState extends State<ResultsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
         bottomNavigationBar: CoolBottomNavigationBar(
-          currentIndex: _currentIndex, // Pass current index
-          onTap: _onItemTapped, // Handle tap event
+          currentIndex: _currentIndex,
+          onTap: _onItemTapped,
         ),
         appBar: ResultAppBar(
           title: "Analysis",
           actions: [
             IconButton(
-              padding: const EdgeInsets.only(right: 30),
+              padding: EdgeInsets.only(right: mediaQuery.size.width * 0.05),
               icon: const Icon(
                 Icons.search,
                 color: Colors.white70,
@@ -106,8 +105,8 @@ class _ResultsPageState extends State<ResultsPage> {
         ),
         body: Column(
           children: [
-            const SizedBox(
-              height: 5,
+            SizedBox(
+              height: mediaQuery.size.height * 0.001,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -118,26 +117,26 @@ class _ResultsPageState extends State<ResultsPage> {
                       Icons.sort_by_alpha,
                       color: Colors.white70,
                     ),
-                    const SizedBox(width: 5), // Adjust spacing as needed
+                    SizedBox(width: mediaQuery.size.width * 0.02),
                     Switch(
                       value: _isAscending,
                       onChanged: (value) {
-                        _toggleSortingOrder(); // Toggle sorting order on switch change
+                        _toggleSortingOrder();
                       },
                       activeColor: Colors.greenAccent,
                       inactiveThumbColor:
                           const Color.fromARGB(255, 89, 50, 128),
                     ),
-                    const SizedBox(width: 10), // Adjust spacing as needed
+                    SizedBox(width: mediaQuery.size.width * 0.02),
                     const Icon(
                       Icons.timer_sharp,
                       color: Colors.white70,
                     ),
-                    const SizedBox(width: 5),
+                    SizedBox(width: mediaQuery.size.width * 0.02),
                     Switch(
                       value: _sortByTime,
                       onChanged: (value) {
-                        _toggleSortingCriteria(); // Toggle sorting criteria (time/date)
+                        _toggleSortingCriteria();
                       },
                       activeColor: Colors.greenAccent,
                       inactiveThumbColor:
@@ -159,7 +158,6 @@ class _ResultsPageState extends State<ResultsPage> {
     List<ProctorModel> records =
         boxProctor.values.cast<ProctorModel>().toList();
 
-    // Sort records based on _isAscending and _sortByTime flags
     if (_sortByTime) {
       records.sort((a, b) => _isAscending
           ? a.time[0].compareTo(b.time[0])
@@ -185,8 +183,8 @@ class _ResultsPageState extends State<ResultsPage> {
                       'Date : ${record.date}  | Time : ${record.time[0]}',
                   destinationPage: RecordDetailsPage(record: record),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
               ],
             ),
@@ -204,7 +202,6 @@ class ClearRecordsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        // Show confirmation dialog
         showDialog(
           barrierColor: const Color.fromARGB(51, 199, 84, 84),
           context: context,
@@ -233,13 +230,10 @@ class ClearRecordsButton extends StatelessWidget {
                     try {
                       boxProctor.clear();
                       log('All records cleared');
-                      // Rebuild the UI after clearing records
-                      // ignore: invalid_use_of_protected_member
                       (context as Element).reassemble();
                       Navigator.of(context).pop(); // Close dialog
                     } catch (e) {
                       log('Error clearing records: $e');
-                      // Handle error here, such as showing an error message to the user
                       Navigator.of(context).pop(); // Close dialog on error
                     }
                   },
