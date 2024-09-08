@@ -249,31 +249,25 @@ class CustomSignoutAlertButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color:
-                const Color.fromARGB(255, 245, 103, 103), // White border color
-            width: 2, // Border width
+            color: const Color.fromARGB(255, 245, 103, 103),
+            width: 2,
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color.fromARGB(255, 255, 0, 0)
-                  .withOpacity(0.6), // Red shadow color with opacity
-              spreadRadius: 3, // Spreads the shadow to create a glowing effect
-              blurRadius: 10, // Softens the shadow
+              color: const Color.fromARGB(255, 255, 0, 0).withOpacity(0.6),
+              spreadRadius: 3,
+              blurRadius: 10,
             ),
           ],
         ),
         child: ClipRRect(
-          borderRadius:
-              BorderRadius.circular(8), // Same border radius as container
+          borderRadius: BorderRadius.circular(8),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  const Color.fromARGB(193, 0, 0, 0), // Transparent background
-              shadowColor:
-                  const Color.fromARGB(209, 0, 0, 0), // No internal shadow
+              backgroundColor: const Color.fromARGB(193, 0, 0, 0),
+              shadowColor: const Color.fromARGB(209, 0, 0, 0),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    8), // Match the shape of the container
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
             onPressed: () {
@@ -281,13 +275,16 @@ class CustomSignoutAlertButton extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const Signoutdialogue();
+                  return Signoutdialogue(
+                    onConfirmed:
+                        onTap, // Pass the sign-out action to the dialog
+                  );
                 },
               );
             },
             child: Text(
               text,
-              style: const TextStyle(color: Colors.white), // White text color
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),

@@ -1,26 +1,13 @@
 import 'package:flutter/material.dart';
-import '../page/home_page.dart';
 
 class Signoutdialogue extends StatelessWidget {
-  const Signoutdialogue({super.key});
+  final VoidCallback onConfirmed; // Add a callback for the sign-out action
+
+  const Signoutdialogue({super.key, required this.onConfirmed});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      // title: Row(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   children: [
-      //     ClipRRect(
-      //       borderRadius: BorderRadius.circular(20.0),
-      //       child: Image.asset(
-      //         "assets/images/cool_stuff/!.gif",
-      //         height: 100,
-      //         width: 200,
-      //         fit: BoxFit.cover,
-      //       ),
-      //     )
-      //   ],
-      // ),
       content: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -28,7 +15,7 @@ class Signoutdialogue extends StatelessWidget {
             'SIGN OUT',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.redAccent, // Use your color here
+              color: Colors.redAccent,
             ),
             textAlign: TextAlign.center,
           ),
@@ -50,17 +37,13 @@ class Signoutdialogue extends StatelessWidget {
         ),
         TextButton(
           style: ButtonStyle(
-            backgroundColor:
-                WidgetStateProperty.all(const Color.fromARGB(200, 57, 57, 57)),
+            backgroundColor: WidgetStateProperty.all(
+              const Color.fromARGB(200, 57, 57, 57),
+            ),
           ),
           onPressed: () {
-            Navigator.pop(context); // Remove current route from stack
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MyHomePage(),
-              ),
-            );
+            Navigator.pop(context); // Close dialog
+            onConfirmed(); // Perform the sign-out action
           },
           child: const Text(
             'Sign Out',
