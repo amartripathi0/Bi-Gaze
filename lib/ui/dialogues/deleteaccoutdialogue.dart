@@ -52,7 +52,7 @@ class DeleteAccountdialogue extends StatelessWidget {
         ),
       ],
       backgroundColor: const Color.fromARGB(223, 0, 0, 0),
-      shadowColor: const Color.fromARGB(121, 255, 255, 255),
+      shadowColor: const Color.fromARGB(255, 255, 255, 255),
     );
   }
 }

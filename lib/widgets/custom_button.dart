@@ -347,6 +347,7 @@ class CustomDeleteAccountoutAlertButton extends StatelessWidget {
                         onTap, // Pass the sign-out action to the dialog
                   );
                 },
+                barrierColor: const Color.fromARGB(147, 255, 68, 68),
               );
             },
             child: Text(
