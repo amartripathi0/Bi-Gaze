@@ -102,11 +102,23 @@ class GlassListTile extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              "Exam Analysis",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color.fromARGB(223, 220, 220, 220), fontSize: 20),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 40,
+                ),
+                Image.asset(
+                  'assets/images/cool_stuff/stats.gif',
+                  height: 30,
+                  width: 30,
+                ),
+                const Text(
+                  "Exam Analysis",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color.fromARGB(223, 220, 220, 220), fontSize: 20),
+                ),
+              ],
             ),
             Text(
               recordId,

@@ -106,6 +106,7 @@ flutter:
     - assets/models/yamnet_label_list.txt
     - assets/models/ssd_mobilenet.txt
     - assets/models/ssd_mobilenet.tflite
+    - assets/images/cool_stuff/stats.gif
     
   #   - images/a_dot_ham.jpeg
 
