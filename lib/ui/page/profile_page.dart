@@ -228,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage>
                             const SizedBox(
                               width: 5,
                             ),
-                            CustomAlertButton(
+                            CustomDeleteAccountoutAlertButton(
                               onTap: () async {
                                 try {
                                   // Delete account and navigate to login screen

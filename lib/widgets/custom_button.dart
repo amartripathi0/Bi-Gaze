@@ -1,3 +1,4 @@
+import 'package:bigaze/ui/dialogues/deleteaccoutdialogue.dart';
 import 'package:bigaze/ui/dialogues/signoutdialogue.dart';
 import 'package:flutter/material.dart';
 
@@ -276,6 +277,72 @@ class CustomSignoutAlertButton extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Signoutdialogue(
+                    onConfirmed:
+                        onTap, // Pass the sign-out action to the dialog
+                  );
+                },
+              );
+            },
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// custom logout button
+
+class CustomDeleteAccountoutAlertButton extends StatelessWidget {
+  const CustomDeleteAccountoutAlertButton({
+    super.key,
+    required this.onTap,
+    required this.text,
+  });
+
+  final String text;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 140,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: const Color.fromARGB(255, 245, 103, 103),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(255, 255, 0, 0).withOpacity(0.6),
+              spreadRadius: 3,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(193, 0, 0, 0),
+              shadowColor: const Color.fromARGB(209, 0, 0, 0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            onPressed: () {
+              // Show confirmation dialog before executing the onTap action
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return DeleteAccountdialogue(
                     onConfirmed:
                         onTap, // Pass the sign-out action to the dialog
                   );
