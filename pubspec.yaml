@@ -55,7 +55,6 @@ dependencies:
   firebase_storage: ^11.6.0
   country_code_picker: ^3.0.0
   flutter_heatmap_calendar: ^1.0.5
-  multi_image_picker2: ^5.0.02
   # rive: ^0.13.13
   
 

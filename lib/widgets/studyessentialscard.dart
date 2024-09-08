@@ -1,4 +1,3 @@
-import 'package:bigaze/ui/page/home_page.dart';
 import 'package:bigaze/ui/page/study_essentials/assignment_page.dart';
 import 'package:bigaze/ui/page/study_essentials/custom_practice_page.dart';
 import 'package:bigaze/ui/page/study_essentials/improvement_book_page.dart';
