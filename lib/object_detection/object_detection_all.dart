@@ -35,8 +35,8 @@ class _ObjectDetectionAllState extends State<ObjectDetectionAll> {
 
       case mobilenet:
         res = await Tflite.loadModel(
-            model: "assets/models/mobilenet_v1_1.0_224.tflite",
-            labels: "assets/models/mobilenet_v1_1.0_224.txt");
+            model: "assets/models/resnet50.tflite",
+            labels: "assets/models/resnet50_labels.txt");
         break;
 
       case posenet:

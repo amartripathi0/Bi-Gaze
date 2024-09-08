@@ -97,8 +97,8 @@ flutter:
     - assets/images/cool_stuff/sms.png
     - assets/images/cool_stuff/gmail.png
     - assets/models/
-    - assets/models/mobilenet_v1_1.0_224.tflite
-    - assets/models/mobilenet_v1_1.0_224.txt
+    - assets/models/resnet50.tflite
+    - assets/models/resnet50_labels.txt
     - assets/models/posenet_mv1_075_float_from_checkpoints.tflite
     - assets/models/yolov2_tiny.txt
     - assets/models/yolov2_tiny.tflite
