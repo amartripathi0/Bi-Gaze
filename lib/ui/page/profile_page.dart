@@ -202,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CustomAlertButton(
+                            CustomSignoutAlertButton(
                               onTap: () async {
                                 try {
                                   await context
