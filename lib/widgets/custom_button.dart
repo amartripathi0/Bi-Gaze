@@ -282,25 +282,6 @@ class CustomSignoutAlertButton extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return const Signoutdialogue();
-                  // return AlertDialog(
-                  //   title: const Text('Confirm Sign Out'),
-                  //   content: const Text('Are you sure you want to sign out?'),
-                  //   actions: <Widget>[
-                  //     TextButton(
-                  //       onPressed: () {
-                  //         Navigator.of(context).pop(); // Close the dialog
-                  //       },
-                  //       child: const Text('Cancel'),
-                  //     ),
-                  //     TextButton(
-                  //       onPressed: () {
-                  //         Navigator.of(context).pop(); // Close the dialog
-                  //         onTap(); // Execute the sign-out action
-                  //       },
-                  //       child: const Text('Sign Out'),
-                  //     ),
-                  //   ],
-                  // );
                 },
               );
             },
