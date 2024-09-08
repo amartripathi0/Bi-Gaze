@@ -25,6 +25,7 @@ class ResultsPage extends StatefulWidget {
 class _ResultsPageState extends State<ResultsPage> {
   int _currentIndex = 1;
   bool _isAscending = true; // Variable to toggle sorting order
+  bool _sortByTime = false; // Variable to toggle sorting by date or time
 
   void _onItemTapped(int index) {
     setState(() {
@@ -60,6 +61,12 @@ class _ResultsPageState extends State<ResultsPage> {
   void _toggleSortingOrder() {
     setState(() {
       _isAscending = !_isAscending; // Toggle between ascending and descending
+    });
+  }
+
+  void _toggleSortingCriteria() {
+    setState(() {
+      _sortByTime = !_sortByTime; // Toggle between sorting by time or date
     });
   }
 
@@ -121,6 +128,21 @@ class _ResultsPageState extends State<ResultsPage> {
                       inactiveThumbColor:
                           const Color.fromARGB(255, 89, 50, 128),
                     ),
+                    const SizedBox(width: 10), // Adjust spacing as needed
+                    const Icon(
+                      Icons.timer_sharp,
+                      color: Colors.white70,
+                    ),
+                    const SizedBox(width: 5),
+                    Switch(
+                      value: _sortByTime,
+                      onChanged: (value) {
+                        _toggleSortingCriteria(); // Toggle sorting criteria (time/date)
+                      },
+                      activeColor: Colors.greenAccent,
+                      inactiveThumbColor:
+                          const Color.fromARGB(255, 89, 50, 128),
+                    ),
                   ],
                 ),
                 const ClearRecordsButton(),
@@ -137,10 +159,15 @@ class _ResultsPageState extends State<ResultsPage> {
     List<ProctorModel> records =
         boxProctor.values.cast<ProctorModel>().toList();
 
-    // Sort records based on _isAscending flag
-    records.sort((a, b) => _isAscending
-        ? a.time[0].compareTo(b.time[0])
-        : b.time[0].compareTo(a.time[0]));
+    // Sort records based on _isAscending and _sortByTime flags
+    if (_sortByTime) {
+      records.sort((a, b) => _isAscending
+          ? a.time[0].compareTo(b.time[0])
+          : b.time[0].compareTo(a.time[0]));
+    } else {
+      records.sort((a, b) =>
+          _isAscending ? a.date.compareTo(b.date) : b.date.compareTo(a.date));
+    }
 
     if (records.isEmpty) {
       return const Center(child: Text('No records found'));
@@ -226,11 +253,11 @@ class ClearRecordsButton extends StatelessWidget {
         );
       },
       style: ButtonStyle(
-        elevation: WidgetStateProperty.all(5),
-        padding: WidgetStateProperty.all(const EdgeInsets.all(10)),
+        elevation: MaterialStateProperty.all(5),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
         backgroundColor:
-            WidgetStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
-        shape: WidgetStateProperty.all(
+            MaterialStateProperty.all(const Color.fromARGB(85, 0, 0, 0)),
+        shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             side: const BorderSide(
               color: AlertButtonColors.endsessioncolor,
@@ -287,19 +314,17 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
         itemCount: records.length,
         itemBuilder: (context, index) {
           final record = records[index];
-          return Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
+          return ListTile(
+            title: Text('Record ID: ${record.id}'),
+            subtitle: Text('Date: ${record.date} | Time: ${record.time[0]}'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RecordDetailsPage(record: record),
                 ),
-                GlassListTile(
-                  recordId: 'Record ID: ${record.id}',
-                  dateOfProctor: 'Date : ${record.date}',
-                  destinationPage: RecordDetailsPage(record: record),
-                ),
-              ],
-            ),
+              );
+            },
           );
         },
       );
@@ -308,29 +333,6 @@ class RecordSearchDelegate extends SearchDelegate<ProctorModel?> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<ProctorModel> records =
-        boxProctor.values.cast<ProctorModel>().toList();
-    records = records
-        .where((record) =>
-            record.id.contains(query) || record.date.contains(query))
-        .toList();
-
-    if (records.isEmpty) {
-      return const Center(child: Text('No suggestions found'));
-    } else {
-      return ListView.builder(
-        itemCount: records.length,
-        itemBuilder: (context, index) {
-          final record = records[index];
-          return ListTile(
-            title: Text('Record ID: ${record.id}'),
-            subtitle: Text('Date : ${record.date}'),
-            onTap: () {
-              showResults(context);
-            },
-          );
-        },
-      );
-    }
+    return const Center(child: Text('Search for records by ID or Date'));
   }
 }
