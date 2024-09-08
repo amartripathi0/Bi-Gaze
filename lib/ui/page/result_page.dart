@@ -89,7 +89,7 @@ class _ResultsPageState extends State<ResultsPage> {
           onTap: _onItemTapped, // Handle tap event
         ),
         appBar: ResultAppBar(
-          title: "Result",
+          title: "Analysis",
           actions: [
             IconButton(
               padding: const EdgeInsets.only(right: 30),
