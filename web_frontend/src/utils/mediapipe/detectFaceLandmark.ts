@@ -1,5 +1,6 @@
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import { drawMesh } from "./drawMesh";
+import { detectCheating } from "./detectCheating"; // Import the detectCheating function
 
 let lastVideoTime = -1;
 let faceLandmarkerResult = undefined;
@@ -37,7 +38,14 @@ export const runDetector = async (
         startTimeMs
       );
       drawMesh(canvasRef, faceLandmarkerResult);
-      console.log(faceLandmarkerResult.faceBlendshapes[0]);
+      // console.log(faceLandmarkerResult.faceBlendshapes[0]);
+
+      // Call detectCheating function
+      const cheatingResult = detectCheating(faceLandmarkerResult);
+      if (cheatingResult.isCheating) {
+        console.log("Potential cheating detected:", cheatingResult.reasons);
+        // Trigger alert or logging mechanism
+      }
     }
 
     requestAnimationFrame(detect);

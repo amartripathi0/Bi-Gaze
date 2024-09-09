@@ -32,7 +32,7 @@ function QuestionNavigationPanel({
         <h1 className="text-xl">{quizById.quizTitle}</h1>
         <h1>Questions Attempted:</h1>
 
-        <div className="flex-center p-6   gap-4 flex-wrap">
+        <div className="flex-center p-6 gap-4 flex-wrap">
           {quizById.questions.map((eachQuestion) => (
             <QuestionNavigationButton
               key={eachQuestion.id}
