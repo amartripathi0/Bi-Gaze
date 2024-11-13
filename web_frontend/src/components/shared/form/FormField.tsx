@@ -14,7 +14,7 @@ function FormField({
       <input
         type={type}
         placeholder={`Please enter your ${placeholder.toLocaleLowerCase()}`}
-        className="bg-transparent h-8 border p-2 text-xs rounded flex-center"
+        className="bg-transparent h-10 border p-2 text-xs rounded flex-center"
         {...register(name)}
       />
       {<span className={`text-xs text-red-400 h-2`}>{error?.message}</span>}

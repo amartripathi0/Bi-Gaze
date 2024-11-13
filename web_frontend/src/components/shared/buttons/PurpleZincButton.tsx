@@ -10,7 +10,7 @@ function PurpleZincButton( {
     <button 
     type={type}
     className={`${additionalStyles} 
-    rounded text-sm bg-gradient-to-r from-purple-900 to-zinc-800 
+    rounded text-sm bg-gradient-to-r from-purple-900 to-zinc-800 w-48
     `}
     onClick ={() => {handleButtonClick && handleButtonClick()}}
 >

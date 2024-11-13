@@ -71,8 +71,8 @@ export type FormFieldProps = {
 
 
  export const UserSignupSchema : ZodType<SignupFormData > =z.object({
-    firstName : z.string().min(3 , {message : "Please enter a valid First Name"}),
-    lastName : z.string().min(3 , {message : "Please enter a valid Last Name"}),
+    // firstName : z.string().min(3 , {message : "Please enter a valid First Name"}),
+    // lastName : z.string().min(3 , {message : "Please enter a valid Last Name"}),
     email: z.string().email(),
     password: z
       .string()
