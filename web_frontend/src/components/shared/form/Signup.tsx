@@ -3,7 +3,7 @@ import { SignupFormData, UserSignupSchema } from "@/types";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PurpleZincButton from "../buttons/PurpleZincButton";
 import {
   createUserWithEmailAndPassword,
@@ -16,6 +16,7 @@ import { auth } from "../../../firebase";
 const provider = new GoogleAuthProvider();
 
 function SignupForm({ userType }: { userType: string }) {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,6 +31,10 @@ function SignupForm({ userType }: { userType: string }) {
         password
       );
       await updateProfile(userCredential.user, { displayName: userType });
+
+      if (userCredential.user) {
+        navigate("/examinee");
+      }
     } catch (error) {
       console.error("Error signing up:", error);
     }
@@ -39,6 +44,10 @@ function SignupForm({ userType }: { userType: string }) {
     try {
       const userCredential = await signInWithPopup(auth, provider);
       await updateProfile(userCredential.user, { displayName: userType });
+
+      if (userCredential.user) {
+        navigate("/examinee");
+      }
     } catch (error) {
       console.error("Error during Google sign-in:", error);
     }
@@ -49,7 +58,7 @@ function SignupForm({ userType }: { userType: string }) {
       onSubmit={handleSubmit(onSubmit)}
       className="flex justify-center items-center h-screen"
     >
-      <PurpleBorderContainer additionalStyles="flex-col gap-2 flex p-6 w-1/2 max-w-md">
+      <PurpleBorderContainer additionalStyles="flex-col gap-2 flex p-6 w-1/2 max-w-sm">
         <FormField
           type="email"
           placeholder="Email"
