@@ -28,6 +28,8 @@ export type ButtonProps = {
   isLoading : boolean
 };
 
+export type UserType = "examinee" | "examiner";
+
 export interface ExamineeTestResponse extends QuestionProp {
   selectedOption: string;
 }

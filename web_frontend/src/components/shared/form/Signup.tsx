@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { SignupFormData, UserSignupSchema } from "@/types";
+import { SignupFormData, UserSignupSchema, UserType } from "@/types";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
@@ -12,11 +12,14 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../../../firebase";
+import { useState } from "react";
 
 const provider = new GoogleAuthProvider();
 
-function SignupForm({ userType }: { userType: string }) {
+function SignupForm({ userType }: { userType: UserType }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,15 +28,16 @@ function SignupForm({ userType }: { userType: string }) {
 
   const onSubmit = async ({ email, password }: SignupFormData) => {
     try {
+      setIsLoading(true);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
       await updateProfile(userCredential.user, { displayName: userType });
-
+      setIsLoading(false);
       if (userCredential.user) {
-        navigate("/examinee");
+        navigate(`/${userType}`);
       }
     } catch (error) {
       console.error("Error signing up:", error);
@@ -46,7 +50,7 @@ function SignupForm({ userType }: { userType: string }) {
       await updateProfile(userCredential.user, { displayName: userType });
 
       if (userCredential.user) {
-        navigate("/examinee");
+        navigate(`/${userType}`);
       }
     } catch (error) {
       console.error("Error during Google sign-in:", error);
@@ -95,6 +99,7 @@ function SignupForm({ userType }: { userType: string }) {
         </p>
 
         <PurpleZincButton
+          isLoading={isLoading}
           type="submit"
           label="Sign Up"
           additionalStyles=" mx-auto py-2 font-semibold uppercase"
