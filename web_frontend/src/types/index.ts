@@ -4,7 +4,7 @@ import { FieldError, UseFormRegister } from "react-hook-form";
 
 export type QuizProp = {
   quizId : number;
-  quizTitle: string;
+  quizTitle: string; 
   quizDescription : string ;
   totalMarks : number;
   createdBy: string;
@@ -25,6 +25,7 @@ export type ButtonProps = {
     | ((e?: React.FormEvent<HTMLFormElement>) => void);
   additionalStyles?: string;
   icon?: LucideIcon;
+  isLoading : boolean
 };
 
 export interface ExamineeTestResponse extends QuestionProp {
