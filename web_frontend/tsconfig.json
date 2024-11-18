@@ -28,8 +28,8 @@
     "src",
     "../my-app/src/app/examinee/quiz",
     "../my-app/src/app/examinee/auth",
-    "../my-app2/src/blocks/examinee",
-    "../my-app2/src/blocks/examiner"
+    "../bi-gaze-web/src/blocks/examinee",
+    "../bi-gaze-web/src/blocks/examiner"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

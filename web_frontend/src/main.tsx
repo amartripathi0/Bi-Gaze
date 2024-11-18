@@ -9,15 +9,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./pages/homepages/home/Home.tsx";
-import ExamineeHomepage from "../../my-app2/src/blocks/examinee/ExamineeHomepage.tsx";
+import ExamineeHomepage from "../../bi-gaze-web/src/blocks/examinee/ExamineeHomepage.tsx";
 import Quiz from "../../my-app/src/app/examinee/quiz/Quiz.tsx";
-import ExamineeLayout from "../../my-app2/src/blocks/examiner/ExaminerLayout.tsx";
-import ExaminerLayout from "../../my-app2/src/blocks/examiner/ExaminerLayout.tsx";
-import ExaminerDashboard from "../../my-app2/src/blocks/examiner/Dashboard.tsx";
+import ExamineeLayout from "../../bi-gaze-web/src/blocks/examiner/ExaminerLayout.tsx";
+import ExaminerLayout from "../../bi-gaze-web/src/blocks/examiner/ExaminerLayout.tsx";
+import ExaminerDashboard from "../../bi-gaze-web/src/blocks/examiner/Dashboard.tsx";
 import ExamineeSignup from "../../my-app/src/app/examinee/auth/signup/page.tsx";
 import ExamineeSignin from "../../my-app/src/app/examinee/auth/signin/page.tsx";
-import ExaminerSignup from "../../my-app2/src/blocks/examiner/auth/ExaminerSignup.tsx";
-import ExaminerSignin from "../../my-app2/src/blocks/examiner/auth/ExaminerSignin.tsx";
+import ExaminerSignup from "../../bi-gaze-web/src/blocks/examiner/auth/ExaminerSignup.tsx";
+import ExaminerSignin from "../../bi-gaze-web/src/blocks/examiner/auth/ExaminerSignin.tsx";
 import ExamineeQuizzesDashoard from "../../my-app/src/app/examinee/quiz/ExamineeQuizzesDashoard.tsx";
 
 const routes = [
