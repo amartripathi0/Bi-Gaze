@@ -9,17 +9,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./pages/homepages/home/Home.tsx";
-import ExamineeHomepage from "./pages/examinee/ExamineeHomepage.tsx";
-import Quiz from "./pages/examinee/quiz/Quiz.tsx";
-import ExamineeLayout from "./pages/examiner/ExaminerLayout.tsx";
-import ExaminerLayout from "./pages/examiner/ExaminerLayout.tsx";
-import ExaminerDashboard from "./pages/examiner/Dashboard.tsx";
-import ExamineeSignup from "./pages/examinee/auth/ExamineeSignup.tsx";
-import ExamineeSignin from "./pages/examinee/auth/ExamineeSignin.tsx";
-import ExaminerSignup from "./pages/examiner/auth/ExaminerSignup.tsx";
-import ExaminerSignin from "./pages/examiner/auth/ExaminerSignin.tsx";
-import ExamineeQuizzesDashoard from "./pages/examinee/quiz/ExamineeQuizzesDashoard.tsx";
-
+import ExamineeHomepage from "../../my-app2/src/blocks/examinee/ExamineeHomepage.tsx";
+import Quiz from "../../my-app/src/app/examinee/quiz/Quiz.tsx";
+import ExamineeLayout from "../../my-app2/src/blocks/examiner/ExaminerLayout.tsx";
+import ExaminerLayout from "../../my-app2/src/blocks/examiner/ExaminerLayout.tsx";
+import ExaminerDashboard from "../../my-app2/src/blocks/examiner/Dashboard.tsx";
+import ExamineeSignup from "../../my-app/src/app/examinee/auth/signup/page.tsx";
+import ExamineeSignin from "../../my-app/src/app/examinee/auth/signin/page.tsx";
+import ExaminerSignup from "../../my-app2/src/blocks/examiner/auth/ExaminerSignup.tsx";
+import ExaminerSignin from "../../my-app2/src/blocks/examiner/auth/ExaminerSignin.tsx";
+import ExamineeQuizzesDashoard from "../../my-app/src/app/examinee/quiz/ExamineeQuizzesDashoard.tsx";
 
 const routes = [
   <Route path="/" element={<App />}>

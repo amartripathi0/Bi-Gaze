@@ -10,9 +10,9 @@ function Home() {
       <Navbar  />
       <div className=" h-[calc(100vh-4rem)]  mt-20 px-24">
         <LandingPage/>
-        <AboutBigaze/>
+        {/* <AboutBigaze/>
         <AboutUs/>
-        <ContactUs/>
+        <ContactUs/> */}
       </div>
     </section>
   );

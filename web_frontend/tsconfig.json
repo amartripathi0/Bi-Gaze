@@ -2,9 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -26,7 +24,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }
-]
+  "include": [
+    "src",
+    "../my-app/src/app/examinee/quiz",
+    "../my-app/src/app/examinee/auth",
+    "../my-app2/src/blocks/examinee",
+    "../my-app2/src/blocks/examiner"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

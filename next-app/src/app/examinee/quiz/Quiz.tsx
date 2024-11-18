@@ -1,5 +1,5 @@
-import QuestionsWithOptions from "../../../components/quiz/QuestionsWithOptions";
-import QuestionNavigationPanel from "../../../components/quiz/QuestionNavigationPanel";
+import QuestionsWithOptions from "../../../../../web_frontend/src/components/quiz/QuestionsWithOptions";
+import QuestionNavigationPanel from "../../../../../web_frontend/src/components/quiz/QuestionNavigationPanel";
 import { useExamineeTestStore } from "@/stores/examinee/utils/store";
 import { useParams } from "react-router-dom";
 import { QuestionProp } from "@/types";
