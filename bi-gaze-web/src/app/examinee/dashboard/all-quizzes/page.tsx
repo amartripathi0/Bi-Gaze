@@ -1,8 +1,20 @@
-import React from 'react'
+import QuizCard from "@/components/quiz/QuizCard";
+import { quizzesArray } from "@/constants";
 
-export default function page() {
+function ExamineeQuizzesDashoard() {
   return (
-    <div>page</div>
-  )
+    <div className="grid grid-cols-3 gap-4">
+      {quizzesArray.map((eachQuiz) => (
+        <QuizCard
+          key={eachQuiz.quizId}
+          quizId={eachQuiz.quizId}
+          quizDescription={eachQuiz.quizDescription}
+          quizTitle={eachQuiz.quizTitle}
+          totalMarks={eachQuiz.totalMarks}
+        />
+      ))}
+    </div>
+  );
 }
 
+export default ExamineeQuizzesDashoard;

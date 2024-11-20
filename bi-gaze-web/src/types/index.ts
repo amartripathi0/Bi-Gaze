@@ -26,6 +26,7 @@ export type ButtonProps = {
     | ((e?: React.FormEvent<HTMLFormElement>) => void);
   additionalStyles?: string;
   icon?: ReactNode;
+  iconSide ?: "left" | "right"
   isLoading?: boolean;
 };
 
