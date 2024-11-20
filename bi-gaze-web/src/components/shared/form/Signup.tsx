@@ -1,59 +1,66 @@
+"use client";
 import { useForm } from "react-hook-form";
-import { SignupFormData, UserSignupSchema, UserType } from "@/types";
+import {
+  SigninFormData,
+  SignupFormData,
+  UserSignupSchema,
+  UserType,
+} from "@/types";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
-import { Link, useNavigate } from "react-router-dom";
 import PurpleZincButton from "../buttons/PurpleZincButton";
 import {
-  createUserWithEmailAndPassword,
-  updateProfile,
+  signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../../../firebase";
+import { auth } from "@/lib/firebase";
 import { useState } from "react";
+import { FirebaseError } from "firebase/app";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-const provider = new GoogleAuthProvider();
-
-function SignupForm({ userType }: { userType: UserType }) {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-
+function SigninForm({ userType }: { userType: UserType }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignupFormData>({ resolver: zodResolver(UserSignupSchema) });
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async ({ email, password }: SignupFormData) => {
+  const onSubmit = async ({ email, password }: SigninFormData) => {
     try {
       setIsLoading(true);
-      const userCredential = await createUserWithEmailAndPassword(
+      const userCredentials = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-      await updateProfile(userCredential.user, { displayName: userType });
       setIsLoading(false);
-      if (userCredential.user) {
-        navigate(`/${userType}`);
+
+      if (userCredentials.user) {
+        router.push(`/${userType}`);
       }
     } catch (error) {
-      console.error("Error signing up:", error);
+      setIsLoading(false);
+      if (error instanceof FirebaseError) {
+        console.error("Error", error.code);
+      }
     }
   };
 
   const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
     try {
-      const userCredential = await signInWithPopup(auth, provider);
-      await updateProfile(userCredential.user, { displayName: userType });
-
-      if (userCredential.user) {
-        navigate(`/${userType}`);
+      const { user } = await signInWithPopup(auth, provider);
+      if (user) {
+        router.push(`/${userType}`);
       }
     } catch (error) {
-      console.error("Error during Google sign-in:", error);
+      console.error("Error signing in with Google:", error);
     }
   };
 
@@ -90,7 +97,7 @@ function SignupForm({ userType }: { userType: UserType }) {
         <p className="text-sm my-4">
           Already have an account?{" "}
           <Link
-            to={`/${userType}/signin`}
+            href={`/${userType}/auth/signin`}
             replace={true}
             className="text-blue-500 font-medium hover:underline"
           >
@@ -110,11 +117,13 @@ function SignupForm({ userType }: { userType: UserType }) {
             className="px-4 py-2 border flex gap-2 border-slate-200 rounded hover:border-slate-400 hover:text-neutral-200 hover:shadow transition duration-150"
             onClick={handleGoogleSignIn}
           >
-            <img
+            <Image
               className="w-4 h-4"
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               loading="lazy"
               alt="google logo"
+              width={20}
+              height={20}
             />
             <span>Signup with Google</span>
           </button>
@@ -124,4 +133,4 @@ function SignupForm({ userType }: { userType: UserType }) {
   );
 }
 
-export default SignupForm;
+export default SigninForm;

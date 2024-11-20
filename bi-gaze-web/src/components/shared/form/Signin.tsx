@@ -1,18 +1,21 @@
+"use client";
 import { SigninFormData, UserSigninSchema, UserType } from "@/types";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
-import { Link, useNavigate } from "react-router-dom";
 import PurpleZincButton from "../buttons/PurpleZincButton";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../../../firebase";
+import { auth } from "@/lib/firebase";
 import { useState } from "react";
 import { FirebaseError } from "firebase/app";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function SigninForm({ userType }: { userType: UserType }) {
   const {
@@ -20,7 +23,7 @@ function SigninForm({ userType }: { userType: UserType }) {
     handleSubmit,
     formState: { errors },
   } = useForm<SigninFormData>({ resolver: zodResolver(UserSigninSchema) });
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async ({ email, password }: SigninFormData) => {
     try {
@@ -33,12 +36,12 @@ function SigninForm({ userType }: { userType: UserType }) {
       setIsLoading(false);
 
       if (userCredentials.user) {
-        navigate(`/${userType}`);
+        router.push(`/${userType}`);
       }
     } catch (error) {
       setIsLoading(false);
       if (error instanceof FirebaseError) {
-        console.error("Errr", error.code);
+        console.error("Error", error.code);
       }
     }
   };
@@ -48,7 +51,7 @@ function SigninForm({ userType }: { userType: UserType }) {
     try {
       const { user } = await signInWithPopup(auth, provider);
       if (user) {
-        navigate(`/${userType}`);
+        router.push(`/${userType}`);
       }
     } catch (error) {
       console.error("Error signing in with Google:", error);
@@ -78,9 +81,9 @@ function SigninForm({ userType }: { userType: UserType }) {
         />
 
         <p className="text-sm my-4">
-          Don't have an account?{" "}
+          Don&asop;t have an account?{" "}
           <Link
-            to={`/${userType}/signup`}
+            href={`/${userType}/auth/signup`}
             replace={true}
             className="text-blue-500 font-medium hover:underline"
           >
@@ -100,11 +103,13 @@ function SigninForm({ userType }: { userType: UserType }) {
             className="px-4 py-2 border flex items-center gap-2 border-slate-700 rounded hover:border-slate-400 hover:text-neutral-200 hover:shadow transition duration-150"
             onClick={handleGoogleSignIn}
           >
-            <img
+            <Image
               className="w-4 h-4"
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               loading="lazy"
               alt="google logo"
+              width={20}
+              height={20}
             />
             <span>Sign in with Google</span>
           </button>

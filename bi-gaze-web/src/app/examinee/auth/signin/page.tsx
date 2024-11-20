@@ -1,9 +1,7 @@
-import SigninForm from "@/components/shared/form/Signin"
+import SigninForm from "@/components/shared/form/Signin";
 
 function ExamineeSignin() {
-  return (
-    <div><SigninForm userType="examinee"/></div>
-  )
+  return <SigninForm userType="examinee" />;
 }
 
-export default ExamineeSignin
+export default ExamineeSignin;

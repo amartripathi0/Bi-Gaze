@@ -1,5 +1,5 @@
 import { ButtonProps } from "@/types";
-import { cn } from "@/utils/utils";
+import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 
 function PurpleZincButton({

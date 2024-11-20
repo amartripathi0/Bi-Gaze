@@ -42,10 +42,10 @@ function LandingPage() {
 
         {/* Login buttons */}
         <div className="flex gap-10 mt-4">
-          <Link href={"/examinee/signin"} passHref>
+          <Link href={"/examinee/auth/signin"} passHref>
             <IndigoButton label="Examinee Signin" icon={<User />} />
           </Link>
-          <Link href={"/examiner/signin"} passHref>
+          <Link href={"/examiner/auth/`signin"} passHref>
             <IndigoButton label="Examiner Signin" icon={<UserSquareIcon />} />
           </Link>
         </div>
