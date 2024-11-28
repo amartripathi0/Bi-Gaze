@@ -9,9 +9,9 @@ function IndigoButton({
   iconSide = "right",
   icon: Icon,
 }: ButtonProps) {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     if (handleButtonClick) {
-      handleButtonClick(e);
+      handleButtonClick();
     }
   };
 
