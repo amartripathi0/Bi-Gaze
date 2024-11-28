@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { ModeToggle } from "@/components/theme-toggle";
 
 const sidebarItems = [
   { label: "Dashboard", link: "", icon: <Home className="mr-3 h-5 w-5" /> },
@@ -96,7 +97,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Button>
           </SidebarFooter>
         </Sidebar>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full bg-red-600">
           <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b border-zinc-200 dark:border-zinc-800 px-6 bg-white dark:bg-zinc-950 sticky top-0 z-10">
             <Link className="lg:hidden" href="#">
               <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400" />
@@ -108,6 +109,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </h1>
             </div>
             <SidebarTrigger className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100" />
+            <ModeToggle/>
             <Avatar className="h-9 w-9 transition-transform hover:scale-105">
               <AvatarImage
                 src="/placeholder.svg?height=32&width=32"
