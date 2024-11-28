@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="h-[calc(100vh-4rem)]  px-24">
+      <main className="px-24">
         <LandingPage />
         <AboutBigaze />
         <AboutUs />

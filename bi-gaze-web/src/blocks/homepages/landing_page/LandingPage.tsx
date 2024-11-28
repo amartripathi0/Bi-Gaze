@@ -1,9 +1,9 @@
 import Logo from "@/components/shared/Logo";
 import bigazeLogo from "@/public/assets/bi-gaze-logo.png";
-import PurpleGradientCard from "@/components/shared/cards/PurpleGradientCard";
+// import PurpleGradientCard from "@/components/shared/cards/PurpleGradientCard";
 import BlueGreenGradientText from "@/components/shared/BlueGreenGradientText";
 import PurpleBlur from "@/components/shared/backgrounds/PurpleBlur";
-import { User, User2, UserSquareIcon } from "lucide-react";
+import { User, User2 } from "lucide-react";
 import IndigoButton from "@/components/shared/buttons/IndigoButton";
 import { MotionDiv } from "@/components/shared/motion";
 import Link from "next/link";
@@ -27,7 +27,7 @@ function LandingPage() {
         <BlueGreenGradientText>
           Bi-GAZE
         </BlueGreenGradientText>
-        {/* <PurpleGradientCard> */}
+        {/* <PurpleGradientCard /> */}
         <p>
           Real-time, AI-driven monitoring that ensures fairness and integrity
           without compromising the test-taker&apos;s comfort.
