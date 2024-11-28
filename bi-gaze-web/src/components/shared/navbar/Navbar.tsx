@@ -8,6 +8,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { MotionNav } from "../motion";
 import bigazeLogo from "@/public/assets/bi-gaze-logo.png";
+import { ModeToggle } from "@/components/theme-toggle";
 
 function Navbar() {
   const scrolled = useTopScroll(10);
@@ -38,9 +39,8 @@ function Navbar() {
           Bi-Gaze
         </h1>
       </Link>
-
       {/* Right: Navigation bar */}
-      <div className={cn("flex-between py-1 font-bold gap-2 h-full w-1/3")}>
+      <div className={cn("flex-between py-1 font-bold gap-2 h-full w-2/5")}>
         {navbarItems.map((navItem) => (
           <NavButton
             key={navItem.label}
@@ -48,6 +48,8 @@ function Navbar() {
             link={navItem.link}
           />
         ))}
+        <ModeToggle />
+
         <Link
           href="#contact-us"
           scroll
