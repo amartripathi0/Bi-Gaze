@@ -2,19 +2,19 @@ import { cn } from "@/lib/utils";
 
 function BlueGreenGradientText({
   additionalStyles,
-  text,
+  children,
 }: {
-  text: string;
+  children: string;
   additionalStyles?: string;
 }) {
   return (
     <h1
       className={cn(
-        additionalStyles,
-        "text-[5.6vw] leading-[1] font-bold bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text"
+        "font-extrabold bg-gradient-to-r from-blue-700 via-green-600 dark:from-blue-600 dark:via-green-300 to-indigo-400 text-8xl text-transparent bg-clip-text",
+        additionalStyles
       )}
     >
-      {text}
+      {children}
     </h1>
   );
 }

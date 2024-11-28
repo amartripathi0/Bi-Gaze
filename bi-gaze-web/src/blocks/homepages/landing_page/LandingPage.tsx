@@ -3,7 +3,7 @@ import bigazeLogo from "@/public/assets/bi-gaze-logo.png";
 import PurpleGradientCard from "@/components/shared/cards/PurpleGradientCard";
 import BlueGreenGradientText from "@/components/shared/BlueGreenGradientText";
 import PurpleBlur from "@/components/shared/backgrounds/PurpleBlur";
-import { User, UserSquareIcon } from "lucide-react";
+import { User, User2, UserSquareIcon } from "lucide-react";
 import IndigoButton from "@/components/shared/buttons/IndigoButton";
 import { MotionDiv } from "@/components/shared/motion";
 import Link from "next/link";
@@ -24,7 +24,9 @@ function LandingPage() {
         }}
         transition={{ duration: 1 }}
       >
-        <BlueGreenGradientText text="Bi-GAZE" />
+        <BlueGreenGradientText>
+          Bi-GAZE
+        </BlueGreenGradientText>
         {/* <PurpleGradientCard> */}
         <p>
           Real-time, AI-driven monitoring that ensures fairness and integrity
@@ -43,10 +45,10 @@ function LandingPage() {
         {/* Login buttons */}
         <div className="flex gap-10 mt-4">
           <Link href={"/examinee/auth/signin"} passHref>
-            <IndigoButton label="Examinee Signin" icon={<User />} />
+            <IndigoButton label="Examinee Signin" icon={<User size={16} />} />
           </Link>
           <Link href={"/examiner/auth/`signin"} passHref>
-            <IndigoButton label="Examiner Signin" icon={<UserSquareIcon />} />
+            <IndigoButton label="Examiner Signin" icon={<User2 size={16} />} />
           </Link>
         </div>
       </MotionDiv>

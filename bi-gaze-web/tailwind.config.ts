@@ -66,6 +66,10 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        raleway: ["var(--font-raleway)", "sans-serif"],
+      },
     },
   },
   plugins: [tailwindAnimate],

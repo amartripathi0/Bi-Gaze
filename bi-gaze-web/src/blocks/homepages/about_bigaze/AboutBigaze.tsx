@@ -1,7 +1,7 @@
 function AboutBigaze() {
   return (
-    <div id="about-bigaze" className="h-full w-full border ">
-      <h1 className="text-2xl">About Biagze</h1>
+    <div id="about-bigaze" className="h-full w-full">
+      <h1 className="text-2xl">About Bigaze</h1>
     </div>
   );
 }

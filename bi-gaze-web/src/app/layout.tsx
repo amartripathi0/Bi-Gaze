@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${raleway.variable}`}>
-      <body>
+      <body className="font-poppins">
         <Providers>{children}</Providers>
       </body>
     </html>

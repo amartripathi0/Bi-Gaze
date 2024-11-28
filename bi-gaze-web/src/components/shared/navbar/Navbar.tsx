@@ -35,7 +35,7 @@ function Navbar() {
         className="flex items-center text-sm uppercase font-bold gap-2"
       >
         <Logo height={20} src={bigazeLogo} />
-        <h1 className="bg-gradient-to-r from-purple-500 to-indigo-300 text-transparent bg-clip-text">
+        <h1 className="bg-gradient-to-r dark:from-purple-500 dark:to-indigo-300 from-purple-800 to-indigo-600 text-transparent bg-clip-text">
           Bi-Gaze
         </h1>
       </Link>
@@ -54,11 +54,11 @@ function Navbar() {
           href="#contact-us"
           scroll
           className={cn(
-            "w-1/4 flex-center gap-1 h-full bg-gradient-to-r from-purple-800 rounded via-indigo-900 to-purple-900 hover:scale-[1.02]"
+            "w-1/4 flex-center gap-1 h-full bg-gradient-to-r from-purple-800 to-purple-900 rounded via-indigo-900 hover:scale-[1.02] dark:from-purple-600 dark:to-purple-800 dark:via-indigo-700"
           )}
         >
-          <button className="text-xs uppercase font-bold">Contact Us</button>
-          <ArrowRight size={14} />
+          <button className="text-xs uppercase font-bold text-white dark:text-gray-200">Contact Us</button>
+          <ArrowRight size={14} className="text-white dark:text-gray-200" />
         </Link>
       </div>
     </MotionNav>
