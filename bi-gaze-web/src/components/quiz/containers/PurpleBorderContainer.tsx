@@ -11,7 +11,7 @@ function PurpleBorderContainer({
   return (
     <div
       className={cn(
-        `shadow-3xl shadow-gray-500 border-purple-900 rounded`,
+        `shadow-3xl shadow-gray-500 border border-purple-900 rounded`,
         additionalStyles
       )}
     >

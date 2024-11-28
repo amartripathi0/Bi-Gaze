@@ -42,7 +42,7 @@ function SigninForm({ userType }: { userType: UserType }) {
       setIsLoading(false);
 
       if (userCredentials.user) {
-        router.push(`/${userType}`);
+        router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
       setIsLoading(false);
@@ -57,7 +57,7 @@ function SigninForm({ userType }: { userType: UserType }) {
     try {
       const { user } = await signInWithPopup(auth, provider);
       if (user) {
-        router.push(`/${userType}`);
+        router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
       console.error("Error signing in with Google:", error);

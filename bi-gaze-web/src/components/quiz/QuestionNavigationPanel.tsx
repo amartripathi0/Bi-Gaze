@@ -3,15 +3,16 @@ import Button from "../shared/Button";
 import QuestionNavigationButton from "./QuestionNavigationButton";
 import WebcamFaceMeshViewer from "./WebcamFaceMeshViewer";
 import PurpleBorderContainer from "./containers/PurpleBorderContainer";
-import { useParams } from "react-router-dom";
 
 type QuestionNavigationButtonProps = {
   handleTestSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
+  params: { quizId: string };
 };
+
 function QuestionNavigationPanel({
   handleTestSubmit,
+  params: { quizId },
 }: QuestionNavigationButtonProps) {
-  const { quizId } = useParams();
   const allQuizzes = useExamineeTestStore((state) => state.quizzes);
   const quizById = allQuizzes?.find(
     (eachQuiz) => eachQuiz.quizId === Number(quizId)

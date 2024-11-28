@@ -1,5 +1,4 @@
 import { z, ZodType } from "zod";
-import { LucideIcon, LucideProps } from "lucide-react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 import { ReactNode } from "react";
 

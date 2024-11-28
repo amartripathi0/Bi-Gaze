@@ -27,26 +27,26 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
 const sidebarItems = [
-  { label: "Dashboard", link: "", icon: <Home className="mr-3 h-4 w-4" /> },
+  { label: "Dashboard", link: "", icon: <Home className="mr-3 h-5 w-5" /> },
   {
     label: "All Quizzes",
     link: "all-quizzes",
-    icon: <ListChecks className="mr-3 h-4 w-4" />,
+    icon: <ListChecks className="mr-3 h-5 w-5" />,
   },
   {
     label: "Previous Quizzes",
     link: "previous-quizzes",
-    icon: <Calendar className="mr-3 h-4 w-4" />,
+    icon: <Calendar className="mr-3 h-5 w-5" />,
   },
   {
     label: "Profile",
     link: "profile",
-    icon: <User className="mr-3 h-4 w-4" />,
+    icon: <User className="mr-3 h-5 w-5" />,
   },
   {
     label: "Notifications",
     link: "notifications",
-    icon: <Bell className="mr-3 h-4 w-4" />,
+    icon: <Bell className="mr-3 h-5 w-5" />,
     badge: (
       <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-white">
         3
@@ -56,20 +56,20 @@ const sidebarItems = [
   {
     label: "Settings",
     link: "settings",
-    icon: <Settings className="mr-3 h-4 w-4" />,
+    icon: <Settings className="mr-3 h-5 w-5" />,
   },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] bg-gray-50">
+      <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
         <Sidebar
           variant="floating"
           collapsible={"icon"}
-          className="hidden lg:block bg-white shadow-lg rounded-lg"
+          className="hidden lg:block shadow-lg"
         >
-          <SidebarHeader className="flex h-[60px] items-center p-4 bg-purple-700 text-white">
+          <SidebarHeader className="flex h-[60px] items-center p-4 bg-purple-900 text-white">
             <Link className="flex items-center gap-2 font-semibold" href="#">
               <BookOpen className="h-6 w-6" />
               <span className="">Examinee Portal</span>
@@ -81,7 +81,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={index}
                   href={item.link}
-                  className="flex items-center gap-2 p-2 rounded hover:bg-purple-100 transition"
+                  className="flex items-center gap-2 p-2 rounded hover:bg-purple-200 transition"
                 >
                   {item.icon}
                   {item.label}
@@ -93,21 +93,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <SidebarFooter>
             <Button
               variant="ghost"
-              className="w-full justify-start hover:bg-gray-200 transition"
+              className="w-full justify-start hover:bg-gray-300 transition"
             >
-              <LogOut className="mr-3 h-4 w-4" />
+              <LogOut className="mr-3 h-5 w-5" />
               Log out
             </Button>
           </SidebarFooter>
         </Sidebar>
-        <div className="flex flex-col w-full ">
-          <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100 px-6 dark:bg-gray-800">
+        <div className="flex flex-col w-full">
+          <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b px-6 dark:bg-gray-900">
             <Link className="lg:hidden" href="#">
               <BookOpen className="h-6 w-6" />
               <span className="sr-only">Home</span>
             </Link>
             <div className="w-full flex-1">
-              <h1 className="font-semibold text-lg text-gray-800">
+              <h1 className="font-semibold text-lg">
                 Examinee Dashboard
               </h1>
             </div>

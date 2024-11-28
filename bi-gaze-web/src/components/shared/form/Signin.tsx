@@ -36,7 +36,7 @@ function SigninForm({ userType }: { userType: UserType }) {
       setIsLoading(false);
 
       if (userCredentials.user) {
-        router.push(`/${userType}`);
+        router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
       setIsLoading(false);
@@ -51,7 +51,7 @@ function SigninForm({ userType }: { userType: UserType }) {
     try {
       const { user } = await signInWithPopup(auth, provider);
       if (user) {
-        router.push(`/${userType}`);
+        router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
       console.error("Error signing in with Google:", error);
@@ -81,7 +81,7 @@ function SigninForm({ userType }: { userType: UserType }) {
         />
 
         <p className="text-sm my-4">
-          Don&asop;t have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href={`/${userType}/auth/signup`}
             replace={true}

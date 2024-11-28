@@ -1,3 +1,4 @@
+"use client"
 import { runDetector } from "@/utils/mediapipe/detectFaceLandmark";
 import React, { useRef, useState } from "react";
 import Webcam from "react-webcam";
