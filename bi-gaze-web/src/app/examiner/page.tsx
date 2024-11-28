@@ -1,9 +1,5 @@
-import React from 'react'
+const ExaminerHomepage = () => {
+  return <div>ExamineeHomepage</div>;
+};
 
-type Props = {}
-
-const ExaminerHomepage = (props: Props) => {
-  return (
-    <div>ExamineeHomepage</div>
-  )
-}
+export default ExaminerHomepage;
