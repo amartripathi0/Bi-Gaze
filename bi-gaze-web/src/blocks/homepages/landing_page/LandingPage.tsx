@@ -47,7 +47,7 @@ function LandingPage() {
           <Link href={"/examinee/auth/signin"} passHref>
             <IndigoButton label="Examinee Signin" icon={<User size={16} />} />
           </Link>
-          <Link href={"/examiner/auth/`signin"} passHref>
+          <Link href={"/examiner/auth/signin"} passHref>
             <IndigoButton label="Examiner Signin" icon={<User2 size={16} />} />
           </Link>
         </div>
