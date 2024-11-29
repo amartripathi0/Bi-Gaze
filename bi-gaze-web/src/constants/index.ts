@@ -1,4 +1,4 @@
-import { QuizProp } from "../types";
+import { Quiz } from "../types";
 import brandLogo from "./assets/bi-gaze-logo.png";
 
 export const bigazeLogo = brandLogo;
@@ -45,7 +45,7 @@ export const navbarItems = [
     link: "#about-us",
   },
 ];
-export const quizArray: QuizProp = {
+export const quizArray: Quiz = {
   quizId: 1,
   quizTitle: "General Knowledge",
   quizDescription: "Test your knowledge on various topics",
@@ -130,7 +130,7 @@ export const quizArray: QuizProp = {
   ],
 };
 
-export const quizzesArray: QuizProp[] = [
+export const quizzesArray: Quiz[] = [
   {
     quizId: 1,
     quizTitle: "General Knowledge",
@@ -141,7 +141,12 @@ export const quizzesArray: QuizProp[] = [
       {
         id: 1,
         title: "What was Stephen Hawking's minor project?",
-        options: ["Minor Blackhole", "Michal Jackson Moon", "White Hole Island", "13 Blackhole"],
+        options: [
+          "Minor Blackhole",
+          "Michal Jackson Moon",
+          "White Hole Island",
+          "13 Blackhole",
+        ],
         answer: "Delhi",
       },
       {

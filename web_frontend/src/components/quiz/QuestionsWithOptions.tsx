@@ -1,8 +1,8 @@
-import { QuestionProp } from "../../types";
+import { Question } from "../../types";
 import QuestionOptions from "./QuestionOption";
 import PurpleBorderContainer from "./containers/PurpleBorderContainer";
 
-function QuestionsWithOptions({ question }: { question : QuestionProp }) {
+function QuestionsWithOptions({ question }: { question: Question }) {
   return (
     <PurpleBorderContainer additionalStyles="h-full w-3/4  p-10 flex flex-col gap-10 ">
       <h1 className="text-2xl">

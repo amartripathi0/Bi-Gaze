@@ -1,11 +1,11 @@
 import { quizzesArray } from "@/constants";
-import { ExamineeTestResponse, Quiz } from "@/types";
+import { AnswerAttempt, Quiz } from "@/types";
 import { create } from "zustand";
 
 type ExamineeTestStore = {
   quizzes: Quiz[];
-  examineeTestResponse: ExamineeTestResponse[];
-  setExamineeTestResponse: (response: ExamineeTestResponse[]) => void;
+  examineeTestResponse: AnswerAttempt[];
+  setExamineeTestResponse: (response: AnswerAttempt[]) => void;
   currentQuestionNumber: number;
   setCurrentQuestionNumber: (newQuestionNumber: number) => void;
 };
@@ -13,7 +13,7 @@ type ExamineeTestStore = {
 export const useExamineeTestStore = create<ExamineeTestStore>((set) => ({
   quizzes: quizzesArray,
   examineeTestResponse: [],
-  setExamineeTestResponse: (response: ExamineeTestResponse[]) => {
+  setExamineeTestResponse: (response: AnswerAttempt[]) => {
     set(() => ({
       examineeTestResponse: response,
     }));

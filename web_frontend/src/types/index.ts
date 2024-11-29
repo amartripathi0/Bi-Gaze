@@ -1,16 +1,16 @@
-import { z, ZodType } from "zod"; 
+import { z, ZodType } from "zod";
 import { LucideIcon } from "lucide-react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
-export type QuizProp = {
-  quizId : number;
-  quizTitle: string; 
-  quizDescription : string ;
-  totalMarks : number;
+export type Quiz = {
+  quizId: number;
+  quizTitle: string;
+  quizDescription: string;
+  totalMarks: number;
   createdBy: string;
-  questions: QuestionProp[];
+  questions: Question[];
 };
-export type QuestionProp = {
+export type Question = {
   id: number;
   title: string;
   options: string[];
@@ -18,31 +18,31 @@ export type QuestionProp = {
 };
 
 export type ButtonProps = {
-  type ?: "button" | "submit" | "reset" ;
+  type?: "button" | "submit" | "reset";
   label: string;
-  handleButtonClick ?:
+  handleButtonClick?:
     | (() => void)
     | ((e?: React.FormEvent<HTMLFormElement>) => void);
   additionalStyles?: string;
   icon?: LucideIcon;
-  isLoading : boolean
+  isLoading: boolean;
 };
 
 export type UserType = "examinee" | "examiner";
 
-export interface ExamineeTestResponse extends QuestionProp {
+export interface ExamineeTestResponse extends Question {
   selectedOption: string;
 }
 
-export interface SigninFormData  {
+export interface SigninFormData {
   email: string;
   password: string;
 }
 
 export interface SignupFormData extends SigninFormData {
-  firstName ?: string;
-  lastName ?: string;
-  confirmPassword ?: string;
+  firstName?: string;
+  lastName?: string;
+  confirmPassword?: string;
 }
 
 export type ValidFieldNames =
@@ -56,24 +56,21 @@ export type FormFieldProps = {
   type: string;
   placeholder: string;
   name: ValidFieldNames;
-  register: UseFormRegister<SignupFormData | SigninFormData> ;
+  register: UseFormRegister<SignupFormData | SigninFormData>;
   error: FieldError | undefined;
   valueAsNumber?: boolean;
-}; 
+};
 
+export const UserSigninSchema: ZodType<SigninFormData> = z.object({
+  email: z.string().email(),
+  password: z
+    .string()
+    .min(6, { message: "Password is too short" })
+    .max(20, { message: "Password is too long" }),
+});
 
- 
- export const UserSigninSchema: ZodType<SigninFormData> = z
+export const UserSignupSchema: ZodType<SignupFormData> = z
   .object({
-    email: z.string().email(),
-    password: z
-      .string()
-      .min(6, { message: "Password is too short" })
-      .max(20, { message: "Password is too long" }),
-  })
-
-
- export const UserSignupSchema : ZodType<SignupFormData > =z.object({
     // firstName : z.string().min(3 , {message : "Please enter a valid First Name"}),
     // lastName : z.string().min(3 , {message : "Please enter a valid Last Name"}),
     email: z.string().email(),
@@ -83,7 +80,7 @@ export type FormFieldProps = {
       .max(20, { message: "Password is too long" }),
     confirmPassword: z.string(),
   })
-  .refine(data => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
-    path: ["confirmPassword"], 
+    path: ["confirmPassword"],
   });

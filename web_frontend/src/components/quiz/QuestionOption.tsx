@@ -1,9 +1,9 @@
-import { useExamineeTestStore } from "@/stores/examinee/utils/store";
-import { ExamineeTestResponse, QuestionProp } from "@/types";
+import { useExamineeTestStore } from "@/stores/examinee/store";
+import { ExamineeTestResponse, Question } from "@/types";
 
 type QuestionOptionsProps = {
   optionValue: string;
-  question: QuestionProp;
+  question: Question;
 };
 function QuestionOption({ optionValue, question }: QuestionOptionsProps) {
   const setExamineeOptionSelect = useExamineeTestStore(
@@ -13,7 +13,7 @@ function QuestionOption({ optionValue, question }: QuestionOptionsProps) {
     (state) => state.examineeTestResponse
   );
 
-  function handleOptionClick(question: QuestionProp, selectedOption: string) {
+  function handleOptionClick(question: Question, selectedOption: string) {
     const examineeSelectedOption: ExamineeTestResponse = {
       ...question,
       selectedOption,

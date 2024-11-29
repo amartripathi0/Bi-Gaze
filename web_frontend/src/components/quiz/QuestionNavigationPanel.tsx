@@ -1,4 +1,4 @@
-import { useExamineeTestStore } from "@/stores/examinee/utils/store";
+import { useExamineeTestStore } from "@/stores/examinee/store";
 import Button from "../shared/Button";
 import QuestionNavigationButton from "./QuestionNavigationButton";
 import WebcamFaceMeshViewer from "./WebcamFaceMeshViewer";

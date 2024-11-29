@@ -1,8 +1,8 @@
 import QuestionsWithOptions from "../../../../../web_frontend/src/components/quiz/QuestionsWithOptions";
 import QuestionNavigationPanel from "../../../../../web_frontend/src/components/quiz/QuestionNavigationPanel";
-import { useExamineeTestStore } from "@/stores/examinee/utils/store";
+import { useExamineeTestStore } from "@/stores/examinee/store";
 import { useParams } from "react-router-dom";
-import { QuestionProp } from "@/types";
+import { Question } from "@/types";
 
 function Quiz() {
   const { quizId } = useParams();
@@ -32,7 +32,7 @@ function Quiz() {
       onSubmit={handleTestSubmit}
       className=" h-screen flex-center p-16 rounded-lg gap-10 "
     >
-      <QuestionsWithOptions question={questionToDisplay as QuestionProp} />
+      <QuestionsWithOptions question={questionToDisplay as Question} />
       <QuestionNavigationPanel handleTestSubmit={handleTestSubmit} />
     </form>
   );

@@ -1,66 +1,67 @@
-import { useExamineeTestStore } from "@/stores/examinee/utils/store";
-import { ExamineeTestResponse, QuestionProp } from "@/types";
+import { cn } from "@/lib/utils";
+import { useExamineeTestStore } from "@/stores/examinee/store";
+import { AnswerAttempt, Question } from "@/types";
 
 type QuestionOptionsProps = {
   optionValue: string;
-  question: QuestionProp;
+  question: Question;
+  optionId: number;
 };
-function QuestionOption({ optionValue, question }: QuestionOptionsProps) {
-  const setExamineeOptionSelect = useExamineeTestStore(
+function QuestionOption({
+  optionValue,
+  question,
+  optionId,
+}: QuestionOptionsProps) {
+  const setTestResponse = useExamineeTestStore(
     (state) => state.setExamineeTestResponse
   );
-  const examineeTestResponse = useExamineeTestStore(
+  const testResponse = useExamineeTestStore(
     (state) => state.examineeTestResponse
   );
 
-  function handleOptionClick(question: QuestionProp, selectedOption: string) {
-    const examineeSelectedOption: ExamineeTestResponse = {
+  function handleOptionClick(question: Question, selectedOption: string) {
+    const answerAttempt: AnswerAttempt = {
       ...question,
       selectedOption,
     };
-    if (examineeTestResponse.length === 0) {
-      setExamineeOptionSelect([
-        ...examineeTestResponse,
-        examineeSelectedOption,
-      ]);
-    } else {
-      const questionAlreadyAnswered = examineeTestResponse.some(
-        (eachSelectedAnswerObj) => eachSelectedAnswerObj.id === question.id
+    const questionAlreadyAnswered = testResponse.some(
+      (eachSelectedAnswerObj) => eachSelectedAnswerObj.id === question.id
+    );
+    // question answered for first time -> add ans to the array
+    if (!questionAlreadyAnswered) {
+      setTestResponse([...testResponse, answerAttempt]);
+    }
+    // question already answered with diff option -> replace the old ans with new one
+    // question already answered with same option -> replace the old ans with new one
+    else {
+      const existingAttemptedAnswer = testResponse.filter(
+        (eachAns) => eachAns.id !== question.id
       );
-
-      // question answered for first time -> add ans to the array
-      if (!questionAlreadyAnswered) {
-        console.log("first time");
-
-        setExamineeOptionSelect([
-          ...examineeTestResponse,
-          examineeSelectedOption,
-        ]);
-      }
-      // question already answered with diff option -> replace the old ans with new one
-      // question already answered with same option -> replace the old ans with new one
-      else {
-        const removedExistingAttempedAns = examineeTestResponse.filter(
-          (eachAns) => eachAns.id !== question.id
-        );
-        setExamineeOptionSelect([
-          ...removedExistingAttempedAns,
-          examineeSelectedOption,
-        ]);
-      }
+      setTestResponse([...existingAttemptedAnswer, answerAttempt]);
     }
   }
 
+  function isOptionSelected() {
+    const questionObj = testResponse.filter(
+      (eachSelectedAnswerObj) => eachSelectedAnswerObj.id === question.id
+    );
+    return questionObj[0]?.selectedOption === optionValue;
+  }
   return (
-    <input
-      type="button"
-      name=""
-      className="w-1/4 p-2 px-4 bg-plum-300 border-2 border-purple-700 rounded-xl shadow-sm hover:shadow-gray-400 hover:scale-[1.03] hover:transition-all duration-200
-    text-md font-medium cursor-pointer 
-    "
+    <button
+      className={cn(
+        "max-w-56 p-4 bg-neutral-950/80 border border-neutral-600 rounded shadow-xs hover:shadow-gray-400 hover:scale-[1.02] hover:transition-all duration-100 text-sm font-semibold cursor-pointer font-raleway flex justify-start items-center",
+        isOptionSelected()
+          ? "border-purple-700 shadow-sm shadow-purple-500 bg-slate-950"
+          : ""
+      )}
       onClick={() => handleOptionClick(question, optionValue)}
-      value={optionValue}
-    />
+    >
+      <span className="font-poppins mr-2 text-neutral-400 font-medium">
+        {optionId + 1}.
+      </span>
+      {optionValue}
+    </button>
   );
 }
 

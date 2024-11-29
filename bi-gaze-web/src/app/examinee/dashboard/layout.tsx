@@ -59,18 +59,21 @@ const sidebarItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] bg-zinc-50 dark:bg-zinc-900">
+      <div className="min-h-screen w-full flex bg-zinc-50 dark:bg-zinc-900">
         <Sidebar
           variant="floating"
           side="left"
           collapsible={"icon"}
-          className="hidden lg:block shadow-lg bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800"
+          className="hidden lg:block shadow-lg bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 "
         >
-          <SidebarHeader className="flex h-[60px] items-center px-6 bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-900 dark:to-indigo-900 text-white">
-            <Link className="flex items-center gap-3 font-semibold" href="#">
-              <BookOpen className="h-6 w-6" />
-              <span className="text-lg">Examinee Portal</span>
-            </Link>
+          <SidebarHeader className="flex items-center justify-center h-[60px] bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-900 dark:to-indigo-900 text-white">
+            <div className="flex items-center w-full justify-between">
+              <Link className="flex items-center gap-3 font-semibold" href="#">
+                <BookOpen className="h-6 w-6" />
+                <span className="text-base">Examinee Portal</span>
+              </Link>
+              <SidebarTrigger className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100" ></SidebarTrigger>
+            </div>
           </SidebarHeader>
           <SidebarContent className="flex flex-col gap-2 p-4">
             <nav className="space-y-1">
@@ -97,7 +100,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Button>
           </SidebarFooter>
         </Sidebar>
-        <div className="flex flex-col w-full bg-red-600">
+        <div className="flex flex-col relative w-full">
           <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b border-zinc-200 dark:border-zinc-800 px-6 bg-white dark:bg-zinc-950 sticky top-0 z-10">
             <Link className="lg:hidden" href="#">
               <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400" />
@@ -108,8 +111,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Examinee Dashboard
               </h1>
             </div>
-            <SidebarTrigger className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100" />
-            <ModeToggle/>
+            <ModeToggle />
             <Avatar className="h-9 w-9 transition-transform hover:scale-105">
               <AvatarImage
                 src="/placeholder.svg?height=32&width=32"

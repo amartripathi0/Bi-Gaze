@@ -1,25 +1,23 @@
+"use client";
 import QuestionNavigationPanel from "@/components/quiz/QuestionNavigationPanel";
-import QuestionsWithOptions from "@/components/quiz/QuestionsWithOptions";
-import { useExamineeTestStore } from "@/stores/examinee/utils/store";
-import { QuestionProp } from "@/types";
+import QuestionWithOptions from "@/components/quiz/question-with-options";
+import { useExamineeTestStore } from "@/stores/examinee/store";
+import { Question } from "@/types";
 
 function Quiz({ params: { quizId } }: { params: { quizId: string } }) {
   const allQuizzes = useExamineeTestStore((state) => state.quizzes);
-  const quizById = allQuizzes.find(
+  const currentQuiz = allQuizzes.find(
     (eachQuiz) => eachQuiz.quizId === Number(quizId)
   );
-  const questionsArray = quizById?.questions;
+  const questionsArray = currentQuiz?.questions;
 
   const currentQuestion = useExamineeTestStore(
     (state) => state.currentQuestionNumber
   );
-  const examineeTestResponse = useExamineeTestStore(
-    (state) => state.examineeTestResponse
-  );
 
   function handleTestSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e?.preventDefault();
-    console.log(examineeTestResponse);
+    // console.log(examineeTestResponse);
   }
 
   const questionToDisplay =
@@ -28,10 +26,13 @@ function Quiz({ params: { quizId } }: { params: { quizId: string } }) {
   return (
     <form
       onSubmit={handleTestSubmit}
-      className=" h-screen flex-center p-16 rounded-lg gap-10 "
+      className="h-screen grid grid-cols-4 w-full p-16 gap-2 "
     >
-      <QuestionsWithOptions question={questionToDisplay as QuestionProp} />
-      <QuestionNavigationPanel handleTestSubmit={handleTestSubmit} />
+      <QuestionWithOptions question={questionToDisplay as Question} />
+      <QuestionNavigationPanel
+        quizId={quizId}
+        handleTestSubmit={handleTestSubmit}
+      />
     </form>
   );
 }

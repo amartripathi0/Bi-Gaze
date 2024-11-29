@@ -1,4 +1,4 @@
-import { QuizProp } from "@/types";
+import { Quiz } from "@/types";
 import IndigoButton from "../shared/buttons/IndigoButton";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -8,7 +8,7 @@ function QuizCard({
   quizTitle,
   quizDescription,
   totalMarks,
-}: Partial<QuizProp>) {
+}: Partial<Quiz>) {
   return (
     <div className="border border-neutral-600 w-full h-52 flex flex-col justify-between hover:border-neutral-200 hover:bg-neutral-900  gap-2 transition-all duration-150 p-4 rounded-lg bg-neutral-800">
       <h4 className="p-2 bg-indigo-900 rounded font-semibold text-base text-white">

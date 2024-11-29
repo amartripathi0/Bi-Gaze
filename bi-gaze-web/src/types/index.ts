@@ -2,15 +2,15 @@ import { z, ZodType } from "zod";
 import { FieldError, UseFormRegister } from "react-hook-form";
 import { ReactNode } from "react";
 
-export type QuizProp = {
+export type Quiz = {
   quizId: number;
   quizTitle: string;
   quizDescription: string;
   totalMarks: number;
   createdBy: string;
-  questions: QuestionProp[];
+  questions: Question[];
 };
-export type QuestionProp = {
+export type Question = {
   id: number;
   title: string;
   options: string[];
@@ -25,13 +25,13 @@ export type ButtonProps = {
     | ((e?: React.FormEvent<HTMLFormElement>) => void);
   additionalStyles?: string;
   icon?: ReactNode;
-  iconSide ?: "left" | "right"
+  iconSide?: "left" | "right";
   isLoading?: boolean;
 };
 
 export type UserType = "examinee" | "examiner";
 
-export interface ExamineeTestResponse extends QuestionProp {
+export interface AnswerAttempt extends Question {
   selectedOption: string;
 }
 
