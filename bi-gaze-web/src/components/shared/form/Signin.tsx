@@ -1,5 +1,5 @@
 "use client";
-import { SigninFormData, UserSigninSchema, UserType } from "@/types";
+import { SigninFormData, UserSigninSchema, UserType } from "@/types/index.type";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -63,7 +63,7 @@ function SigninForm({ userType }: { userType: UserType }) {
       onSubmit={handleSubmit(onSubmit)}
       className="flex justify-center items-center h-screen"
     >
-      <PurpleBorderContainer additionalStyles="flex-col gap-2 flex p-6 w-1/2 max-w-sm">
+      <PurpleBorderContainer className="flex-col gap-2 flex p-6 w-1/2 max-w-sm">
         <FormField
           type="email"
           placeholder="Email"
@@ -95,7 +95,7 @@ function SigninForm({ userType }: { userType: UserType }) {
           isLoading={isLoading}
           type="submit"
           label="Sign In"
-          additionalStyles="mx-auto py-2 font-semibold uppercase"
+          className="mx-auto py-2 font-semibold uppercase"
         />
         <span className="mx-auto text-sm">or</span>
         <div className="flex items-center justify-center mx-auto text-sm">

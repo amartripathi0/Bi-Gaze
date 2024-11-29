@@ -1,10 +1,10 @@
-import { ButtonProps } from "@/types";
+import { ButtonProps } from "@/types/index.type";
 import { cn } from "@/lib/utils";
 
 function Button({
   label,
   handleButtonClick,
-  additionalStyles,
+  className,
   iconSide = "right",
   icon: Icon,
 }: ButtonProps) {
@@ -17,8 +17,8 @@ function Button({
   return (
     <button
       className={cn(
-        "bg-purple-900 h-10 rounded text-white text-lg",
-        additionalStyles
+        "bg-purple-900 p-2.5 hover:bg-purple-900/90 w-40 rounded text-white text-base",
+        className
       )}
       onClick={handleClick}
     >

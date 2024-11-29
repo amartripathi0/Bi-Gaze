@@ -26,22 +26,22 @@ const sidebarItems = [
   { label: "Dashboard", link: "", icon: <Home className="mr-3 h-5 w-5" /> },
   {
     label: "All Quizzes",
-    link: "dashboard/all-quizzes",
+    link: "/examinee/dashboard/all-quizzes",
     icon: <ListChecks className="mr-3 h-5 w-5" />,
   },
   {
     label: "Previous Quizzes",
-    link: "dashboard/previous-quizzes",
+    link: "/examinee/dashboard/previous-quizzes",
     icon: <Calendar className="mr-3 h-5 w-5" />,
   },
   {
     label: "Profile",
-    link: "dashboard/profile",
+    link: "/examinee/dashboard/profile",
     icon: <User className="mr-3 h-5 w-5" />,
   },
   {
     label: "Notifications",
-    link: "dashboard/notifications",
+    link: "/examinee/dashboard/notifications",
     icon: <Bell className="mr-3 h-5 w-5" />,
     badge: (
       <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-500 text-white">
@@ -51,7 +51,7 @@ const sidebarItems = [
   },
   {
     label: "Settings",
-    link: "dashboard/settings",
+    link: "/examinee/dashboard/settings",
     icon: <Settings className="mr-3 h-5 w-5" />,
   },
 ];

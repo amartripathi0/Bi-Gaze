@@ -1,4 +1,4 @@
-import { ButtonProps } from "@/types";
+import { ButtonProps } from "@/types/index.type";
 import { cn } from "@/lib/utils";
 import { Loader } from "lucide-react";
 
@@ -6,7 +6,7 @@ function PurpleZincButton({
   type = "button",
   label,
   handleButtonClick,
-  additionalStyles,
+  className,
   isLoading,
 }: ButtonProps) {
   const handleClick = () => {
@@ -21,7 +21,7 @@ function PurpleZincButton({
       disabled={isLoading}
       className={cn(
         "flex justify-center items-center gap-2 rounded text-sm bg-gradient-to-r dark:text-white text-neutral-800 dark:from-purple-900 dark:to-zinc-900 from-purple-600 to-zinc-300 w-48",
-        additionalStyles,
+        className,
         isLoading ? "opacity-60" : "opacity-100"
       )}
       onClick={handleClick}

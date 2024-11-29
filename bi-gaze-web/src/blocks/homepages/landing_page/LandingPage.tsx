@@ -25,7 +25,7 @@ function LandingPage() {
         }}
         transition={{ duration: 1 }}
       >
-        <BlueGreenGradientText additionalStyles="text-4xl md:text-6xl lg:text-8xl">
+        <BlueGreenGradientText className="text-4xl md:text-6xl lg:text-8xl">
           Bi-GAZE
         </BlueGreenGradientText>
         <p className="text-sm md:text-base mt-2">

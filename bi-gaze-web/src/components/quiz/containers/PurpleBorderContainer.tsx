@@ -2,17 +2,14 @@ import { cn } from "@/lib/utils";
 
 type PurpleBorderProps = {
   children: React.ReactNode;
-  additionalStyles: string;
+  className: string;
 };
-function PurpleBorderContainer({
-  children,
-  additionalStyles,
-}: PurpleBorderProps) {
+function PurpleBorderContainer({ children, className }: PurpleBorderProps) {
   return (
     <div
       className={cn(
         `shadow-3xl shadow-gray-500 border border-purple-900 rounded`,
-        additionalStyles
+        className
       )}
     >
       {children}

@@ -1,5 +1,5 @@
 import { quizzesArray } from "@/constants";
-import { AnswerAttempt, Quiz } from "@/types";
+import { AnswerAttempt, Quiz } from "@/types/index.type";
 import { create } from "zustand";
 
 type ExamineeTestStore = {

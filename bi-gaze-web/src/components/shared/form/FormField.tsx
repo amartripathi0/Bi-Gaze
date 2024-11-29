@@ -1,4 +1,4 @@
-import { FormFieldProps } from "@/types";
+import { FormFieldProps } from "@/types/index.type";
 
 function FormField({
   type,
@@ -9,8 +9,9 @@ function FormField({
 }: FormFieldProps) {
   return (
     <div className="flex flex-col gap-1">
-
-      <label className="text-sm" htmlFor={name}>{placeholder}</label>
+      <label className="text-sm" htmlFor={name}>
+        {placeholder}
+      </label>
       <input
         type={type}
         placeholder={`Please enter your ${placeholder.toLocaleLowerCase()}`}

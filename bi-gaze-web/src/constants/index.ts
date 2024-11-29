@@ -1,4 +1,4 @@
-import { Quiz } from "../types";
+import { Quiz } from "../types/index.type";
 import brandLogo from "./assets/bi-gaze-logo.png";
 
 export const bigazeLogo = brandLogo;

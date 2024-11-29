@@ -3,10 +3,11 @@ import Button from "../shared/Button";
 import QuestionNavigationButton from "./QuestionNavigationButton";
 // import WebcamFaceMeshViewer from "./WebcamFaceMeshViewer";
 import PurpleBorderContainer from "./containers/PurpleBorderContainer";
+import Link from "next/link";
 
 type QuestionNavigationButtonProps = {
   handleTestSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
-   quizId: string;
+  quizId: string;
 };
 
 function QuestionNavigationPanel({
@@ -24,16 +25,16 @@ function QuestionNavigationPanel({
   );
 
   return (
-    <PurpleBorderContainer additionalStyles="h-full grid w-full col-span-1 rounded-md  p-4  flex-center flex-col gap-4 ">
+    <PurpleBorderContainer className="h-full w-full col-span-3 lg:col-span-2 rounded-md  p-4  flex-center flex-col gap-4 ">
       <div className="h-1/2 w-full flex-between bg-gray-900 p-2 rounded-xl  border ">
         {/* <WebcamFaceMeshViewer webcamHeight="2/3" webcamWidth="full" /> */}
       </div>
 
-      <div className="bg-gray-900 p-2 rounded-xl flex items-center flex-col">
-        <h1 className="text-xl">{quizById.quizTitle}</h1>
-        <h1>Questions Attempted:</h1>
+      <div className="bg-gray-900 p-3 rounded-xl flex items-center flex-col gap-4">
+        {/* <h1 className="text-xl">{quizById.quizTitle}</h1> */}
+        <p>Questions Attempted:</p>
 
-        <div className="flex-center p-6 gap-4 flex-wrap">
+        <div className="flex-center p-2  gap-4 flex-wrap">
           {quizById.questions.map((eachQuestion) => (
             <QuestionNavigationButton
               key={eachQuestion.id}
@@ -45,7 +46,9 @@ function QuestionNavigationPanel({
           ))}
         </div>
 
-        <Button handleButtonClick={handleTestSubmit} label="Submit Test" />
+        <Link href={"result"}>
+          <Button handleButtonClick={handleTestSubmit} label="Submit Test" />
+        </Link>
       </div>
     </PurpleBorderContainer>
   );

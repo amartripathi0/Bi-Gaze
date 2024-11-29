@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useExamineeTestStore } from "@/stores/examinee/store";
-import { AnswerAttempt, Question } from "@/types";
+import { AnswerAttempt, Question } from "@/types/index.type";
 
 type QuestionOptionsProps = {
   optionValue: string;
