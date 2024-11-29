@@ -1,7 +1,7 @@
 import { useExamineeTestStore } from "@/stores/examinee/store";
 import Button from "../shared/Button";
 import QuestionNavigationButton from "./QuestionNavigationButton";
-import WebcamFaceMeshViewer from "./WebcamFaceMeshViewer";
+// import WebcamFaceMeshViewer from "./WebcamFaceMeshViewer";
 import PurpleBorderContainer from "./containers/PurpleBorderContainer";
 
 type QuestionNavigationButtonProps = {
