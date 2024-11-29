@@ -20,7 +20,7 @@ export type Question = {
   title: string;
   options: string[];
   answer: string;
-  marks?: number;
+  marks: number;
 };
 
 export type ButtonProps = {

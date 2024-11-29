@@ -6,12 +6,12 @@ import PurpleBorderContainer from "./containers/PurpleBorderContainer";
 import Link from "next/link";
 
 type QuestionNavigationButtonProps = {
-  handleTestSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
+  // handleTestSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
   quizId: string;
 };
 
 function QuestionNavigationPanel({
-  handleTestSubmit,
+  // handleTestSubmit,
   quizId,
 }: QuestionNavigationButtonProps) {
   const allQuizzes = useExamineeTestStore((state) => state.quizzes);
@@ -23,7 +23,8 @@ function QuestionNavigationPanel({
   const examineeTestResponse = useExamineeTestStore(
     (state) => state.examineeTestResponse
   );
-
+  console.log(examineeTestResponse);
+  
   return (
     <PurpleBorderContainer className="h-full w-full col-span-3 lg:col-span-2 rounded-md  p-4  flex-center flex-col gap-4 ">
       <div className="h-1/2 w-full flex-between bg-gray-900 p-2 rounded-xl  border ">
@@ -47,7 +48,7 @@ function QuestionNavigationPanel({
         </div>
 
         <Link href={"result"}>
-          <Button handleButtonClick={handleTestSubmit} label="Submit Test" />
+          <Button  label="Submit Test" />
         </Link>
       </div>
     </PurpleBorderContainer>
