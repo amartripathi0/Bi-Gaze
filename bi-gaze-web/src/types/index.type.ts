@@ -9,12 +9,18 @@ export type Quiz = {
   totalMarks: number;
   createdBy: string;
   questions: Question[];
+  category?: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  timeLimit?: number;
+  isPublished?: boolean;
+  createdAt?: string;
 };
 export type Question = {
   id: number;
   title: string;
   options: string[];
   answer: string;
+  marks?: number;
 };
 
 export type ButtonProps = {
