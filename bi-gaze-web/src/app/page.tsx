@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="px-24">
+      <main className="px-4 lg:px-24 py-16">
         <LandingPage />
         <AboutBigaze />
         <AboutUs />

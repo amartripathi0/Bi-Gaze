@@ -1,19 +1,20 @@
-import Logo from "@/components/shared/Logo";
 import bigazeLogo from "@/public/assets/bi-gaze-logo.png";
-// import PurpleGradientCard from "@/components/shared/cards/PurpleGradientCard";
 import BlueGreenGradientText from "@/components/shared/BlueGreenGradientText";
 import PurpleBlur from "@/components/shared/backgrounds/PurpleBlur";
 import { User, User2 } from "lucide-react";
 import IndigoButton from "@/components/shared/buttons/IndigoButton";
 import { MotionDiv } from "@/components/shared/motion";
 import Link from "next/link";
+import Image from "next/image";
 
 function LandingPage() {
   return (
-    <section id="/" className="flex-between h-screen overflow-x-hidden px-20">
-      {/* left side  */}
+    <section
+      id="/"
+      className="flex flex-col md:flex-row md:items-center sm:h-[calc(100vh-4rem)] xl:px-20 py-6 sm:py-0"
+    >
       <MotionDiv
-        className=" w-1/2 flex flex-col justify-center gap-6"
+        className="md:w-1/2 flex flex-col justify-center gap-2 sm:gap-6"
         initial={{
           opacity: 0,
           x: -100,
@@ -24,26 +25,21 @@ function LandingPage() {
         }}
         transition={{ duration: 1 }}
       >
-        <BlueGreenGradientText>
+        <BlueGreenGradientText additionalStyles="text-4xl md:text-6xl lg:text-8xl">
           Bi-GAZE
         </BlueGreenGradientText>
-        {/* <PurpleGradientCard /> */}
-        <p>
+        <p className="text-sm md:text-base mt-2">
           Real-time, AI-driven monitoring that ensures fairness and integrity
           without compromising the test-taker&apos;s comfort.
         </p>
-        {/* </PurpleGradientCard> */}
-        {/* <PurpleGradientCard> */}
-        <p>
+        <p className="text-sm md:text-base">
           Our system is built to detect and deter any form of dishonesty,
           providing a comprehensive solution that includes identity
           verification, attention tracking, and an array of customizable
           proctoring features.
         </p>
-        {/* </PurpleGradientCard> */}
 
-        {/* Login buttons */}
-        <div className="flex gap-10 mt-4">
+        <div className="flex flex-wrap gap-4 mt-4">
           <Link href={"/examinee/auth/signin"} passHref>
             <IndigoButton label="Examinee Signin" icon={<User size={16} />} />
           </Link>
@@ -53,9 +49,8 @@ function LandingPage() {
         </div>
       </MotionDiv>
 
-      {/* right side */}
       <MotionDiv
-        className="relative  flex-center h-full"
+        className="relative flex-center h-full md:w-1/2 mt-6 sm:mt-0"
         initial={{
           opacity: 0,
           x: 100,
@@ -68,16 +63,14 @@ function LandingPage() {
       >
         <PurpleBlur />
 
-        {/* logo and text */}
         <MotionDiv
-          className="flex-col-center text-xl h-3/5 w-full  z-20"
+          className="flex-col-center text-lg md:text-xl h-3/5 w-full z-20"
           initial={{
             scale: 1,
           }}
           animate={{
             scale: 0.9,
           }}
-          whileHover={{ rotate: "1deg" }}
           transition={{
             duration: 1,
             repeat: Infinity,
@@ -85,15 +78,23 @@ function LandingPage() {
             ease: "linear",
           }}
         >
-          <Logo height={300} width={300} alt="bi-gaze" src={bigazeLogo} />
-          <div className=" bottom-0 flex-col-center">
-            <p>
+          <Image
+            className="aspect-square size-44 sm:h-60 md:size-60 lg:size-80"
+            height={600}
+            width={600}
+            src={bigazeLogo}
+            alt="bi-gaze"
+          />
+          <div className="bottom-0 flex-col-center">
+            <p className="text-sm md:text-base">
               AI based{" "}
-              <span className="opacity-90 hover:opacity-100 text-cyan-200 font-semibold">
+              <span className="opacity-90 hover:opacity-100 text-cyan-900 dark:text-cyan-200 font-semibold">
                 Proctoring System
               </span>{" "}
             </p>
-            <p>Revolutionizing Online Assessment</p>
+            <p className="text-sm md:text-base">
+              Revolutionizing Online Assessment
+            </p>
           </div>
         </MotionDiv>
       </MotionDiv>
