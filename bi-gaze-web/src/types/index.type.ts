@@ -11,7 +11,7 @@ export type Quiz = {
   questions: Question[];
   category?: string;
   difficulty?: "Easy" | "Medium" | "Hard";
-  timeLimit?: number;
+  timeLimit : number;
   isPublished?: boolean;
   createdAt?: string;
 };

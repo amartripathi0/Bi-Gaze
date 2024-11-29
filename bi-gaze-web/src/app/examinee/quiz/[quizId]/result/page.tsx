@@ -19,10 +19,21 @@ export default function Result({
   );
 
   const [totalScore, setTotalScore] = useState<number>(0);
+  const [totalQuestions, setTotalQuestions] = useState<number>(0);
+  const [totalCorrect, setTotalCorrect] = useState<number>(0);
+  const [totalIncorrect, setTotalIncorrect] = useState<number>(0);
+  const [totalAttempt, setTotalAttempt] = useState<number>(0);
 
   useEffect(() => {
-    setTotalScore(getTotalScore());
-  }, [examineeTestResponse]);
+    const score = getTotalScore();
+    const correct = getTotalCorrect();
+    const attempt = examineeTestResponse.length;
+    setTotalScore(score);
+    setTotalQuestions(currentQuiz?.questions.length || 0);
+    setTotalCorrect(correct);
+    setTotalIncorrect(attempt - correct);
+    setTotalAttempt(attempt);
+  }, [examineeTestResponse, currentQuiz]);
 
   function getTotalScore(): number {
     return examineeTestResponse.reduce((score, question: AnswerAttempt) => {
@@ -30,6 +41,12 @@ export default function Result({
         ? score + question.marks
         : score;
     }, 0);
+  }
+
+  function getTotalCorrect(): number {
+    return examineeTestResponse.filter(
+      (question: AnswerAttempt) => question.selectedOption === question.answer
+    ).length;
   }
 
   const percentage: number = Math.round(
@@ -53,6 +70,10 @@ export default function Result({
             percentage={percentage}
             totalScore={totalScore}
             totalMarks={currentQuiz?.totalMarks}
+            totalQuestions={totalQuestions}
+            totalCorrect={totalCorrect}
+            totalIncorrect={totalIncorrect}
+            totalAttempt={totalAttempt}
             examineeTestResponse={examineeTestResponse}
           />
         </div>
@@ -65,6 +86,10 @@ interface ResultSummaryProps {
   percentage: number;
   totalScore: number;
   totalMarks?: number;
+  totalQuestions: number;
+  totalCorrect: number;
+  totalIncorrect: number;
+  totalAttempt: number;
   examineeTestResponse: AnswerAttempt[];
 }
 
@@ -72,51 +97,67 @@ function ResultSummary({
   percentage,
   totalScore,
   totalMarks,
+  totalQuestions,
+  totalCorrect,
+  totalIncorrect,
+  totalAttempt,
   examineeTestResponse,
 }: ResultSummaryProps) {
   return (
     <div className="flex flex-col items-center justify-center space-y-6 my-6">
-      <div className="relative w-36 h-36">
-        <svg className="w-full h-full transform -rotate-90">
-          <circle
-            className="text-gray-200 dark:text-gray-700 stroke-current"
-            strokeWidth="8"
-            cx="70"
-            cy="72"
-            r="60"
-            fill="none"
-          />
-          <motion.circle
-            className="text-purple-500 stroke-current"
-            strokeWidth="8"
-            strokeLinecap="round"
-            cx="70"
-            cy="72"
-            r="60"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{
-              pathLength: Math.max(0, Math.min(percentage, 100)) / 100,
-            }} // Ensure percentage is within 0-100
-            transition={{ duration: 2, ease: "easeOut" }}
-          />
-        </svg>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <p className="text-xl font-bold">
-              {Math.max(0, Math.min(percentage, 100))}%
-            </p>
-            <p className="text-sm opacity-75">
-              Score: {totalScore}/{totalMarks}
-            </p>
-          </motion.div>
+      <div className="flex-center gap-6">
+        <div className="relative w-36 h-36">
+          <svg className="w-full h-full transform -rotate-90">
+            <circle
+              className="text-gray-200 dark:text-gray-700 stroke-current"
+              strokeWidth="8"
+              cx="70"
+              cy="72"
+              r="60"
+              fill="none"
+            />
+            <motion.circle
+              className="text-purple-500 stroke-current"
+              strokeWidth="8"
+              strokeLinecap="round"
+              cx="70"
+              cy="72"
+              r="60"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{
+                pathLength: Math.max(0, Math.min(percentage, 100)) / 100,
+              }} // Ensure percentage is within 0-100
+              transition={{ duration: 2, ease: "easeOut" }}
+            />
+          </svg>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <p className="text-xl font-bold">
+                {Math.max(0, Math.min(percentage, 100))}%
+              </p>
+              <p className="text-sm opacity-75">
+                Score: {totalScore}/{totalMarks}
+              </p>
+            </motion.div>
+          </div>
+        </div>
+        <div>
+          {" "}
+          <p className="text-sm opacity-75">
+            Total Questions: {totalQuestions}
+          </p>
+          <p className="text-sm opacity-75">Total Attempts: {totalAttempt}</p>
+          <p className="text-sm opacity-75">Correct Answers: {totalCorrect}</p>
+          <p className="text-sm opacity-75">
+            Incorrect Answers: {totalIncorrect}
+          </p>
         </div>
       </div>
-
       <div className="w-full space-y-4">
         {examineeTestResponse.map((question: AnswerAttempt, index: number) => (
           <QuestionResponseDetail
@@ -135,7 +176,10 @@ interface QuestionResponseDetailProps {
   index: number;
 }
 
-function QuestionResponseDetail({ question, index }: QuestionResponseDetailProps) {
+function QuestionResponseDetail({
+  question,
+  index,
+}: QuestionResponseDetailProps) {
   return (
     <motion.div
       className={`p-4 rounded-lg shadow-md transition-colors duration-300 ${
@@ -148,9 +192,12 @@ function QuestionResponseDetail({ question, index }: QuestionResponseDetailProps
       transition={{ duration: 0.3, delay: index * 0.1 }}
     >
       <div className="flex justify-between gap-4">
+        <div className="flex gap-2">
+        <span className="text-neutral-300">Q-{question.id}</span>
         <h3 className="font-medium text-base mb-2 line-clamp-3">
           {question.title}
         </h3>
+        </div>
         <p className="text-sm max-w-60 h-fit border p-2 rounded text-center border-neutral-300">
           Marks:{" "}
           {question.selectedOption === question.answer ? question.marks : 0}/

@@ -5,7 +5,6 @@ import QuestionWithOptions from "@/components/quiz/question-with-options";
 
 function Quiz({ params: { quizId } }: { params: { quizId: string } }) {
 
-
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
@@ -14,7 +13,6 @@ function Quiz({ params: { quizId } }: { params: { quizId: string } }) {
       <QuestionWithOptions quizId={quizId} />
       <QuestionNavigationPanel
         quizId={quizId}
-        // handleTestSubmit={handleTestSubmit}
       />
     </form>
   );
