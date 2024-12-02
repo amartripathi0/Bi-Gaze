@@ -24,7 +24,7 @@ function QuestionNavigationPanel({
     (state) => state.examineeTestResponse
   );
   console.log(examineeTestResponse);
-  
+
   return (
     <PurpleBorderContainer className="h-full w-full col-span-3 lg:col-span-2 rounded-md  p-4  flex-center flex-col gap-4 ">
       <div className="h-1/2 w-full flex-between bg-gray-900 p-2 rounded-xl  border ">
@@ -32,7 +32,7 @@ function QuestionNavigationPanel({
       </div>
 
       <div className="bg-gray-900 p-3 rounded-xl flex items-center flex-col gap-4">
-        {/* <h1 className="text-xl">{quizById.quizTitle}</h1> */}
+        {/* <h1 className="text-xl">{quizById.title}</h1> */}
         <p>Questions Attempted:</p>
 
         <div className="flex-center p-2  gap-4 flex-wrap">
@@ -48,7 +48,7 @@ function QuestionNavigationPanel({
         </div>
 
         <Link href={"result"}>
-          <Button  label="Submit Test" />
+          <Button label="Submit Test" />
         </Link>
       </div>
     </PurpleBorderContainer>

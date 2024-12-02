@@ -1,26 +1,50 @@
 import { z, ZodType } from "zod";
 import { FieldError, UseFormRegister } from "react-hook-form";
 import { ReactNode } from "react";
+import { Timestamp } from "firebase/firestore";
+
 
 export type Quiz = {
-  quizId: number;
-  quizTitle: string;
-  quizDescription: string;
-  totalMarks: number;
+  title: string;
+  description: string;
+  maxMarks: number;
   createdBy: string;
   questions: Question[];
   category?: string;
   difficulty?: "Easy" | "Medium" | "Hard";
-  timeLimit : number;
+  timeLimit: number;
   isPublished?: boolean;
+  visibility: "public" | "private";
   createdAt?: string;
+  thumbnailUrl?: string;
+  passMarks?: number;
+  attemptsAllowed?: number;
+  instructions?: string;
 };
 export type Question = {
-  id: number;
   title: string;
   options: string[];
   answer: string;
   marks: number;
+  category?: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  explanation?: string;
+  imageUrl?: string;
+  videoUrl?: string;
+  isMultipleChoice?: boolean;
+  tags?: string[];
+  createdAt?: string;
+};
+
+export type QuizSession = {
+  sessionId: string; // Unique identifier
+  quizId: string; // Reference to the associated quiz
+  isStarted: boolean;
+  isPaused: boolean;
+  isEnd: boolean;
+  startTime: Timestamp;
+  endTime: Timestamp;
+  participants: string[];
 };
 
 export type ButtonProps = {

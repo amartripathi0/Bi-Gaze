@@ -1,17 +1,12 @@
 "use client";
 import { useForm } from "react-hook-form";
-import {
-  SigninFormData,
-  SignupFormData,
-  UserSignupSchema,
-  UserType,
-} from "@/types/index.type";
+import { SignupFormData, UserSignupSchema, UserType } from "@/types/index.type";
 import FormField from "./FormField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PurpleBorderContainer from "@/components/quiz/containers/PurpleBorderContainer";
 import PurpleZincButton from "../buttons/PurpleZincButton";
 import {
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
@@ -21,8 +16,9 @@ import { FirebaseError } from "firebase/app";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { setUserDetails } from "@/utils/setUserDetails";
 
-function SigninForm({ userType }: { userType: UserType }) {
+function SignupForm({ userType }: { userType: UserType }) {
   const {
     register,
     handleSubmit,
@@ -31,18 +27,20 @@ function SigninForm({ userType }: { userType: UserType }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async ({ email, password }: SigninFormData) => {
+  const onSubmit = async ({ email, password }: SignupFormData) => {
     try {
       setIsLoading(true);
-      const userCredentials = await signInWithEmailAndPassword(
+      const userCredentials = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
       setIsLoading(false);
+      console.log("userCredentials", userCredentials);
 
       if (userCredentials.user) {
-        router.push(`/${userType}/dashboard`);
+        await setUserDetails(userCredentials.user, userType);
+        // router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
       setIsLoading(false);
@@ -52,11 +50,15 @@ function SigninForm({ userType }: { userType: UserType }) {
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     const provider = new GoogleAuthProvider();
     try {
       const { user } = await signInWithPopup(auth, provider);
       if (user) {
+        await setUserDetails(user, userType);
         router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
@@ -133,4 +135,4 @@ function SigninForm({ userType }: { userType: UserType }) {
   );
 }
 
-export default SigninForm;
+export default SignupForm;

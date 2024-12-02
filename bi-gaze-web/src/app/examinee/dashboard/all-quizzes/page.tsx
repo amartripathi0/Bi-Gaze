@@ -8,9 +8,9 @@ function ExamineeQuizzesDashboard() {
         <QuizCard
           key={eachQuiz.quizId}
           quizId={eachQuiz.quizId}
-          quizDescription={eachQuiz.quizDescription}
-          quizTitle={eachQuiz.quizTitle}
-          totalMarks={eachQuiz.totalMarks}
+          description={eachQuiz.description}
+          title={eachQuiz.title}
+          maxMarks={eachQuiz.maxMarks}
         />
       ))}
     </div>

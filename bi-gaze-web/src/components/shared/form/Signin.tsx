@@ -16,6 +16,7 @@ import { FirebaseError } from "firebase/app";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { setUserDetails } from "@/utils/setUserDetails";
 
 function SigninForm({ userType }: { userType: UserType }) {
   const {
@@ -25,34 +26,36 @@ function SigninForm({ userType }: { userType: UserType }) {
   } = useForm<SigninFormData>({ resolver: zodResolver(UserSigninSchema) });
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async ({ email, password }: SigninFormData) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-      setIsLoading(false);
-
       if (userCredentials.user) {
         router.push(`/${userType}/dashboard`);
       }
     } catch (error) {
-      setIsLoading(false);
       if (error instanceof FirebaseError) {
         console.error("Error", error.code);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
     const provider = new GoogleAuthProvider();
     try {
       const { user } = await signInWithPopup(auth, provider);
-      if (user) {
-        router.push(`/${userType}/dashboard`);
-      }
+      await setUserDetails(user, userType);
+      router.push(`/${userType}/dashboard`);
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }
@@ -71,7 +74,6 @@ function SigninForm({ userType }: { userType: UserType }) {
           register={register}
           error={errors.email}
         />
-
         <FormField
           type="password"
           placeholder="Password"
@@ -79,7 +81,6 @@ function SigninForm({ userType }: { userType: UserType }) {
           register={register}
           error={errors.password}
         />
-
         <p className="text-sm my-4">
           Don&apos;t have an account?{" "}
           <Link
@@ -90,7 +91,6 @@ function SigninForm({ userType }: { userType: UserType }) {
             Signup
           </Link>
         </p>
-
         <PurpleZincButton
           isLoading={isLoading}
           type="submit"

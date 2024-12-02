@@ -50,7 +50,7 @@ export default function Result({
   }
 
   const percentage: number = Math.round(
-    (totalScore / (currentQuiz?.totalMarks || 1)) * 100
+    (totalScore / (currentQuiz?.maxMarks || 1)) * 100
   );
 
   return (
@@ -63,13 +63,13 @@ export default function Result({
       >
         <div className="p-8">
           <h1 className="text-3xl font-bold text-center text-purple-600 dark:text-purple-400">
-            {currentQuiz?.quizTitle}
+            {currentQuiz?.title}
           </h1>
 
           <ResultSummary
             percentage={percentage}
             totalScore={totalScore}
-            totalMarks={currentQuiz?.totalMarks}
+            maxMarks={currentQuiz?.maxMarks}
             totalQuestions={totalQuestions}
             totalCorrect={totalCorrect}
             totalIncorrect={totalIncorrect}
@@ -85,7 +85,7 @@ export default function Result({
 interface ResultSummaryProps {
   percentage: number;
   totalScore: number;
-  totalMarks?: number;
+  maxMarks?: number;
   totalQuestions: number;
   totalCorrect: number;
   totalIncorrect: number;
@@ -96,7 +96,7 @@ interface ResultSummaryProps {
 function ResultSummary({
   percentage,
   totalScore,
-  totalMarks,
+  maxMarks,
   totalQuestions,
   totalCorrect,
   totalIncorrect,
@@ -141,7 +141,7 @@ function ResultSummary({
                 {Math.max(0, Math.min(percentage, 100))}%
               </p>
               <p className="text-sm opacity-75">
-                Score: {totalScore}/{totalMarks}
+                Score: {totalScore}/{maxMarks}
               </p>
             </motion.div>
           </div>
@@ -193,10 +193,10 @@ function QuestionResponseDetail({
     >
       <div className="flex justify-between gap-4">
         <div className="flex gap-2">
-        <span className="text-neutral-300">Q-{question.id}</span>
-        <h3 className="font-medium text-base mb-2 line-clamp-3">
-          {question.title}
-        </h3>
+          <span className="text-neutral-300">Q-{question.id}</span>
+          <h3 className="font-medium text-base mb-2 line-clamp-3">
+            {question.title}
+          </h3>
         </div>
         <p className="text-sm max-w-60 h-fit border p-2 rounded text-center border-neutral-300">
           Marks:{" "}

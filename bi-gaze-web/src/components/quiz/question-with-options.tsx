@@ -16,7 +16,7 @@ function QuestionWithOptions({ quizId }: { quizId: string }) {
   return (
     <PurpleBorderContainer className="col-span-5 lg:col-span-6 overflow-y-scroll relative bg-neutral-950/80">
       <div className="bg-slate-900 rounded-t-lg p-4 flex-between sticky w-full top-0 left-0">
-        <h3>{currentQuiz?.quizTitle}</h3>
+        <h3>{currentQuiz?.title}</h3>
         <Timer quizTime={(currentQuiz?.timeLimit || 30) * 60} />
       </div>
       <div className="text-base flex gap-2 p-4">
