@@ -3,7 +3,7 @@ import IndigoButton from "../shared/buttons/IndigoButton";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-function QuizCard({ quizId, title, description, maxMarks }: Partial<Quiz>) {
+function QuizCard({ id, title, description, maxMarks }: Partial<Quiz>) {
   return (
     <div className="border border-neutral-600 w-full h-52 flex flex-col justify-between hover:border-neutral-400 hover:bg-neutral-900  gap-2 transition-all duration-150 p-4 rounded-lg bg-neutral-800">
       <h4 className="p-2 bg-indigo-900 rounded font-semibold text-base text-white">
@@ -16,7 +16,7 @@ function QuizCard({ quizId, title, description, maxMarks }: Partial<Quiz>) {
         {description}
       </p>
 
-      <Link href={`/examinee/quiz/${quizId}/quiz-details`} className="mt-2">
+      <Link href={`/examinee/quiz/${id}/quiz-details`} className="mt-2">
         <IndigoButton
           iconSide="right"
           label="Attempt Quiz"

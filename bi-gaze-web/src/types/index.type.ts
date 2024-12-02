@@ -5,6 +5,7 @@ import { Timestamp } from "firebase/firestore";
 
 
 export type Quiz = {
+  id: string;
   title: string;
   description: string;
   maxMarks: number;
@@ -22,6 +23,7 @@ export type Quiz = {
   instructions?: string;
 };
 export type Question = {
+  id: string;
   title: string;
   options: string[];
   answer: string;
