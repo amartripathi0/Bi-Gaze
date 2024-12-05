@@ -1,4 +1,5 @@
 "use client";
+import { Clock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,8 +29,12 @@ export default function Timer({ quizTime }: { quizTime: number }) {
   const sec = time % 60;
 
   return (
-    <div className="border p-2 rounded px-3 bg-neutral-900">
-      {min} : {sec < 10 ? `0${sec}` : sec}
+    <div className="border p-2 rounded px-3 bg-neutral-900 flex gap-2 items-center justify-center">
+      <Clock size={17}/>
+
+      <span>
+        {min} : {sec < 10 ? `0${sec}` : sec}
+      </span>
     </div>
   );
 }

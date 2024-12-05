@@ -9,7 +9,6 @@ function ExamineeQuizzesDashboard() {
   const { data: quizzesArray } = useQueryData(["quizzes"], getAllQuizzes) as {
     data: Quiz[];
   };
-  console.log(quizzesArray)
   return (
     <div className="grid grid-cols-3 gap-4">
       {quizzesArray?.map((eachQuiz: Quiz) => (
